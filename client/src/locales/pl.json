@@ -1,0 +1,18 @@
+{
+  "NavigationComponent": {
+    "message": "To jest komponent nawigacji"
+  },
+  "AccountList": {
+    "test": "BBBBBBBBBBBB"
+  },
+  "UserPanel": {},
+  "UserProfile": {
+    "birthday": "Data urodzin",
+    "gender": "Płeć",
+    "edit": "Edytuj",
+    "forget": "Zapomnij"
+  },
+  "UserApp": {
+    "shared": "Udostępnione dane"
+  }
+}

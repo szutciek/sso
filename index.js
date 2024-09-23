@@ -16,6 +16,10 @@ app.use("/api", apiRouter);
 app.use(express.static("client/dist/"));
 app.use(express.static("public/"));
 
+app.get("/*", (_, res) =>
+  res.sendFile(import.meta.dirname + "/client/dist/index.html")
+);
+
 app.use(safeErrorHandler);
 
 app.listen(server.httpPort, () =>

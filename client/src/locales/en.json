@@ -1,0 +1,18 @@
+{
+  "NavigationComponent": {
+    "message": "This is the navigation component"
+  },
+  "AccountList": {
+    "test": "AAAAAAAAAAAA"
+  },
+  "UserPanel": {},
+  "UserProfile": {
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "edit": "Edit",
+    "forget": "Forget"
+  },
+  "UserApp": {
+    "shared": "Shared data"
+  }
+}

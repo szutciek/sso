@@ -1,85 +1,220 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div>
+    <Fonts />
+    <ToasterManager />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <RouterView name="navigation" />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <div id="mainContentContainer">
+      <RouterView />
     </div>
-  </header>
 
-  <RouterView />
+    <RouterView name="footer" />
+  </div>
 </template>
 
+<script setup>
+import Fonts from "@/components/Fonts.vue";
+import ToasterManager from "@/components/ToasterManager.vue";
+
+import localeStore from "@/store/localeStore.js";
+
+localeStore.loadLocale();
+
+import userStore from "@/store/userStore.js";
+
+userStore.loadPreviousState();
+userStore.checkLoginStatus();
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--sec-color-d);
+}
+
+:root {
+  --third-color-l: #fff;
+  --third-color-d: #bbb;
+  --sec-color-l: #2c2c2c;
+  --sec-color-d: #1c1c1c;
+  --main-color-l: #ec7837;
+  --main-color-d: #9e4a1b;
+  --nav-height: 80px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 130%;
+}
+h2 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 130%;
+}
+h2.med {
+  font-weight: 500;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 130%;
+}
+h4 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.b1 {
+  font-size: 20px;
+  font-weight: 400;
+}
+.b1.med {
+  font-weight: 500;
+}
+.b2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+.b2.med {
+  font-weight: 600;
+}
+.b3 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.b3.med {
+  font-weight: 500;
+}
+.b3.sb {
+  font-weight: 700;
+  line-height: 10px;
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: fit-content;
+  width: fit-content;
+}
+button.bold {
+  font-size: 16px;
+  font-weight: 600;
+}
+button.med {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+input {
+  border-radius: 0;
+}
+
+.flexVert {
+  display: flex;
+  align-items: center;
+}
+
+.mW1400 {
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+.mW800 {
+  max-width: 820px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+.mW500 {
+  max-width: 510px;
+  padding: 0 5px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: var(--gray_2);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #151415;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b2b30;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #717171;
+}
+
+.accordion-content {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: 200ms;
+}
+.accordion-content.hidden {
+  grid-template-rows: 0fr !important;
+  opacity: 0;
+}
+.accordion-content div {
+  overflow: hidden;
+}
+
+@keyframes loading {
+  from {
+    background-color: #ededed;
+    background: linear-gradient(
+        100deg,
+        #ffffff00 40%,
+        #ffffff80 50%,
+        #ffffff00 60%
+      )
+      #ededed;
+    background-size: 200% 100%;
+    background-position-x: 180%;
+    color: transparent;
+  }
+  to {
+    background-color: #ededed;
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 40%,
+        #ffffff80 50%,
+        #ffffff00 60%
+      )
+      #ededed;
+    background-size: 200% 100%;
+    background-position-x: -20%;
+    color: transparent;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  :root {
+    --nav-height: 65px;
+  }
+  h1 {
+    font-size: 32px;
+  }
+}
+</style>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+#mainContentContainer {
+  min-height: 100vh;
 }
 </style>
