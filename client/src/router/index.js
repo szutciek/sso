@@ -10,8 +10,11 @@ const routes = [
     redirect: "/en",
   },
 
+  // Website from the perspecive of a normal user
   ...userRoutes,
+  // Website from the perspective of a app admin
   ...appRoutes,
+  // Website from the perspective of a broader admin
   ...adminRoutes,
 
   {
