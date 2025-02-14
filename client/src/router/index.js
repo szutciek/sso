@@ -2,12 +2,32 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import userRoutes from "./user.js";
 import appRoutes from "./app.js";
-import adminRoutes from "./admin.js";
+import developerRoutes from "./developer.js";
+
+import NavigationComponent from "@/components/NavigationComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
+
+// BASE URL: /:locale
 
 const routes = [
   {
     path: "/",
     redirect: "/en",
+  },
+  {
+    path: "/:locale/home",
+    redirect: (to) => {
+      return { path: `/${to.params.locale}` };
+    },
+  },
+  {
+    path: "/:locale",
+    name: "home",
+    components: {
+      default: () => import("../views/Home.vue"),
+      navigation: NavigationComponent,
+      footer: FooterComponent,
+    },
   },
 
   // Website from the perspecive of a normal user
@@ -15,7 +35,7 @@ const routes = [
   // Website from the perspective of a app admin
   ...appRoutes,
   // Website from the perspective of a broader admin
-  ...adminRoutes,
+  ...developerRoutes,
 
   {
     path: "/:catchAll(.*)",

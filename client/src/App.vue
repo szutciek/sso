@@ -19,7 +19,7 @@ import ToasterManager from "@/components/ToasterManager.vue";
 
 import localeStore from "@/store/localeStore.js";
 
-localeStore.loadLocale();
+localeStore.loadLocaleFromUrl();
 
 import userStore from "@/store/userStore.js";
 
@@ -37,7 +37,8 @@ userStore.checkLoginStatus();
 
 body {
   min-height: 100vh;
-  background-color: var(--sec-color-d);
+  /* background-color: var(--sec-color-d); */
+  background-color: #fff;
 }
 
 :root {
@@ -158,6 +159,14 @@ a {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #717171;
+}
+
+.hoverShadow {
+  transition: 0.2s;
+}
+.hoverShadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 15px #0002;
 }
 
 .accordion-content {

@@ -2,7 +2,7 @@ import AccountList from "@/views/user/AccountList.vue";
 import AppDetails from "@/views/user/AppDetails.vue";
 import AuthorizeApp from "@/views/user/AuthorizeApp.vue";
 
-const base = "/:locale/user/apps";
+const base = "/:locale/users/apps";
 
 export default [
   {

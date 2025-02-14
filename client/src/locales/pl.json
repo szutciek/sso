@@ -1,6 +1,42 @@
 {
   "NavigationComponent": {
-    "message": "To jest komponent nawigacji"
+    "items": [
+      {
+        "name": "Funkcjonalność",
+        "topics": [
+          {
+            "title": "Automatyzacja Rejestracji Kont",
+            "description": "Wybierz domyślne konto do logowania się do każdego z różnych typów aplikacji"
+          },
+          {
+            "title": "Elastyczność",
+            "description": "Loguj się za pomocą 2FA jedynie wtedy, gdy jest to konieczne"
+          },
+          {
+            "title": "Rozwiązania",
+            "list": ["Bezpieczne 2FA", "Zarządzanie sesjami"]
+          }
+        ]
+      },
+      {
+        "name": "Poradniki",
+        "topics": [
+          {
+            "title": "Dla Developera",
+            "description": "Zobacz poradniki integracji z Kanapka SSO dla programistów"
+          },
+          {
+            "title": "Dla Użytkownika",
+            "description": "Dowiedz się, jak czerpać wszystkie korzyści z Kanapka SSO"
+          }
+        ]
+      },
+      {
+        "name": "O Stronie",
+        "topics": []
+      }
+    ],
+    "action": "Zabezpiecz Moją Stronę"
   },
   "AccountList": {
     "test": "BBBBBBBBBBBB"

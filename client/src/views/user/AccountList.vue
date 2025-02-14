@@ -7,6 +7,8 @@
       <div class="userAppsComponent">
         <UserApps />
       </div>
+
+      <TileBackground />
     </div>
   </div>
 </template>
@@ -37,4 +39,6 @@ import lS from "@/store/localeStore";
 
 import UserPanel from "@/components/user/UserPanel.vue";
 import UserApps from "@/components/user/UserApps.vue";
+
+import TileBackground from "@/components/TileBackground.vue";
 </script>

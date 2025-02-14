@@ -1,6 +1,42 @@
 {
   "NavigationComponent": {
-    "message": "This is the navigation component"
+    "items": [
+      {
+        "name": "Features",
+        "topics": [
+          {
+            "title": "Automated Sign-ups",
+            "description": "Select the default account to use when logging in to all types of apps"
+          },
+          {
+            "title": "Flexibility",
+            "description": "Log in using 2FA only when its necessary"
+          },
+          {
+            "title": "Features",
+            "list": ["Secure 2FA", "Session Management"]
+          }
+        ]
+      },
+      {
+        "name": "Guides",
+        "topics": [
+          {
+            "title": "For Developers",
+            "description": "Find out how to integrate Kanapka SSO with your app"
+          },
+          {
+            "title": "For Users",
+            "description": "Learn how to use Kanapka SSO"
+          }
+        ]
+      },
+      {
+        "name": "About",
+        "topics": []
+      }
+    ],
+    "action": "Secure My App"
   },
   "AccountList": {
     "test": "AAAAAAAAAAAA"
