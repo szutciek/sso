@@ -2,7 +2,7 @@ import * as UserBridge from "../bridges/UserBridge.js";
 
 export const getCurrentUser = async (req, res, next) => {
   try {
-    const user = await UserBridge.getUserById(req.user._id);
+    const user = await UserBridge.getUserById(req.user._id.toString());
     res.status(200).json(user);
   } catch (error) {
     next(error);

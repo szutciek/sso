@@ -2,8 +2,6 @@ import {
   User,
   UserValidation,
   LooseUserValidation,
-  publicFields,
-  privateFields,
 } from "../models/UserModel.js";
 import performValidation from "../utils/performValidation.js";
 import catchDuplicateError from "../utils/catchDuplicateError.js";
@@ -37,7 +35,7 @@ export const createUser = async (userData) => {
     user.setPassword(validatedData.password);
     await user.save();
   });
-  return user.stripTo(privateFields);
+  return user;
 };
 
 export const updateUser = async (userId, updateData) => {
@@ -51,5 +49,5 @@ export const updateUser = async (userId, updateData) => {
     }
     await user.save();
   });
-  return user.stripTo(privateFields);
+  return user;
 };

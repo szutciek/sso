@@ -32,6 +32,15 @@ const mongooseUserSchema = new mongoose.Schema({
     type: String,
     select: false,
   },
+  // INTERACTION HISTORY
+  apps: [
+    {
+      _id: false,
+      app: { type: mongoose.Schema.Types.ObjectId, ref: "App" },
+      status: { type: String },
+      default: [],
+    },
+  ],
   // EMAIL VERIFICATION
   verifiedEmail: {
     type: Boolean,
@@ -78,6 +87,16 @@ const LooseUserValidation = UserValidation.fork(
   (field) => field.optional()
 );
 
+const AppValidation = Joi.object({
+  app: Joi.required().custom((value, helpers) => {
+    if (!mongoose.Types.ObjectId.isValid(value)) {
+      return helpers.error("ObjectId.invalid", { value });
+    }
+    return value;
+  }, "ObjectId Validation"),
+  status: Joi.boolean().required(),
+});
+
 const publicFields = ["_id", "username", "profile"];
 const privateFields = ["email", ...publicFields];
 
@@ -87,6 +106,7 @@ export {
   User,
   UserValidation,
   LooseUserValidation,
+  AppValidation,
   publicFields,
   privateFields,
 };

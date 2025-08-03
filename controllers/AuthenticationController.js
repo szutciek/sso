@@ -1,10 +1,10 @@
 import AppError from "../utils/AppError.js";
 import { getUserByProperty } from "../bridges/UserBridge.js";
-import jwt from "jsonwebtoken";
-import { privateKey } from "../utils/rsaKeys.js";
 import { jwt as jwtConfig } from "../config.js";
 import { LooseUserValidation } from "../models/UserModel.js";
 import performValidation from "../utils/performValidation.js";
+import { signToken } from "../utils/JWTUtilityFunctions.js";
+import { setAuthCookies } from "../utils/cookieUtilityFunctions.js";
 
 export const send2FACode = async (user) => {
   const code = crypto.randomUUID().split("-")[0];
@@ -64,17 +64,11 @@ export const generateToken = async (req, res, next) => {
   try {
     const payload = {
       _id: req.user._id,
-      username: req.user.username,
       iat: new Date().getTime(),
       exp: new Date().getTime() / 1000 + jwtConfig.expiresIn, // Convert seconds to milliseconds
     };
-
-    const token = jwt.sign(payload, privateKey, {
-      algorithm: "RS256",
-    });
-
-    console.log(token);
-
+    const token = signToken(payload);
+    setAuthCookies(res, token);
     res.status(200).json({ message: "User signed in successfully" });
   } catch (error) {
     next(error);

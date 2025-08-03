@@ -28,7 +28,7 @@ app.use("/api", apiRouter);
 app.use("/authenticate", authRouter);
 
 app.get("/authorize", handleAuthorizationRequest, sendFrontend);
-app.post("/token", handleTokenRequest);
+// app.post("/token", handleTokenRequest);
 
 app.use(express.static("client/dist/"));
 app.use(express.static("public/"));
