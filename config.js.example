@@ -1,0 +1,22 @@
+export const dirname = import.meta.dirname;
+
+export const server = {
+  httpPort: 0,
+  wsPort: 0,
+  baseUrl: "https://hostname.com",
+};
+
+export const jwt = {
+  secret: "private-key",
+  expiresIn: "67d",
+};
+
+export const db = {
+  authOn: true,
+  host: "host",
+  port: 0,
+  user: "dbuser",
+  pwd: "dbpwd",
+  name: "dbname",
+  params: "urlparams",
+};

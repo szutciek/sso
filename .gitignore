@@ -1,2 +1,4 @@
+keys/rsa.key
+keys/rsa.key.pub
 node_modules
-config.*
+config.js
