@@ -1,3 +1,3 @@
 export default function sendFrontend(_, res) {
-  res.sendFile(dirname + "/client/dist/index.html");
+  res.sendFile(import.meta.dirname + "/client/dist/index.html");
 }

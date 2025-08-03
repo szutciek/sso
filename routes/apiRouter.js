@@ -1,9 +1,9 @@
 import { Router } from "express";
 const apiRouter = Router();
 
-import userRouter from "./userApi.js";
-import developerRouter from "./developerApi.js";
-import appRouter from "./appApi.js";
+import userRouter from "./userApiRouter.js";
+import developerRouter from "./developerApiRouter.js";
+import appRouter from "./appApiRouter.js";
 
 apiRouter.use("/users", userRouter);
 apiRouter.use("/developers", developerRouter);

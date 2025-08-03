@@ -9,33 +9,23 @@ import performValidation from "../utils/performValidation.js";
 import catchDuplicateError from "../utils/catchDuplicateError.js";
 import AppError from "../utils/AppError.js";
 
-export const getUserById = async (userId, selectPassword = false) => {
+export const getUserById = async (userId, selectString) => {
   const idValidationScheme = UserValidation.extract("_id");
   const validId = performValidation(idValidationScheme, userId);
-  const selectString = `${selectPassword ? "+" : "-"}password`;
   const user = await User.findById(validId).select(selectString);
   if (!user) {
     throw new AppError("User not found", 404);
   }
-  if (req.user._id === user._id) {
-    return user.stripTo(privateFields);
-  } else {
-    return user.stripTo(publicFields);
-  }
+  return user;
 };
 
-export const getUserByProperty = async (property, selectPassword = false) => {
+export const getUserByProperty = async (property, selectString) => {
   const validated = performValidation(LooseUserValidation, property);
-  const selectString = `${selectPassword ? "+" : "-"}password`;
   const user = await User.findOne(validated).select(selectString);
   if (!user) {
     throw new AppError("User not found", 404);
   }
-  if (req.user._id === user._id) {
-    return user.stripTo(privateFields);
-  } else {
-    return user.stripTo(publicFields);
-  }
+  return user;
 };
 
 export const createUser = async (userData) => {
@@ -53,10 +43,7 @@ export const createUser = async (userData) => {
 export const updateUser = async (userId, updateData) => {
   let user = null;
   await catchDuplicateError(async () => {
-    user = await User.findById(userId);
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
+    user = await getUserById(userId, true);
     const validatedData = performValidation(LooseUserValidation, updateData);
     Object.assign(user, validatedData);
     if (validatedData.password) {

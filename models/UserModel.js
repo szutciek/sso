@@ -19,9 +19,18 @@ const mongooseUserSchema = new mongoose.Schema({
     type: String,
     select: false,
   },
+  use2FA: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  // 2FA
+  code2FA: {
+    type: String,
+    select: false,
   },
   // EMAIL VERIFICATION
   verifiedEmail: {

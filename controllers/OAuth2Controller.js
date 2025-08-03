@@ -1,3 +1,5 @@
+import { privateKey, publicKey } from "../utils/rsaKeys.js";
+
 /*
 Preferred parameters:
  - response_type: token (code, token)
@@ -9,12 +11,24 @@ export const handleAuthorizationRequest = async (req, res, next) => {
   try {
     // Check if the user website has cookies set
     // If the user is not logged in, send the frontend
-    if (!req.cookies || !req.cookies.user) {
+    if (!req.cookies || !req.cookies.token) {
       return next();
     }
-    const { username, password } = req.query;
-    // If the username and password are not provided, send the frontend
-    if (!username || !password) return next();
+
+    // depending on the state of the app,
+    // provide different data in the token
+    ////////
+    // const token = jwt.sign(payload, privateKey, {
+    //   algorithm: "RS256",
+    // });
+
+    // // decode tokem
+
+    // const decoded = jwt.verify(token, publicKey, {
+    //   algorithms: "RS256",
+    // });
+    ////////
+
     const { response_type, client_id, redirect_uri, scope } = req.query;
     console.log(response_type, client_id, redirect_uri, scope);
   } catch (error) {

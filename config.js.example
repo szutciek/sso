@@ -8,7 +8,7 @@ export const server = {
 
 export const jwt = {
   secret: "private-key",
-  expiresIn: "67d",
+  expiresIn: 7 * 24 * 60 * 60,
 };
 
 export const db = {
