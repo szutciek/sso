@@ -8,8 +8,7 @@ export const getAppById = async (appId, selectString) => {
   const validId = performValidation(idValidationScheme, appId);
   const app = await App.findById(validId)
     .select(selectString)
-    .populate("developer")
-    .populate("developer.user");
+    .populate([{ path: "developer", populate: { path: "user" } }]);
   if (!app) {
     throw new AppError("App not found", 404);
   }
@@ -20,8 +19,7 @@ export const getAppByProperty = async (property, selectString) => {
   const validated = performValidation(LooseAppValidation, property);
   const app = await App.findOne(validated)
     .select(selectString)
-    .populate("developer")
-    .populate("developer.user");
+    .populate([{ path: "developer", populate: { path: "user" } }]);
   if (!app) {
     throw new AppError("App not found", 404);
   }

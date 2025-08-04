@@ -12,8 +12,7 @@ export const getUserById = async (userId, selectString) => {
   const validId = performValidation(idValidationScheme, userId);
   const user = await User.findById(validId)
     .select(selectString)
-    .populate("developer")
-    .populate("developer.apps.app");
+    .populate([{ path: "developer", populate: { path: "apps.app" } }]);
   if (!user) {
     throw new AppError("User not found", 404);
   }
@@ -24,8 +23,7 @@ export const getUserByProperty = async (property, selectString) => {
   const validated = performValidation(LooseUserValidation, property);
   const user = await User.findOne(validated)
     .select(selectString)
-    .populate("developer")
-    .populate("developer.apps.app");
+    .populate([{ path: "developer", populate: { path: "apps.app" } }]);
   if (!user) {
     throw new AppError("User not found", 404);
   }

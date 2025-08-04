@@ -14,6 +14,7 @@ router
 router
   .route("/:_id")
   .get(AppController.getAppById)
-  .put(authenticate, restrictToDeveloper, AppController.updateAppById);
+  .put(authenticate, restrictToDeveloper, AppController.updateAppById)
+  .delete(authenticate, restrictToDeveloper, AppController.deleteAppById);
 
 export default router;
