@@ -1,11 +1,11 @@
-import * as DeveloperBridge from "../bridges/DeveloperBridge.js";
-import * as UserBridge from "../bridges/UserBridge.js";
-import * as AppBridge from "../bridges/AppBridge.js";
+import * as DeveloperCrud from "../crud/DeveloperCrud.js";
+import * as UserCrud from "../crud/UserCrud.js";
+import * as AppCrud from "../crud/AppCrud.js";
 import AppError from "../utils/AppError.js";
 
 export const getDeveloperById = async (req, res, next) => {
   try {
-    const developer = await DeveloperBridge.getDeveloperById(
+    const developer = await DeveloperCrud.getDeveloperById(
       req.params._id.toString()
     );
     res.status(200).json(developer);
@@ -28,7 +28,7 @@ export const createDeveloper = async (req, res, next) => {
     if (req.user.developer) {
       throw new AppError("You are a developer", 400);
     }
-    const developer = await DeveloperBridge.createDeveloper({
+    const developer = await DeveloperCrud.createDeveloper({
       user: req.user._id.toString(),
     });
     req.user.developer = developer._id;
@@ -40,16 +40,16 @@ export const createDeveloper = async (req, res, next) => {
 };
 
 export const handleDeveloperDeletion = async (devId) => {
-  const developer = await DeveloperBridge.getDeveloperById(devId);
+  const developer = await DeveloperCrud.getDeveloperById(devId);
   for (let i = 0; i < developer.apps.length; i++) {
     if (developer.apps[i].role === "developer") {
-      await AppBridge.deleteApp(developer.apps[i].app._id);
+      await AppCrud.deleteApp(developer.apps[i].app._id);
     }
   }
-  const user = await UserBridge.getUserById(developer.user._id.toString());
+  const user = await UserCrud.getUserById(developer.user._id.toString());
   user.developer = undefined;
   await user.save();
-  await DeveloperBridge.deleteDeveloper(developer._id.toString());
+  await DeveloperCrud.deleteDeveloper(developer._id.toString());
 };
 
 export const deleteDeveloper = async (req, res, next) => {

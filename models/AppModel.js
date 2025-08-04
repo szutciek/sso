@@ -50,9 +50,10 @@ const AppValidation = Joi.object({
   name: Joi.string().required().min(3).max(30).trim(),
   developer: Joi.string().hex().length(24),
   clientId: Joi.string().required().min(3).max(30).trim(),
-  redirectUris: Joi.array().items(Joi.string().uri()).max(5),
+  redirectUris: Joi.array().required().items(Joi.string().uri()).max(5),
   redirectUrisDevelopment: Joi.array().items(Joi.string().uri()).max(5),
   scope: Joi.array()
+    .required()
     .items(
       Joi.string().valid(
         "username",

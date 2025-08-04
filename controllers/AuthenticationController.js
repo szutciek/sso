@@ -1,5 +1,5 @@
 import AppError from "../utils/AppError.js";
-import { getUserByProperty } from "../bridges/UserBridge.js";
+import { getUserByProperty } from "../crud/UserCrud.js";
 import { jwt as jwtConfig } from "../config.js";
 import { LooseUserValidation } from "../models/UserModel.js";
 import performValidation from "../utils/performValidation.js";

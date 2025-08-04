@@ -1,5 +1,5 @@
 import AppError from "../utils/AppError.js";
-import { getUserById } from "../bridges/UserBridge.js";
+import { getUserById } from "../crud/UserCrud.js";
 import { decodeToken } from "../utils/JWTUtilityFunctions.js";
 import { clearAuthCookies } from "../utils/cookieUtilityFunctions.js";
 

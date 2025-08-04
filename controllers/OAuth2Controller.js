@@ -1,7 +1,7 @@
 import { decodeToken } from "../utils/JWTUtilityFunctions.js";
 import { OAuth2ParamValidator } from "../utils/OAuth2Validators.js";
 import performValidation from "../utils/performValidation.js";
-import { getUserById } from "../bridges/UserBridge.js";
+import { getUserById } from "../crud/UserCrud.js";
 
 export const handleAuthorizationRequest = async (req, res, next) => {
   try {
