@@ -12,7 +12,10 @@ export const getUserById = async (userId, selectString) => {
   const validId = performValidation(idValidationScheme, userId);
   const user = await User.findById(validId)
     .select(selectString)
-    .populate([{ path: "developer", populate: { path: "apps.app" } }]);
+    .populate([
+      { path: "apps.app" },
+      { path: "developer", populate: { path: "apps.app" } },
+    ]);
   if (!user) {
     throw new AppError("User not found", 404);
   }
@@ -23,7 +26,10 @@ export const getUserByProperty = async (property, selectString) => {
   const validated = performValidation(LooseUserValidation, property);
   const user = await User.findOne(validated)
     .select(selectString)
-    .populate([{ path: "developer", populate: { path: "apps.app" } }]);
+    .populate([
+      { path: "apps.app" },
+      { path: "developer", populate: { path: "apps.app" } },
+    ]);
   if (!user) {
     throw new AppError("User not found", 404);
   }
@@ -54,4 +60,12 @@ export const updateUser = async (userId, updateData) => {
     await user.save();
   });
   return user;
+};
+
+export const updateMany = async (query, change) => {
+  let users = null;
+  await catchDuplicateError(async () => {
+    users = await User.updateMany(query, change);
+  });
+  return users;
 };

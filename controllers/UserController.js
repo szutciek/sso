@@ -1,6 +1,5 @@
 import * as UserCrud from "../crud/UserCrud.js";
 import * as DeveloperController from "./DeveloperController.js";
-import AppError from "../utils/AppError.js";
 
 export const getCurrentUser = async (req, res, next) => {
   try {

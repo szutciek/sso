@@ -3,7 +3,7 @@ import { getUserByProperty } from "../crud/UserCrud.js";
 import { jwt as jwtConfig } from "../config.js";
 import { LooseUserValidation } from "../models/UserModel.js";
 import performValidation from "../utils/performValidation.js";
-import { signToken } from "../utils/JWTUtilityFunctions.js";
+import { signToken, decodeToken } from "../utils/JWTUtilityFunctions.js";
 import { setAuthCookies } from "../utils/cookieUtilityFunctions.js";
 
 export const send2FACode = async (user) => {
@@ -73,6 +73,20 @@ export const generateToken = async (req, res, next) => {
     const token = signToken(payload);
     setAuthCookies(res, token);
     res.status(200).json({ message: "User signed in successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const setDefaultToken = async (req, res, next) => {
+  try {
+    const newToken = req.body.token;
+    if (!newToken) {
+      throw new AppError("Token not provided", 400);
+    }
+    decodeToken(newToken);
+    setAuthCookies(res, newToken);
+    res.status(200).json({ message: "Default token changed successfully" });
   } catch (error) {
     next(error);
   }

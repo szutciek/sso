@@ -1,6 +1,7 @@
 import * as DeveloperCrud from "../crud/DeveloperCrud.js";
 import * as UserCrud from "../crud/UserCrud.js";
 import * as AppCrud from "../crud/AppCrud.js";
+import * as AppController from "./AppController.js";
 import AppError from "../utils/AppError.js";
 
 export const getDeveloperById = async (req, res, next) => {
@@ -43,7 +44,7 @@ export const handleDeveloperDeletion = async (devId) => {
   const developer = await DeveloperCrud.getDeveloperById(devId);
   for (let i = 0; i < developer.apps.length; i++) {
     if (developer.apps[i].role === "developer") {
-      await AppCrud.deleteApp(developer.apps[i].app._id);
+      await AppController.handleAppDeletion(developer.apps[i].app._id);
     }
   }
   const user = await UserCrud.getUserById(developer.user._id.toString());

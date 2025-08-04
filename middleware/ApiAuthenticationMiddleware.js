@@ -11,6 +11,7 @@ export const authenticate = async (req, res, next) => {
     }
     const decoded = decodeToken(token);
     req.user = await getUserById(decoded._id);
+    req._used2FA = decoded.used2FA;
     next();
   } catch (error) {
     clearAuthCookies(res);

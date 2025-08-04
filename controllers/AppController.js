@@ -1,4 +1,5 @@
 import * as AppCrud from "../crud/AppCrud.js";
+import * as UserCrud from "../crud/UserCrud.js";
 import * as DeveloperCrud from "../crud/DeveloperCrud.js";
 import AppError from "../utils/AppError.js";
 
@@ -35,6 +36,19 @@ export const updateAppById = async (req, res, next) => {
   }
 };
 
+export const handleAppDeletion = async (appId) => {
+  await UserCrud.updateMany(
+    { "apps.app": appId },
+    { $pull: { apps: { app: appId } } }
+  );
+  const app = await AppCrud.getAppById(appId.toString());
+  const devId = app.developer._id.toString();
+  const developer = await DeveloperCrud.getDeveloperById(devId);
+  developer.apps.pull({ app: appId });
+  await developer.save();
+  await AppCrud.deleteApp(app._id.toString());
+};
+
 export const deleteAppById = async (req, res, next) => {
   try {
     const devId = req.user.developer._id.toString();
@@ -42,10 +56,7 @@ export const deleteAppById = async (req, res, next) => {
     if (app.developer._id.toString() !== devId) {
       throw new AppError("Not allowed to delete this app", 403);
     }
-    await AppCrud.deleteApp(app._id.toString());
-    const developer = await DeveloperCrud.getDeveloperById(devId);
-    developer.apps.pull({ app: app._id });
-    await developer.save();
+    await handleAppDeletion(app._id);
     res.status(204).send();
   } catch (err) {
     return next(err);

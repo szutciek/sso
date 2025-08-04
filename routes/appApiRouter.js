@@ -6,10 +6,13 @@ import {
   restrictToDeveloper,
 } from "../middleware/ApiAuthenticationMiddleware.js";
 import * as AppController from "../controllers/AppController.js";
+import appTrustRouter from "./appTrustApiRouter.js";
 
 router
   .route("/")
   .post(authenticate, restrictToDeveloper, AppController.createApp);
+
+router.use("/trust", authenticate, appTrustRouter);
 
 router
   .route("/:_id")
