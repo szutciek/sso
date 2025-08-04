@@ -32,13 +32,17 @@ const mongooseUserSchema = new mongoose.Schema({
     type: String,
     select: false,
   },
-  // INTERACTION HISTORY
+  // DEVELOPER
+  developer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Developer",
+  },
+  // APPS
   apps: [
     {
       _id: false,
       app: { type: mongoose.Schema.Types.ObjectId, ref: "App" },
       status: { type: String },
-      default: [],
     },
   ],
   // EMAIL VERIFICATION

@@ -17,3 +17,14 @@ export const authenticate = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const restrictToDeveloper = async (req, res, next) => {
+  try {
+    if (!req.user.developer) {
+      throw new AppError("You are not a developer", 403);
+    }
+    next();
+  } catch (error) {
+    return next(error);
+  }
+};

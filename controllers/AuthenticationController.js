@@ -40,6 +40,7 @@ export const verifyCredentials = async (req, res, next) => {
 
 export const verify2FA = async (req, res, next) => {
   try {
+    req._used2FA = false;
     if (!req.user.use2FA) {
       return next();
     }
@@ -50,10 +51,11 @@ export const verify2FA = async (req, res, next) => {
       code2FA: req.body.code2FA,
     });
     if (req.user.code2FA !== code) {
-      throw new AppError("Invalid 2FA code", 401);
+      throw new AppError("Invalid 2FA code", 401, { includeCode: true });
     }
     req.user.code2FA = null;
     await req.user.save();
+    req._used2FA = true;
     next();
   } catch (error) {
     next(error);
@@ -64,6 +66,7 @@ export const generateToken = async (req, res, next) => {
   try {
     const payload = {
       _id: req.user._id,
+      used2FA: req._used2FA,
       iat: new Date().getTime(),
       exp: new Date().getTime() / 1000 + jwtConfig.expiresIn, // Convert seconds to milliseconds
     };

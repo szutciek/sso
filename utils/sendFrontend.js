@@ -1,3 +1,5 @@
+import { dirname } from "../config.js";
+
 export default function sendFrontend(_, res) {
-  res.sendFile(import.meta.dirname + "/client/dist/index.html");
+  res.sendFile(dirname + "/client/dist/index.html");
 }

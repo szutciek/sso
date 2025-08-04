@@ -12,6 +12,10 @@ export const handleAuthorizationRequest = async (req, res, next) => {
     req.user = await getUserById(decoded._id);
     const query = performValidation(OAuth2ParamValidator, req.query);
     console.log(query);
+    // get user data
+    // get app data
+    // check if user accepted app (shared data requested)
+    // generate new token and redirect client with it in url
   } catch (error) {
     return next(error);
   }
