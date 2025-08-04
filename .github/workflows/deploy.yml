@@ -19,4 +19,5 @@ jobs:
           script: |
             ssh-keyscan github.com >> ~/.ssh/known_hosts
             cd ${{ secrets.SERVER_PATH }}
-            git pull origin main && npm i
+            git pull origin main
+            pm2 restart sso
