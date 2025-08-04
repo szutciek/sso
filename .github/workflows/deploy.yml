@@ -16,7 +16,7 @@ jobs:
       - name: Add server to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p "${{ secrets.SERVER_PORT }}" "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -26,9 +26,14 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd ${{ secrets.SERVER_PATH }}
-            git config --global --add safe.directory /var/www/sso
+            set -e  # Exit on error
+            cd "${{ secrets.SERVER_PATH }}"
+            git config --global --add safe.directory "${{ secrets.SERVER_PATH }}"
             git fetch origin main
             git reset --hard origin/main
-            npm ci --omit=dev || npm install --omit=dev
-            pm2 restart sso
+            if [ -f package-lock.json ]; then
+              npm ci --omit=dev || npm install --omit=dev
+            else
+              npm install --omit=dev
+            fi
+            pm2 restart sso || pm2 start ecosystem.config.js --only sso
