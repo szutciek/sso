@@ -12,10 +12,10 @@ jobs:
       - name: SSH Commands
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd /home/${{ secrets.SSH_USER }}/projects/webdev/portfolio/
-            git pull origin && npm i && npm run build
+            cd ${{ secrets.SERVER_PATH }}
+            git pull origin main && npm i
