@@ -13,8 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Add server to known_hosts
-        run: |
+        - name: Test SSH connectivity
+          run: |
+          timeout 10 bash -c "</dev/tcp/${{ secrets.SERVER_HOST }}/${{ secrets.SERVER_PORT }}" && echo "Connection successful" || echo "Connection failed or timed out"
+
+        - name: Add server to known_hosts
+          run: |
           mkdir -p ~/.ssh
           ssh-keyscan -p "${{ secrets.SERVER_PORT }}" "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
 
@@ -31,9 +35,4 @@ jobs:
             git config --global --add safe.directory "${{ secrets.SERVER_PATH }}"
             git fetch origin main
             git reset --hard origin/main
-            if [ -f package-lock.json ]; then
-              npm ci --omit=dev || npm install --omit=dev
-            else
-              npm install --omit=dev
-            fi
-            pm2 restart sso || pm2 start ecosystem.config.js --only sso
+            pm2 restart sso
