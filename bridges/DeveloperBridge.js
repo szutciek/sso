@@ -44,3 +44,7 @@ export const updateDeveloper = async (developerId, updateData) => {
   });
   return developer;
 };
+
+export const deleteDeveloper = async (developerId) => {
+  return await Developer.deleteOne({ _id: developerId });
+};

@@ -8,7 +8,12 @@ import {
 import * as DeveloperController from "../controllers/DeveloperController.js";
 
 router
-  .route("/")
+  .route("/me")
+  .get(
+    authenticate,
+    restrictToDeveloper,
+    DeveloperController.getCurrentDeveloper
+  )
   .post(authenticate, DeveloperController.createDeveloper)
   .delete(
     authenticate,

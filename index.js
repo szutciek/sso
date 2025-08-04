@@ -6,12 +6,8 @@ import "./database.js";
 import apiRouter from "./routes/apiRouter.js";
 import authRouter from "./routes/authRouter.js";
 import oAuth2KeyRouter from "./routes/oAuth2KeyRouter.js";
-import {
-  handleAuthorizationRequest,
-  handleTokenRequest,
-} from "./controllers/OAuth2Controller.js";
+import { handleAuthorizationRequest } from "./controllers/OAuth2Controller.js";
 import sendFrontend from "./utils/sendFrontend.js";
-import "./utils/ObjectPrototypeMethods.js";
 import safeErrorHandler from "./utils/safeErrorHandler.js";
 
 import { server } from "./config.js";

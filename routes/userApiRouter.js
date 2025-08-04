@@ -7,7 +7,8 @@ import * as UserController from "../controllers/UserController.js";
 router
   .route("/me")
   .get(authenticate, UserController.getCurrentUser)
-  .put(authenticate, UserController.updateCurrentUser);
+  .put(authenticate, UserController.updateCurrentUser)
+  .delete(authenticate, UserController.deleteCurrentUser);
 
 router.route("/").post(UserController.createUser);
 

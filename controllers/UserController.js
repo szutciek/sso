@@ -1,4 +1,6 @@
 import * as UserBridge from "../bridges/UserBridge.js";
+import * as DeveloperController from "./DeveloperController.js";
+import AppError from "../utils/AppError.js";
 
 export const getCurrentUser = async (req, res, next) => {
   try {
@@ -13,6 +15,19 @@ export const updateCurrentUser = async (req, res, next) => {
   try {
     const user = await UserBridge.updateUser(req.params._id, req.body);
     res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteCurrentUser = async (req, res, next) => {
+  try {
+    if (req.user.developer) {
+      const developerId = req.user.developer._id.toString();
+      await DeveloperController.handleDeveloperDeletion(developerId);
+    }
+    await req.user.deleteOne();
+    res.status(204).send();
   } catch (error) {
     next(error);
   }

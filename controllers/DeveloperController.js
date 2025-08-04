@@ -1,4 +1,6 @@
 import * as DeveloperBridge from "../bridges/DeveloperBridge.js";
+import * as UserBridge from "../bridges/UserBridge.js";
+import * as AppBridge from "../bridges/AppBridge.js";
 import AppError from "../utils/AppError.js";
 
 export const getDeveloperById = async (req, res, next) => {
@@ -6,6 +8,15 @@ export const getDeveloperById = async (req, res, next) => {
     const developer = await DeveloperBridge.getDeveloperById(
       req.params._id.toString()
     );
+    res.status(200).json(developer);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const getCurrentDeveloper = async (req, res, next) => {
+  try {
+    const developer = await req.user.developer.populate("user");
     res.status(200).json(developer);
   } catch (err) {
     return next(err);
@@ -28,12 +39,24 @@ export const createDeveloper = async (req, res, next) => {
   }
 };
 
+export const handleDeveloperDeletion = async (devId) => {
+  const developer = await DeveloperBridge.getDeveloperById(devId);
+  for (let i = 0; i < developer.apps.length; i++) {
+    if (developer.apps[i].role === "developer") {
+      await AppBridge.deleteApp(developer.apps[i].app._id);
+    }
+  }
+  const user = await UserBridge.getUserById(developer.user._id.toString());
+  user.developer = undefined;
+  await user.save();
+  await DeveloperBridge.deleteDeveloper(developer._id.toString());
+};
+
 export const deleteDeveloper = async (req, res, next) => {
   try {
-    throw new AppError("Not supported yet", 500);
-    // remove reference from user
-    // remove all apps
-    // delete developer
+    const developerId = req.user.developer._id.toString();
+    await handleDeveloperDeletion(developerId);
+    res.status(204).send();
   } catch (err) {
     return next(err);
   }

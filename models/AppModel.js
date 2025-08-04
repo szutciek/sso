@@ -16,6 +16,14 @@ const mongooseAppSchema = new mongoose.Schema({
   },
   redirectUris: [String],
   redirectUrisDevelopment: [String],
+  scope: [
+    {
+      type: String,
+    },
+  ],
+  scopeUpdatedAt: {
+    type: Date,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -24,6 +32,17 @@ const mongooseAppSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  icon: {
+    type: String,
+    default: "https://assets.kanapka.eu/images/app.png",
+  },
+});
+
+mongooseAppSchema.pre("save", function (next) {
+  if (this.isModified("scope")) {
+    this.scopeUpdatedAt = new Date();
+  }
+  next();
 });
 
 const AppValidation = Joi.object({
@@ -33,6 +52,20 @@ const AppValidation = Joi.object({
   clientId: Joi.string().required().min(3).max(30).trim(),
   redirectUris: Joi.array().items(Joi.string().uri()).max(5),
   redirectUrisDevelopment: Joi.array().items(Joi.string().uri()).max(5),
+  scope: Joi.array()
+    .items(
+      Joi.string().valid(
+        "username",
+        "profile",
+        "email",
+        "age",
+        "locale",
+        "language",
+        "createdAt"
+      )
+    )
+    .min(1),
+  icon: Joi.string().uri(),
 });
 
 const LooseAppValidation = AppValidation.fork(

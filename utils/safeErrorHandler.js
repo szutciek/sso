@@ -4,7 +4,7 @@ export default function safeErrorHandler(err, req, res, next) {
       status: "error",
       message: err.message,
     };
-    if (err.apiInfo) json.apiInfo = err.apiInfo;
+    if (err.apiInfo) json.details = err.apiInfo;
     return res.status(err.code).json(json);
   }
   console.log(err);
