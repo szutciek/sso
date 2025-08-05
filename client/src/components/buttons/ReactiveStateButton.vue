@@ -9,19 +9,6 @@
 </template>
 
 <style scoped>
-.default {
-  background-color: #97acdf;
-  cursor: pointer;
-}
-.loading {
-  background-color: #889dcd;
-  cursor: not-allowed;
-}
-.success {
-  background-color: #55b94e;
-  cursor: not-allowed;
-}
-
 button {
   width: 100%;
   padding: 0.75rem;
@@ -37,8 +24,23 @@ button {
   background-color: #97acdf;
   cursor: pointer;
 }
-button:hover {
+.default {
+  background-color: #97acdf;
+  cursor: pointer;
+}
+button.default:hover {
   background-color: #889dcd;
+}
+.loading {
+  background-color: #889dcd;
+  cursor: not-allowed;
+}
+.success {
+  background-color: #55b94e;
+  cursor: not-allowed;
+}
+button.success:hover {
+  background-color: #55b94e;
 }
 
 .loader {

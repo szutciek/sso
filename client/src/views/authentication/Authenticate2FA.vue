@@ -3,21 +3,16 @@
     <div class="box">
       <div class="title">
         <div class="top">
-          <h1>Sign in</h1>
+          <h1>2FA Code</h1>
         </div>
-        <h2>Use the form below to sign in with your Kanapka SSO account.</h2>
+        <h2>Enter the 2 factor authentication code from your inbox.</h2>
       </div>
 
       <div class="form">
         <LabelledTextInput
-          @input="email = $event"
-          :config="emailInputConfig"
-          :error="emailInputError"
-        />
-        <LabelledTextInput
-          @input="password = $event"
-          :config="passwordInputConfig"
-          :error="passwordInputError"
+          @input="code = $event"
+          :config="codeInputConfig"
+          :error="codeInputError"
         />
       </div>
 
@@ -36,42 +31,31 @@
 import { ref } from "vue";
 import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
-import profileStore from "@/store/profileStore";
-import { useRouter } from "vue-router";
-const router = useRouter();
 
-const emailInputConfig = {
-  field: "email",
-  type: "email",
-  label: "Email address",
-};
-const passwordInputConfig = {
-  field: "password",
-  type: "password",
-  label: "Password",
+const codeInputConfig = {
+  field: "code",
+  type: "",
+  label: "2FA Code",
 };
 
-const emailInputError = ref("");
-const passwordInputError = ref("");
+const codeInputError = ref("");
 
 const buttonState = ref("default");
 const buttonText = ref("Submit");
 
-const email = ref("");
-const password = ref("");
+const code = ref("");
 
 const handleSubmit = async () => {
   try {
     buttonState.value = "loading";
 
-    const response = await fetch("/authenticate", {
+    const response = await fetch("/authenticate/2fa", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        code: code.value,
       }),
     });
 
@@ -82,17 +66,6 @@ const handleSubmit = async () => {
         passwordInputError.value = data.details?.password;
       }
       buttonState.value = "default";
-      return;
-    }
-    buttonState.value = "success";
-    profileStore.addProfile({
-      token: data.token,
-      _id: data.details._id,
-      use2FA: data.details.use2FA,
-      used2FA: data.details.used2FA,
-    });
-    if (data.details.use2FA === true && data.details.used2FA !== true) {
-      router.push("2fa");
     }
   } catch (error) {
     console.error("Error:", error.message);

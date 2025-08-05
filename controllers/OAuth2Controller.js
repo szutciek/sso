@@ -10,6 +10,13 @@ import { jwt as jwtConfig } from "../config.js";
 
 export const handleAuthorizationRequest = async (req, res, next) => {
   try {
+    if (req.user.use2FA === true && req._used2FA !== true) {
+      return next(
+        new AppError("2FA login required", 401, {
+          require2FA: true,
+        })
+      );
+    }
     const currentUrl = encodeURIComponent(
       req.protocol + "://" + req.get("host") + req.originalUrl
     );
@@ -21,6 +28,13 @@ export const handleAuthorizationRequest = async (req, res, next) => {
     req._used2FA = decoded.used2FA;
     const query = performValidation(OAuth2ParamValidator, req.query);
     const app = await AppCrud.getAppByProperty({ clientId: query.client_id });
+    if (app.require2FA === true && req._used2FA !== true) {
+      return next(
+        new AppError("2FA login required to access app", 401, {
+          require2FA: true,
+        })
+      );
+    }
     if (!app.redirectUris.includes(query.redirect_uri)) {
       return next(
         new AppError("Provided redirect uri not registered for app", 400)

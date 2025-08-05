@@ -24,6 +24,10 @@ const mongooseAppSchema = new mongoose.Schema({
   scopeUpdatedAt: {
     type: Date,
   },
+  require2FA: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -66,6 +70,7 @@ const AppValidation = Joi.object({
       )
     )
     .min(1),
+  require2FA: Joi.boolean(),
   icon: Joi.string().uri(),
 });
 

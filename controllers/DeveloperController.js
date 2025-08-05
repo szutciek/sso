@@ -33,6 +33,7 @@ export const createDeveloper = async (req, res, next) => {
       user: req.user._id.toString(),
     });
     req.user.developer = developer._id;
+    req.user.use2FA = true;
     await req.user.save();
     res.status(200).json(developer);
   } catch (err) {

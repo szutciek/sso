@@ -29,18 +29,25 @@ const mongooseUserSchema = new mongoose.Schema({
   locale: {
     type: String,
   },
-  use2FA: {
-    type: Boolean,
-    default: false,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now,
   },
   // 2FA
+  use2FA: {
+    type: Boolean,
+    default: false,
+  },
   code2FA: {
     type: String,
     select: false,
+  },
+  last2FAGeneration: {
+    type: Date,
+  },
+  last2FAEmail: {
+    type: Date,
   },
   // DEVELOPER
   developer: {

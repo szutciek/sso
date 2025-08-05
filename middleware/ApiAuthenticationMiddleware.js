@@ -12,6 +12,14 @@ export const authenticate = async (req, res, next) => {
     const decoded = decodeToken(token);
     req.user = await getUserById(decoded._id);
     req._used2FA = decoded.used2FA;
+    const userRequires2FA = req.user.use2FA === true && req._used2FA !== true;
+    if (userRequires2FA && !req.originalUrl.startsWith("/authenticate/2fa")) {
+      return next(
+        new AppError("2FA login required", 401, {
+          require2FA: true,
+        })
+      );
+    }
     next();
   } catch (error) {
     clearAuthCookies(res);
