@@ -70,7 +70,11 @@ const routes = [
 
   {
     path: "/:catchAll(.*)",
-    redirect: "/",
+    name: "lost",
+    components: {
+      default: () => import("../views/Lost.vue"),
+      navigation: NavigationComponentLite,
+    },
   },
 ];
 
@@ -87,7 +91,6 @@ import lS from "@/store/localeStore.js";
 router.beforeEach((to, from, next) => {
   const urlLocale = to.path.split("/")[1];
   if (!lS.supportedLocales.includes(urlLocale)) {
-    console.warn(`Redirecting from: ${to.fullPath}`);
     next({ path: `/en${to.fullPath}`, query: to.query, replace: true });
   } else {
     next();

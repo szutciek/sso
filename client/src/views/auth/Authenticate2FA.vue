@@ -1,12 +1,10 @@
 <template>
-  <div class="container mW1200">
+  <div class="container-standard mW1200">
     <div class="box">
-      <div class="title">
-        <div class="top">
-          <h1>2FA Code</h1>
-        </div>
-        <h2>Enter the 2 factor authentication code from your inbox.</h2>
+      <div class="row">
+        <h1>2FA Code</h1>
       </div>
+      <h2>Enter the 2 factor authentication code from your inbox.</h2>
 
       <div class="form">
         <LabelledTextInput
@@ -119,43 +117,4 @@ notificationStore.createNotif({
 });
 </script>
 
-<style scoped>
-.container {
-  flex: 1;
-  width: 100%;
-}
-.box {
-  margin: 30px 0;
-  max-width: 320px;
-}
-
-.title .top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-.title h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-.title .top img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #efefef;
-}
-.title h2 {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #535353;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin: 20px 0;
-}
-</style>
+<style scoped></style>

@@ -20,8 +20,6 @@ import ToasterManager from "@/components/ToasterManager.vue";
 import localeStore from "@/store/localeStore.js";
 localeStore.loadLocaleFromUrl();
 
-console.log(window.location.href);
-
 import { ref } from "vue";
 const navHeight = ref(126);
 const updateNavHeight = (newHeight) => {
@@ -219,10 +217,58 @@ a {
   }
 }
 
+.container-standard {
+  flex: 1;
+  width: 100%;
+
+  max-width: 1240px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+.container-standard .box {
+  margin: 30px 0;
+  max-width: 320px;
+}
+.container-standard .box.wide {
+  margin: 30px 0;
+  max-width: 420px;
+}
+.container-standard .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.container-standard .row img,
+.container-standard .row svg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #efefef;
+}
+.container-standard .form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+.container-standard h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.container-standard h2 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #535353;
+}
+.container-standard p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #535353;
+}
+
 @media only screen and (max-width: 1000px) {
-  :root {
-    --nav-height: 65px;
-  }
   h1 {
     font-size: 32px;
   }

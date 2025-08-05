@@ -417,7 +417,7 @@ watch(
 
   background-color: #fff;
   border: 1px solid #c8c8c8;
-  border-radius: 4px;
+  /* border-radius: 4px; */
 
   transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -15,9 +15,10 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       delete req.query.source;
       sendAppOnFail = false;
     }
-    const currentUrl = encodeURIComponent(
-      req.protocol + "://" + req.get("host") + req.originalUrl
-    );
+    const currentUrl = encodeURIComponent(req.originalUrl);
+    // const currentUrl = encodeURIComponent(
+    //   req.protocol + "://" + req.get("host") + req.originalUrl
+    // );
     if (!req.cookies || !req.cookies.token) {
       req._targetAppPath = `/authenticate?redirect=${currentUrl}`;
       if (sendAppOnFail) return next();
@@ -89,7 +90,14 @@ export const handleAuthorizationRequest = async (req, res, next) => {
     const successQuery = encodeURIComponent(
       `access_token=${token}&state=${query.state}&scope=${app.scope.join(" ")}`
     );
-    return res.redirect(`${query.redirect_uri}?${successQuery}`);
+    if (sendAppOnFail) {
+      return res.redirect(`${query.redirect_uri}?${successQuery}`);
+    } else {
+      res.status(200).json({
+        message: "Successfully obtained access token",
+        redirect: `${query.redirect_uri}?${successQuery}`,
+      });
+    }
   } catch (error) {
     return next(error);
   }

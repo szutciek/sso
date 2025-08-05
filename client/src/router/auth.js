@@ -11,7 +11,6 @@ export default [
     components: {
       default: Authorize,
       navigation: NavigationComponentLite,
-      // footer: FooterComponent,
     },
   },
   {
@@ -20,7 +19,6 @@ export default [
     components: {
       default: Authenticate,
       navigation: NavigationComponentLite,
-      // footer: FooterComponent,
     },
   },
   {
@@ -29,7 +27,6 @@ export default [
     components: {
       default: Authenticate2FA,
       navigation: NavigationComponentLite,
-      // footer: FooterComponent,
     },
   },
 ];

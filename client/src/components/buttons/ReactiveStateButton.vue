@@ -4,7 +4,7 @@
     @click="state === `default` && emit(`submit`)"
   >
     <div v-if="state === 'loading'" class="loader"></div>
-    {{ state !== "loading" ? text : "" }}
+    {{ state !== "loading" ? text || "&nbsp;" : "" }}
   </button>
 </template>
 
