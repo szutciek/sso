@@ -1,14 +1,10 @@
 <template>
-  <nav ref="nav">
+  <nav ref="nav" class="keep-dropdown-open">
     <div class="bar mW1200">
       <div class="logo">
         <div class="extension"></div>
         <Logo class="graphic" />
       </div>
-
-      <ul>
-        <li>Panel</li>
-      </ul>
     </div>
   </nav>
 </template>
@@ -21,10 +17,10 @@ nav {
   right: 0;
   z-index: 1000;
 
-  padding: 10px;
+  padding: 50px 10px 10px 10px;
 
   background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
 .bar {
   display: flex;
@@ -32,44 +28,36 @@ nav {
   align-items: center;
 }
 
-.bar ul {
-  display: flex;
-  flex: 2;
-  gap: 24px;
-  padding: 0 40px;
-  list-style: none;
+.bar .logo {
+  position: relative;
 }
-.bar li {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-  padding: 8px 16px;
-  cursor: pointer;
+.bar .logo .extension {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 500px;
+  background-color: var(--main-color-l);
+
+  overflow: hidden;
+  border-radius: 0 0 4px 4px;
 }
 
 @media screen and (max-width: 800px) {
   .bar {
     padding: 0;
   }
-  .bar ul {
-    gap: 12px;
-    padding: 0 20px;
-  }
-  .bar li {
-    padding: 8px 12px;
-  }
 }
 </style>
 
 <script setup>
+import Logo from "@/components/LogoComponent.vue";
+
 import { defineEmits, ref, onMounted } from "vue";
 const emit = defineEmits(["update-nav-height"]);
 const nav = ref(null);
 onMounted(() => {
   emit("update-nav-height", nav.value.getBoundingClientRect().height);
 });
-
-import lS from "@/store/localeStore";
-
-import Logo from "@/components/LogoComponent.vue";
 </script>

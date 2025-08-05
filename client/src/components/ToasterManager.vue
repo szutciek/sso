@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import appStore from "../store/appStore.js";
+import notificationStore from "@/store/notificationStore.js";
 import { onMounted, watch } from "vue";
 
 class Handler {
@@ -383,9 +383,9 @@ setInterval(() => {
 }, 100);
 
 watch(
-  () => appStore.notifications,
+  () => notificationStore.notifications,
   () => {
-    handler.updateNotifs(appStore.notifications);
+    handler.updateNotifs(notificationStore.notifications);
   }
 );
 </script>

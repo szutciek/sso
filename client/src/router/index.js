@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import authRoutes from "./auth.js";
 import userRoutes from "./user.js";
 import appRoutes from "./app.js";
 import developerRoutes from "./developer.js";
@@ -30,6 +31,8 @@ const routes = [
     },
   },
 
+  // Website authentication pages
+  ...authRoutes,
   // Website from the perspecive of a normal user
   ...userRoutes,
   // Website from the perspective of a app admin

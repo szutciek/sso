@@ -1,6 +1,6 @@
 <template>
-  <nav class="keep-dropdown-open">
-    <div class="bar">
+  <nav ref="nav" class="keep-dropdown-open">
+    <div class="bar mW1200">
       <div class="logo">
         <div class="extension"></div>
         <Logo class="graphic" />
@@ -53,10 +53,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 .bar .logo {
@@ -130,6 +126,13 @@ nav {
 </style>
 
 <script setup>
+import { defineEmits, ref, onMounted } from "vue";
+const emit = defineEmits(["update-nav-height"]);
+const nav = ref(null);
+onMounted(() => {
+  emit("update-nav-height", nav.value.getBoundingClientRect().height);
+});
+
 import lS from "@/store/localeStore";
 
 import Logo from "@/components/LogoComponent.vue";

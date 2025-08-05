@@ -1,11 +1,11 @@
 <template>
   <div class="userPanel">
     <div class="profiles">
-      <div class="profile" v-for="(profile, i) of AccountListStore.profiles">
+      <div class="profile" v-for="(profile, i) of profileStore.profiles">
         <UserProfile
           :profile="profile"
-          :selected="i === AccountListStore.selectedProfileIndex"
-          @click="AccountListStore.selectNewProfile(i)"
+          :selected="i === profileStore.selectedProfileIndex"
+          @click="profileStore.selectNewProfile(i)"
         />
       </div>
     </div>
@@ -16,7 +16,7 @@
 import { ref } from "vue";
 import UserProfile from "@/components/user/UserProfile.vue";
 import lS from "@/store/localeStore.js";
-import AccountListStore from "@/store/accountListStore.js";
+import profileStore from "@/store/profileStore.js";
 </script>
 
 <style scoped>

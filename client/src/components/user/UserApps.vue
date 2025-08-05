@@ -3,7 +3,7 @@
     <div class="developers">
       <div
         class="developer"
-        v-for="(dev, i) of AccountListStore.getCurrentProfile().authorizedApps"
+        v-for="(dev, i) of profileStore.getCurrentProfile().authorizedApps"
       >
         <UserAppsDeveloper :developer="dev" />
       </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import AccountListStore from "@/store/accountListStore.js";
+import profileStore from "@/store/profileStore.js";
 import UserAppsDeveloper from "@/components/user/UserAppsDeveloper.vue";
 </script>
 

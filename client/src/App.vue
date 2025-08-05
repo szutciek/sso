@@ -3,9 +3,9 @@
     <Fonts />
     <ToasterManager />
 
-    <RouterView name="navigation" />
+    <RouterView name="navigation" @update-nav-height="updateNavHeight" />
 
-    <div id="mainContentContainer">
+    <div id="mainContentContainer" :style="`padding-top: ${navHeight}px`">
       <RouterView />
     </div>
 
@@ -18,13 +18,13 @@ import Fonts from "@/components/Fonts.vue";
 import ToasterManager from "@/components/ToasterManager.vue";
 
 import localeStore from "@/store/localeStore.js";
-
 localeStore.loadLocaleFromUrl();
 
-import userStore from "@/store/userStore.js";
-
-userStore.loadPreviousState();
-userStore.checkLoginStatus();
+import { ref } from "vue";
+const navHeight = ref(126);
+const updateNavHeight = (newHeight) => {
+  navHeight.value = newHeight;
+};
 </script>
 
 <style>
@@ -48,7 +48,6 @@ body {
   --sec-color-d: #1c1c1c;
   --main-color-l: #ec7837;
   --main-color-d: #9e4a1b;
-  --nav-height: 80px;
 }
 
 h1 {
@@ -129,6 +128,12 @@ input {
 
 .mW1400 {
   max-width: 1440px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.mW1200 {
+  max-width: 1240px;
   padding: 0 20px;
   margin: 0 auto;
 }
@@ -225,5 +230,8 @@ a {
 <style scoped>
 #mainContentContainer {
   min-height: 100vh;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 </style>

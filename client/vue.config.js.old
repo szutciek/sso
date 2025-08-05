@@ -1,6 +1,8 @@
 module.exports = {
   devServer: {
     proxy: {
+      "/authenticate": { target: "http://localhost:4771" },
+      "/authorize": { target: "http://localhost:4771" },
       "/api": { target: "http://localhost:4771" },
       "/assets": { target: "http://localhost:4771" },
     },
