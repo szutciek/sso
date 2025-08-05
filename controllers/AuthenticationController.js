@@ -39,7 +39,7 @@ export const generateToken = async (req, res, next) => {
       _id: req.user._id,
       used2FA: req._used2FA,
       iat: new Date().getTime(),
-      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn, // Convert seconds to milliseconds
+      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn,
     };
     const token = signToken(payload);
     setAuthCookies(res, token);
@@ -111,12 +111,16 @@ export const verify2FA = async (req, res, next) => {
     const codeValidator = Joi.object({
       code: Joi.string().required().length(8),
     });
-    const code2FA = performValidation(codeValidator, req.body);
-    if (req.user.code2FA !== code2FA) {
+    const { code } = performValidation(codeValidator, req.body);
+    const user = await getUserById(
+      req.user._id.toString(),
+      "+code2FA +last2FAGeneration"
+    );
+    if (user.code2FA !== code) {
       throw new AppError("Invalid 2FA code", 401, { code: "Invalid 2FA Code" });
     }
-    req.user.code2FA = null;
-    await req.user.save();
+    user.code2FA = null;
+    await user.save();
     req._used2FA = true;
     next();
   } catch (error) {

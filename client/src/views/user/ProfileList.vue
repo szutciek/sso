@@ -8,6 +8,8 @@
         <UserApps />
       </div>
 
+      <h1>Profile List</h1>
+
       <TileBackground />
     </div>
   </div>

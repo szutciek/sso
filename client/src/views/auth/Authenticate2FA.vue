@@ -3,21 +3,16 @@
     <div class="box">
       <div class="title">
         <div class="top">
-          <h1>Sign in</h1>
+          <h1>2FA Code</h1>
         </div>
-        <h2>Use the form below to sign in with your Kanapka SSO account.</h2>
+        <h2>Enter the 2 factor authentication code from your inbox.</h2>
       </div>
 
       <div class="form">
         <LabelledTextInput
-          @input="email = $event"
-          :config="emailInputConfig"
-          :error="emailInputError"
-        />
-        <LabelledTextInput
-          @input="password = $event"
-          :config="passwordInputConfig"
-          :error="passwordInputError"
+          @input="code = $event"
+          :config="codeInputConfig"
+          :error="codeInputError"
         />
       </div>
 
@@ -36,54 +31,50 @@
 import { ref } from "vue";
 import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
+import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
+const route = useRoute();
+const redirect = route.query.redirect;
 
-const emailInputConfig = {
-  field: "email",
-  type: "email",
-  label: "Email address",
-};
-const passwordInputConfig = {
-  field: "password",
-  type: "password",
-  label: "Password",
+const codeInputConfig = {
+  field: "code",
+  type: "",
+  label: "2FA Code",
 };
 
-const emailInputError = ref("");
-const passwordInputError = ref("");
+const codeInputError = ref("");
 
 const buttonState = ref("default");
 const buttonText = ref("Submit");
 
-const email = ref("");
-const password = ref("");
+const code = ref("");
 
 const handleSubmit = async () => {
   try {
     buttonState.value = "loading";
 
-    const response = await fetch("/authenticate", {
+    const response = await fetch("/authenticate/2fa", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        code: code.value,
       }),
     });
 
     const data = await response.json();
+
     if (!response.ok) {
       if (data.details) {
-        emailInputError.value = data.details?.email;
-        passwordInputError.value = data.details?.password;
+        codeInputError.value = data.details?.code;
+        return;
       }
       buttonState.value = "default";
-      return;
     }
+
     buttonState.value = "success";
     profileStore.addProfile({
       token: data.token,
@@ -91,13 +82,41 @@ const handleSubmit = async () => {
       use2FA: data.details.use2FA,
       used2FA: data.details.used2FA,
     });
+
+    const queryPresent = redirect != null;
+    const encodedQuery = encodeURIComponent(`?redirect=${redirect}`);
     if (data.details.use2FA === true && data.details.used2FA !== true) {
-      router.push("2fa");
+      router.push(`/en/authenticate/2fa${queryPresent ? encodedQuery : ""}`);
+    } else {
+      router.push(`${queryPresent ? encodedQuery : "/en"}`);
     }
   } catch (error) {
     console.error("Error:", error.message);
   }
 };
+
+import wrappedFetch from "@/assets/wrappedFetch.js";
+
+const emailRequest = wrappedFetch("/authenticate/2fa/request-code", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    code: code.value,
+  }),
+});
+
+notificationStore.createNotif({
+  type: "info",
+  title: "Sending 2FA Code",
+  details: "We are sending your 2FA code to your email",
+  duration: 5000,
+  promise: {
+    promise: emailRequest,
+    while: "Sending email...",
+  },
+});
 </script>
 
 <style scoped>

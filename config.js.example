@@ -20,3 +20,10 @@ export const db = {
   name: "dbname",
   params: "urlparams",
 };
+
+export const email = {
+  host: "mail.domain.com",
+  port: 0,
+  user: "user@domain.com",
+  password: "emailPwd",
+};

@@ -1,11 +1,9 @@
 import NavigationComponent from "@/components/NavigationComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 
-const base = "/:locale/developers";
-
 export default [
   {
-    path: `${base}`,
+    path: `/developers`,
     components: {
       default: () => import("../views/developer/DeveloperPanel.vue"),
       navigation: () =>
@@ -13,12 +11,20 @@ export default [
       footer: FooterComponent,
     },
   },
-  //   {
-  //     path: `${base}/signup`,
-  //     components: {
-  //     //   default: () => import("../views/developer/DeveloperPanel.vue"),
-  //       navigation: NavigationComponent,
-  //       footer: FooterComponent,
-  //     },
-  //   },
+  {
+    path: `/developers/open`,
+    components: {
+      //   default: () => import("../views/developer/DeveloperPanel.vue"),
+      navigation: NavigationComponent,
+      footer: FooterComponent,
+    },
+  },
+  {
+    path: `/developers/close`,
+    components: {
+      //   default: () => import("../views/developer/DeveloperPanel.vue"),
+      navigation: NavigationComponent,
+      footer: FooterComponent,
+    },
+  },
 ];

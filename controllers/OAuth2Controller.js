@@ -10,28 +10,45 @@ import { jwt as jwtConfig } from "../config.js";
 
 export const handleAuthorizationRequest = async (req, res, next) => {
   try {
-    if (req.user.use2FA === true && req._used2FA !== true) {
-      return next(
-        new AppError("2FA login required", 401, {
-          require2FA: true,
-        })
-      );
+    let sendAppOnFail = true;
+    if (req.query.source === "app") {
+      delete req.query.source;
+      sendAppOnFail = false;
     }
     const currentUrl = encodeURIComponent(
       req.protocol + "://" + req.get("host") + req.originalUrl
     );
     if (!req.cookies || !req.cookies.token) {
-      return res.redirect(`/authenticate?redirect=${currentUrl}`);
+      req._targetAppPath = `/authenticate?redirect=${currentUrl}`;
+      if (sendAppOnFail) return next();
+      return next(
+        new AppError("Not authenticated", 401, {
+          redirect: req._targetAppPath,
+        })
+      );
     }
     const decoded = decodeToken(req.cookies.token);
     req.user = await getUserById(decoded._id);
     req._used2FA = decoded.used2FA;
+    if (req.user.use2FA === true && req._used2FA !== true) {
+      req._targetAppPath = `/authenticate/2fa?redirect=${currentUrl}`;
+      if (sendAppOnFail) return next();
+      return next(
+        new AppError("2FA login required", 401, {
+          require2FA: true,
+          redirect: req._targetAppPath,
+        })
+      );
+    }
     const query = performValidation(OAuth2ParamValidator, req.query);
     const app = await AppCrud.getAppByProperty({ clientId: query.client_id });
     if (app.require2FA === true && req._used2FA !== true) {
+      req._targetAppPath = `/authenticate/2fa?redirect=${currentUrl}`;
+      if (sendAppOnFail) return next();
       return next(
         new AppError("2FA login required to access app", 401, {
           require2FA: true,
+          redirect: req._targetAppPath,
         })
       );
     }
@@ -45,10 +62,17 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       (e) => e.app._id.toString() === appIdString && e.status === "trusted"
     );
     if (appTrusted !== true) {
-      return res.redirect(`/trust/${app._id}?redirect=${currentUrl}`);
+      req._targetAppPath = `/trust/${app._id}?redirect=${currentUrl}`;
+      if (sendAppOnFail) return next();
+      return next(
+        new AppError("App not trusted by user", 401, {
+          redirect: req._targetAppPath,
+        })
+      );
     }
     const payload = {
-      _id: req.user._id,
+      uuid: req.user._id,
+      authority: "sso.kanapka.eu",
       used2FA: req._used2FA,
       data: {},
       iat: new Date().getTime(),

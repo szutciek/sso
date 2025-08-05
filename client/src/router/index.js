@@ -6,9 +6,10 @@ import appRoutes from "./app.js";
 import developerRoutes from "./developer.js";
 
 import NavigationComponent from "@/components/NavigationComponent.vue";
+import NavigationComponentLite from "@/components/NavigationComponentLite.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 
-// BASE URL: /:locale
+import Authorize from "@/views/auth/Authorize.vue";
 
 const routes = [
   {
@@ -21,6 +22,17 @@ const routes = [
       return { path: `/${to.params.locale}` };
     },
   },
+
+  {
+    path: "/authorize",
+    name: "authorizeCatch",
+    components: {
+      default: Authorize,
+      navigation: NavigationComponentLite,
+      // footer: FooterComponent,
+    },
+  },
+
   {
     path: "/:locale",
     name: "home",
@@ -32,13 +44,29 @@ const routes = [
   },
 
   // Website authentication pages
-  ...authRoutes,
+  ...authRoutes.map((r) => {
+    r.path = `/:locale${r.path}`;
+    return r;
+  }),
+
   // Website from the perspecive of a normal user
-  ...userRoutes,
+  ...userRoutes.map((r) => {
+    r.path = `/:locale${r.path}`;
+    return r;
+  }),
+
+  ,
   // Website from the perspective of a app admin
-  ...appRoutes,
+  ...appRoutes.map((r) => {
+    r.path = `/:locale${r.path}`;
+    return r;
+  }),
+
   // Website from the perspective of a broader admin
-  ...developerRoutes,
+  ...developerRoutes.map((r) => {
+    r.path = `/:locale${r.path}`;
+    return r;
+  }),
 
   {
     path: "/:catchAll(.*)",
@@ -52,6 +80,18 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+});
+
+import lS from "@/store/localeStore.js";
+
+router.beforeEach((to, from, next) => {
+  const urlLocale = to.path.split("/")[1];
+  if (!lS.supportedLocales.includes(urlLocale)) {
+    console.warn(`Redirecting from: ${to.fullPath}`);
+    next({ path: `/en${to.fullPath}`, query: to.query, replace: true });
+  } else {
+    next();
+  }
 });
 
 export default router;

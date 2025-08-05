@@ -1,35 +1,15 @@
-import AccountList from "@/views/user/AccountList.vue";
-import AppDetails from "@/views/user/AppDetails.vue";
-import AuthorizeApp from "@/views/user/AuthorizeApp.vue";
-
-const base = "/:locale/users/apps";
+import ProfileList from "@/views/user/ProfileList.vue";
+import NavigationComponent from "@/components/NavigationComponent.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
 
 export default [
   {
-    path: `${base}`,
-    name: "AccountList",
+    path: `/users`,
+    name: "ProfileList",
     components: {
-      default: AccountList,
+      default: ProfileList,
       // navigation: NavigationComponent,
-      // footer: FooterComponent,
-    },
-  },
-  {
-    path: `${base}/:id`,
-    name: "AppDetails",
-    components: {
-      default: AppDetails,
-      // navigation: NavigationComponent,
-      // footer: FooterComponent,
-    },
-  },
-  {
-    path: `${base}/authorize`,
-    name: "AuthorizeApp",
-    components: {
-      default: AuthorizeApp,
-      // navigation: NavigationComponent,
-      // footer: FooterComponent,
+      footer: FooterComponent,
     },
   },
 ];

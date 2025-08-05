@@ -164,7 +164,12 @@ class Notif {
           }
         })
         .catch((err) => {
-          console.warn(err);
+          let errorText = "Unknown error occurred";
+          if (typeof err === "string") {
+            errorText = err;
+          } else if (typeof err?.message === "string") {
+            errorText = err.message;
+          }
           this.replaceType("error");
 
           const info = this.element.querySelector(".info");
@@ -172,13 +177,11 @@ class Notif {
 
           const title = document.createElement("p");
           title.classList.add("title");
-          title.textContent = `Wystąpił błąd podczas: ${
-            this.promise.while || this.title
-          }`;
+          title.textContent = `Error: ${this.promise.while || this.title}`;
 
           const details = document.createElement("p");
           details.classList.add("details");
-          details.textContent = err || "Wystąpił nieznany błąd";
+          details.textContent = errorText;
 
           if (this.testCarousel(title)) {
             info.appendChild(this.createCarousel(title, true));
@@ -322,7 +325,7 @@ class Notif {
     main.appendChild(info);
     if (this.undo) {
       const button = document.createElement("button");
-      button.textContent = "Cofnij";
+      button.textContent = "Undo";
       main.appendChild(button);
     }
     this.element = main;

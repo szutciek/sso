@@ -110,7 +110,6 @@ const handleInput = (i) => {
 watch(
   () => error,
   (newError, oldError) => {
-    console.log("err");
     if (newError) {
       handleInputError(newError);
     }

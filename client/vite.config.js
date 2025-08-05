@@ -58,6 +58,7 @@ export default defineConfig({
       },
       workbox: {
         skipWaiting: true,
+        navigateFallbackDenylist: [/^\/authorize/],
       },
       devOptions: {
         enabled: true,

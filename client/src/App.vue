@@ -20,6 +20,8 @@ import ToasterManager from "@/components/ToasterManager.vue";
 import localeStore from "@/store/localeStore.js";
 localeStore.loadLocaleFromUrl();
 
+console.log(window.location.href);
+
 import { ref } from "vue";
 const navHeight = ref(126);
 const updateNavHeight = (newHeight) => {
