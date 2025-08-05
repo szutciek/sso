@@ -38,6 +38,7 @@ notificationStore.createNotif({
 
 authorizationRequest
   .then((data) => {
+    // WARNING: can result in changing host
     window.location = data.redirect;
   })
   .catch((err) => {

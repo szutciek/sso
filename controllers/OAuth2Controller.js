@@ -87,9 +87,9 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       payload.data[field] = userScope[field];
     });
     const token = signToken(payload);
-    const successQuery = encodeURIComponent(
-      `access_token=${token}&state=${query.state}&scope=${app.scope.join(" ")}`
-    );
+    const successQuery = `access_token=${token}&state=${
+      query.state
+    }&scope=${app.scope.join(" ")}`;
     if (sendAppOnFail) {
       return res.redirect(`${query.redirect_uri}?${successQuery}`);
     } else {

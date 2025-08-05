@@ -34,7 +34,6 @@ import profileStore from "@/store/profileStore";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-const redirect = route.query.redirect;
 
 const codeInputConfig = {
   field: "code",
@@ -81,14 +80,13 @@ const handleSubmit = async () => {
       used2FA: data.details.used2FA,
     });
 
-    const queryPresent = redirect != null;
-    const encodedQuery = encodeURIComponent(`?redirect=${redirect}`);
-    if (data.details.use2FA === true && data.details.used2FA !== true) {
-      router.push(`/en/authenticate/2fa${queryPresent ? encodedQuery : ""}`);
-    } else {
-      router.push(`${queryPresent ? encodedQuery : "/en"}`);
+    if (route.query.redirect) {
+      return router.push(route.query.redirect);
     }
+
+    router.push(`/en`);
   } catch (error) {
+    buttonState.value = "default";
     console.error("Error:", error.message);
   }
 };
