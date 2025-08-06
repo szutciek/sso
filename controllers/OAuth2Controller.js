@@ -74,10 +74,11 @@ export const handleAuthorizationRequest = async (req, res, next) => {
     const payload = {
       uuid: req.user._id.toString(),
       authority: "sso.kanapka.eu",
+      client_id: app.clientId,
       used2FA: req._used2FA,
       data: {},
       iat: new Date().getTime(),
-      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn, // Convert seconds to milliseconds
+      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn,
     };
     if (req._inDevelopment === true) {
       payload.developmentOnly = true;
