@@ -1,5 +1,14 @@
 export default (url, options) => {
   return new Promise((resolve, reject) => {
+    if (!options) {
+      options = {};
+    }
+    if (!options.headers) {
+      options.headers = {};
+    }
+    if (!options.headers["Content-Type"]) {
+      options.headers["Content-Type"] = "application/json";
+    }
     fetch(url, options)
       .then((response) => {
         response

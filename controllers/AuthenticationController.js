@@ -11,7 +11,7 @@ import Joi from "joi";
 export const verifyCredentials = async (req, res, next) => {
   try {
     const credentials = performValidation(LooseUserValidation, req.body);
-    if (!credentials || !credentials.email || !credentials.password) {
+    if (!credentials) {
       throw new AppError("Email and password are required", 400);
     }
     const user = await getUserByProperty(
@@ -87,11 +87,15 @@ export const send2FACode = async (req, res, next) => {
     if (!lastSent) {
       lastSent = 0;
     }
-    const emailExpired = lastSent < now - 1 * 60 * 1000;
+    const emailExpired = lastSent < now - 5 * 60 * 1000;
     if (!emailExpired) {
-      throw new AppError("Please wait before requesting another email", 400, {
-        frequency: true,
-      });
+      throw new AppError(
+        "The valid 2FA code should be in your inbox. Please wait before requesting another email",
+        400,
+        {
+          frequency: true,
+        }
+      );
     }
     if (!user.code2FA || codeExpired) {
       user.code2FA = crypto.randomUUID().split("-")[0];
@@ -120,6 +124,8 @@ export const verify2FA = async (req, res, next) => {
       throw new AppError("Invalid 2FA code", 401, { code: "Invalid 2FA Code" });
     }
     user.code2FA = null;
+    user.last2FAGeneration = new Date(0);
+    user.last2FAEmail = new Date(0);
     await user.save();
     req._used2FA = true;
     next();

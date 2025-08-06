@@ -36,6 +36,7 @@ import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore";
 import { useRouter, useRoute } from "vue-router";
+import wrappedFetch from "@/assets/wrappedFetch.js";
 const router = useRouter();
 const route = useRoute();
 
@@ -52,56 +53,58 @@ const buttonText = ref("Submit");
 
 const code = ref("");
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   try {
     buttonState.value = "loading";
 
-    const response = await fetch("/authenticate/2fa", {
+    const loginRequest = wrappedFetch("/authenticate/2fa", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         code: code.value,
       }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      if (data.details) {
-        codeInputError.value = data.details?.code;
-        return;
-      }
-      buttonState.value = "default";
-    }
-
-    buttonState.value = "success";
-    profileStore.addProfile({
-      token: data.token,
-      _id: data.details._id,
-      use2FA: data.details.use2FA,
-      used2FA: data.details.used2FA,
+    notificationStore.createNotif({
+      type: "info",
+      title: "Authentication",
+      details: "You have been successfully authenticated",
+      duration: 10000,
+      promise: {
+        promise: loginRequest,
+        while: "Checking the provided 2FA code...",
+      },
     });
 
-    if (route.query.redirect) {
-      return router.push(route.query.redirect);
-    }
+    loginRequest
+      .then((data) => {
+        buttonState.value = "success";
+        profileStore.addProfile({
+          token: data.token,
+          _id: data.details._id,
+          use2FA: data.details.use2FA,
+          used2FA: data.details.used2FA,
+        });
 
-    router.push(`/en`);
+        if (route.query.redirect) {
+          return router.push(route.query.redirect);
+        }
+
+        router.push(`/en`);
+      })
+      .catch((err) => {
+        if (err.details) {
+          codeInputError.value = err.details?.code;
+        }
+        buttonState.value = "default";
+      });
   } catch (error) {
     buttonState.value = "default";
     console.error("Error:", error.message);
   }
 };
 
-import wrappedFetch from "@/assets/wrappedFetch.js";
-
 const emailRequest = wrappedFetch("/authenticate/2fa/request-code", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
   body: JSON.stringify({
     code: code.value,
   }),
@@ -109,12 +112,12 @@ const emailRequest = wrappedFetch("/authenticate/2fa/request-code", {
 
 notificationStore.createNotif({
   type: "info",
-  title: "Sending 2FA Code",
-  details: "We are sending your 2FA code to your email",
-  duration: 5000,
+  title: "2FA Code Delivery",
+  details: "2FA code has been delivered to you inbox",
+  duration: 10000,
   promise: {
     promise: emailRequest,
-    while: "Sending email...",
+    while: "Sending 2FA code to your email...",
   },
 });
 

@@ -36,6 +36,8 @@ import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import profileStore from "@/store/profileStore";
 import { useRouter, useRoute } from "vue-router";
+import wrappedFetch from "@/assets/wrappedFetch";
+import notificationStore from "@/store/notificationStore";
 const router = useRouter();
 const route = useRoute();
 
@@ -59,49 +61,56 @@ const buttonText = ref("Submit");
 const email = ref("");
 const password = ref("");
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   try {
     buttonState.value = "loading";
 
-    const response = await fetch("/authenticate", {
+    const loginRequest = wrappedFetch("/authenticate", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         email: email.value,
         password: password.value,
       }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      if (data.details) {
-        emailInputError.value = data.details?.email;
-        passwordInputError.value = data.details?.password;
-      }
-      buttonState.value = "default";
-      return;
-    }
-
-    buttonState.value = "success";
-    profileStore.addProfile({
-      token: data.token,
-      _id: data.details._id,
-      use2FA: data.details.use2FA,
-      used2FA: data.details.used2FA,
+    notificationStore.createNotif({
+      type: "info",
+      title: "Authentication",
+      details: "You have been successfully authenticated",
+      duration: 10000,
+      promise: {
+        promise: loginRequest,
+        while: "Checking your credentials...",
+      },
     });
 
-    if (route.query.redirect) {
-      return router.push(route.query.redirect);
-    }
+    loginRequest
+      .then((data) => {
+        buttonState.value = "success";
+        profileStore.addProfile({
+          token: data.token,
+          _id: data.details._id,
+          use2FA: data.details.use2FA,
+          used2FA: data.details.used2FA,
+        });
 
-    if (data.details.use2FA === true && data.details.used2FA !== true) {
-      router.push(`/en/authenticate/2fa}`);
-    } else {
-      router.push(`/en`);
-    }
+        if (route.query.redirect) {
+          return router.push(route.query.redirect);
+        }
+
+        if (data.details.use2FA === true && data.details.used2FA !== true) {
+          router.push(`/en/authenticate/2fa`);
+        } else {
+          router.push(`/en`);
+        }
+      })
+      .catch((err) => {
+        if (err.details) {
+          emailInputError.value = err.details?.email;
+          passwordInputError.value = err.details?.password;
+        }
+        buttonState.value = "default";
+      });
   } catch (error) {
     buttonState.value = "default";
     console.error("Error:", error.message);
