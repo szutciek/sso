@@ -3,40 +3,45 @@
     <div class="inputBox">
       <h1>{{ config.label }}</h1>
       <div class="date-input">
-        <label>
-          Day:
+        <h2>
           <input
-            type="number"
+            class="day"
+            type="text"
             v-model="day"
-            min="1"
-            max="31"
-            @input="emitDate"
+            maxlength="2"
+            inputmode="numeric"
+            pattern="\d*"
+            placeholder="DD"
+            @input="handleInput"
+            ref="dayInput"
+            data-field="day"
           />
-        </label>
-
-        <label>
-          Month:
+          <span>-</span>
           <input
-            type="number"
+            class="month"
+            type="text"
             v-model="month"
-            min="1"
-            max="12"
-            @input="emitDate"
+            maxlength="2"
+            inputmode="numeric"
+            pattern="\d*"
+            placeholder="MM"
+            @input="handleInput"
+            ref="monthInput"
+            data-field="month"
           />
-        </label>
-
-        <label>
-          Year:
+          <span>-</span>
           <input
-            type="number"
+            class="year"
+            type="text"
             v-model="year"
-            min="1900"
-            max="2100"
-            @input="emitDate"
+            maxlength="4"
+            inputmode="numeric"
+            pattern="\d*"
+            placeholder="YYYY"
+            @input="handleInput"
+            ref="yearInput"
           />
-        </label>
-
-        <p v-if="formattedDate">Selected Date: {{ formattedDate }}</p>
+        </h2>
       </div>
     </div>
   </div>
@@ -55,37 +60,20 @@ const day = ref();
 const month = ref();
 const year = ref();
 
-const emitDate = () => {
-  if (isValidDate()) {
-    emit("input", formattedDate.value, config.field);
-  } else {
-    emit("input", null);
+const monthInput = ref();
+const yearInput = ref();
+
+const handleInput = (e) => {
+  if (e.target.value.length === 2) {
+    if (e.target.dataset.field === "day") {
+      monthInput.value.focus();
+    }
+    if (e.target.dataset.field === "month") {
+      yearInput.value.focus();
+    }
   }
+  emit("input", new Date(year.value, month.value - 1, day.value), config.field);
 };
-
-const isValidDate = () => {
-  const d = parseInt(day.value);
-  const m = parseInt(month.value);
-  const y = parseInt(year.value);
-  if (!d || !m || !y) return false;
-
-  const date = new Date(y, m - 1, d);
-  return (
-    date.getFullYear() === y &&
-    date.getMonth() === m - 1 &&
-    date.getDate() === d
-  );
-};
-
-const formattedDate = computed(() => {
-  if (isValidDate()) {
-    const d = String(day.value).padStart(2, "0");
-    const m = String(month.value).padStart(2, "0");
-    const y = String(year.value);
-    return `${y}-${m}-${d}`;
-  }
-  return "";
-});
 </script>
 
 <style scoped>
@@ -115,9 +103,26 @@ const formattedDate = computed(() => {
   flex-direction: column;
   gap: 8px;
 }
-.date-input label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
+.date-input input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+
+  font-size: 16px;
+  color: #000;
+  text-align: center;
+}
+.date-input input::placeholder {
+  color: #2d2d2d;
+}
+.date-input input.day {
+  width: 28px;
+}
+.date-input input.month {
+  width: 32px;
+}
+.date-input input.year {
+  width: 44px;
 }
 </style>

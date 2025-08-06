@@ -15,7 +15,11 @@
     </div>
 
     <div class="form">
-      <LabelledDropdownInput :config="localeConfig" @input="handleInput" />
+      <LabelledDropdownInput
+        :config="localeConfig"
+        :selected="user.locale"
+        @input="handleInput"
+      />
       <LabelledEnumInput
         :config="languageConfig"
         :selected="user.language"
@@ -29,7 +33,11 @@
         :selected="user.use2FA"
         @input="handleInput"
       />
+    </div>
+
+    <div class="form">
       <LabelledTextInput :config="passwordConfig" @input="handleInput" />
+      <LabelledTextInput :config="repeatPasswordConfig" @input="handleInput" />
     </div>
   </div>
 </template>
@@ -85,6 +93,11 @@ const passwordConfig = {
   field: "password",
   type: "password",
   label: "Password",
+};
+const repeatPasswordConfig = {
+  field: "passwordRepeat",
+  type: "password",
+  label: "Repeat Password",
 };
 </script>
 

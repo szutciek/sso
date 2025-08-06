@@ -19,29 +19,30 @@ button {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-  color: white;
+  color: #889dcd;
 
-  background-color: #97acdf;
+  background-color: #fff;
   border: 1px solid #97acdf;
   cursor: pointer;
 }
 button.default:hover {
-  background-color: #889dcd;
+  color: #889dcd;
+  background-color: #eee9;
   border: 1px solid #889dcd;
 }
 .loading {
-  background-color: #889dcd;
+  color: #889dcd;
   border: 1px solid #889dcd;
   cursor: not-allowed;
 }
 .success {
-  background-color: #55b94e;
+  color: #55b94e;
   border: 1px solid #55b94e;
   cursor: not-allowed;
 }
 
 .loader {
-  border: 0.2rem solid #fff6;
+  border: 0.2rem solid #0001;
   border-left: 0.2rem solid #0004;
   border-radius: 50%;
   width: 1.5rem;

@@ -27,12 +27,13 @@ const user = ref({
   username: null,
   email: null,
   profile: "https://assets.kanapka.eu/images/user.png",
-  password: null,
   use2FA: null,
   birthday: null,
   gender: null,
   locale: null,
   language: null,
+  password: null,
+  passwordRepeat: null,
 });
 
 const handleInput = (value, field) => {

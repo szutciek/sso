@@ -47,12 +47,22 @@
         </li>
       </ul>
     </div>
+    <div class="section buttons" v-if="showEdit || showDefault">
+      <ReactiveStateButtonEmpty v-if="showEdit" :text="`Edit`" />
+      <ReactiveStateButton v-if="showDefault" :text="`Set default`" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
+import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
 import { defineProps } from "vue";
-const { user } = defineProps(["user"]);
+const { user, showEdit, showDefault } = defineProps([
+  "user",
+  "showEdit",
+  "showDefault",
+]);
 </script>
 
 <style scoped>
@@ -85,5 +95,9 @@ ul.keyVal li {
   display: flex;
   justify-content: space-between;
   list-style: none;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
 }
 </style>

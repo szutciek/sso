@@ -6,7 +6,9 @@
         <li
           v-for="opt of config.enum"
           @click="$emit('input', opt, config.field)"
+          @keydown.enter="$emit('input', opt, config.field)"
           :class="[opt == selected && 'active']"
+          tabindex="0"
         >
           {{ opt.toString() }}
         </li>
@@ -62,5 +64,10 @@ const emit = defineEmits(["input"]);
 .inputBox ul li.active {
   background-color: #2d2d2d;
   color: #fff;
+}
+
+li[tabindex="0"]:focus {
+  outline: 1px solid #2d2d2d;
+  outline-offset: -1px;
 }
 </style>

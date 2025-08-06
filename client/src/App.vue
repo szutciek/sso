@@ -225,7 +225,7 @@ a {
 
   display: grid;
   grid-template-columns: 320px 320px;
-  gap: 80px;
+  gap: 20px 80px;
 
   max-width: 1240px;
   padding: 0 20px;
