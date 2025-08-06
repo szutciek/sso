@@ -4,7 +4,11 @@
       <div class="row">
         <h1>2FA Code</h1>
       </div>
-      <h2>Enter the 2 factor authentication code from your inbox.</h2>
+      <h2>
+        Enter the 2 factor authentication code from
+        <a v-if="emailUrl" :href="emailUrl" target="_blank">your inbox</a
+        ><span v-if="!emailUrl">your inbox</span>.
+      </h2>
 
       <div class="form">
         <LabelledTextInput
@@ -113,6 +117,19 @@ notificationStore.createNotif({
     while: "Sending email...",
   },
 });
+
+const emailUrl = ref(null);
+wrappedFetch("/api/users/me/email-provider")
+  .then((data) => {
+    emailUrl.value = data.provider;
+  })
+  .catch((err) => {
+    console.warn(`Email Provider Fetch Failed: ${err.message}`);
+  });
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  text-decoration: underline;
+}
+</style>

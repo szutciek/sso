@@ -5,6 +5,10 @@ import { authenticate } from "../middleware/ApiAuthenticationMiddleware.js";
 import * as UserController from "../controllers/UserController.js";
 
 router
+  .route("/me/email-provider")
+  .get(authenticate, UserController.getCurrentUserEmailProvider);
+
+router
   .route("/me")
   .get(authenticate, UserController.getCurrentUser)
   .put(authenticate, UserController.updateCurrentUser)

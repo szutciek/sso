@@ -3,6 +3,8 @@ import { getUserById } from "../crud/UserCrud.js";
 import { decodeToken } from "../utils/JWTUtilityFunctions.js";
 import { clearAuthCookies } from "../utils/cookieUtilityFunctions.js";
 
+const urlsOverride2FA = ["/authenticate/2fa", "/api/users/me/email-provider"];
+
 export const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.token;
@@ -13,7 +15,7 @@ export const authenticate = async (req, res, next) => {
     req.user = await getUserById(decoded._id);
     req._used2FA = decoded.used2FA;
     const userRequires2FA = req.user.use2FA === true && req._used2FA !== true;
-    if (userRequires2FA && !req.originalUrl.startsWith("/authenticate/2fa")) {
+    if (userRequires2FA && !urlsOverride2FA.includes(req.originalUrl)) {
       return next(
         new AppError("2FA login required", 401, {
           require2FA: true,
