@@ -10,11 +10,7 @@ import { jwt as jwtConfig } from "../config.js";
 
 export const handleAuthorizationRequest = async (req, res, next) => {
   try {
-    let sendAppOnFail = true;
-    if (req.query.source === "app") {
-      delete req.query.source;
-      sendAppOnFail = false;
-    }
+    let sendAppOnFail = req.accepts().includes("text/html");
     const currentUrl = encodeURIComponent(req.originalUrl);
     // const currentUrl = encodeURIComponent(
     //   req.protocol + "://" + req.get("host") + req.originalUrl
@@ -53,10 +49,14 @@ export const handleAuthorizationRequest = async (req, res, next) => {
         })
       );
     }
+    req._inDevelopment = false;
     if (!app.redirectUris.includes(query.redirect_uri)) {
-      return next(
-        new AppError("Provided redirect uri not registered for app", 400)
-      );
+      if (!app.redirectUrisDevelopment.includes(query.redirect_uri)) {
+        return next(
+          new AppError("Provided redirect uri not registered for app", 400)
+        );
+      }
+      req._inDevelopment = true;
     }
     const appIdString = app._id.toString();
     const appTrusted = req.user.apps.some(
@@ -72,13 +72,16 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       );
     }
     const payload = {
-      uuid: req.user._id,
+      uuid: req.user._id.toString(),
       authority: "sso.kanapka.eu",
       used2FA: req._used2FA,
       data: {},
       iat: new Date().getTime(),
       exp: new Date().getTime() / 1000 + jwtConfig.expiresIn, // Convert seconds to milliseconds
     };
+    if (req._inDevelopment === true) {
+      payload.developmentOnly = true;
+    }
     const userScope = await UserCrud.getUserById(
       req.user._id.toString(),
       `+${app.scope.join(" +")}`

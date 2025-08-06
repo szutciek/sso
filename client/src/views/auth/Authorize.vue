@@ -16,14 +16,10 @@ import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 
-const query = { ...route.query };
-delete query.source;
-const queryString = new URLSearchParams(query).toString();
-
-const authorizationRequest = wrappedFetch(
-  `/authorize?${queryString}&source=app`,
-  { method: "GET" }
-);
+const queryString = new URLSearchParams(route.query).toString();
+const authorizationRequest = wrappedFetch(`/authorize?${queryString}`, {
+  method: "GET",
+});
 
 notificationStore.createNotif({
   type: "info",
