@@ -72,11 +72,12 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       );
     }
     const payload = {
-      uuid: req.user._id.toString(),
       authority: "sso.kanapka.eu",
       client_id: app.clientId,
       used2FA: req._used2FA,
-      data: {},
+      user: {
+        uuid: req.user._id.toString(),
+      },
       iat: new Date().getTime(),
       exp: new Date().getTime() / 1000 + jwtConfig.expiresIn,
     };
@@ -88,7 +89,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       `+${app.scope.join(" +")}`
     );
     app.scope.forEach((field) => {
-      payload.data[field] = userScope[field];
+      payload.user[field] = userScope[field];
     });
     const token = signToken(payload);
     const successQuery = `access_token=${token}&state=${
