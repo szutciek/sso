@@ -24,6 +24,7 @@ import { ref } from "vue";
 const navHeight = ref(126);
 const updateNavHeight = (newHeight) => {
   navHeight.value = newHeight;
+  document.documentElement.style.setProperty("--nav-height", `${newHeight}px`);
 };
 </script>
 
@@ -48,6 +49,7 @@ body {
   --sec-color-d: #1c1c1c;
   --main-color-l: #ec7837;
   --main-color-d: #9e4a1b;
+  --nav-height: 400px;
 }
 
 h1 {
@@ -221,17 +223,20 @@ a {
   flex: 1;
   width: 100%;
 
+  display: grid;
+  grid-template-columns: 320px 320px;
+  gap: 80px;
+
   max-width: 1240px;
   padding: 0 20px;
   margin: 0 auto;
 }
+.container-standard.wide {
+  grid-template-columns: 420px 420px;
+}
 .container-standard .box {
   margin: 30px 0;
-  max-width: 320px;
-}
-.container-standard .box.wide {
-  margin: 30px 0;
-  max-width: 420px;
+  width: 100%;
 }
 .container-standard .row {
   display: flex;
@@ -268,16 +273,34 @@ a {
   color: #535353;
 }
 
+.sb {
+  border: 1px solid #ddd;
+}
+.sbt {
+  border-top: 1px solid #ddd;
+}
+.sbb {
+  border-bottom: 1px solid #ddd;
+}
+
 @media only screen and (max-width: 1000px) {
   h1 {
     font-size: 32px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .container-standard {
+    grid-template-columns: 320px;
+  }
+  .container-standard.wide {
+    grid-template-columns: 420px;
   }
 }
 </style>
 
 <style scoped>
 #mainContentContainer {
-  min-height: 100vh;
+  min-height: 100dvh;
   padding-bottom: 0;
   display: flex;
   flex-direction: column;

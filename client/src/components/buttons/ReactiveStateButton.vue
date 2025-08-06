@@ -24,10 +24,6 @@ button {
   background-color: #97acdf;
   cursor: pointer;
 }
-.default {
-  background-color: #97acdf;
-  cursor: pointer;
-}
 button.default:hover {
   background-color: #889dcd;
 }

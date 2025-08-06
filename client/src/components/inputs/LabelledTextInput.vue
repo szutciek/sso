@@ -19,9 +19,6 @@
 </template>
 
 <style scoped>
-.fancyInput:last-of-type {
-  margin-bottom: 0;
-}
 .inputArea {
   position: relative;
 }
@@ -104,7 +101,7 @@ const value = ref("");
 
 const handleInput = (i) => {
   handleInputChange(i);
-  emit("input", value.value);
+  emit("input", value.value, config.field);
 };
 
 watch(

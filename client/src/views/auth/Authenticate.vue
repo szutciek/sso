@@ -1,5 +1,5 @@
 <template>
-  <div class="container-standard mW1200">
+  <div class="container-standard">
     <div class="box">
       <div class="row">
         <h1>Sign in</h1>

@@ -1,13 +1,13 @@
 <template>
-  <div class="container-standard">
-    <div class="box wide">
+  <div class="container-standard wide">
+    <div class="box">
       <div class="row">
         <h1>Trust App</h1>
       </div>
       <h2>Review the details of the app and required info.</h2>
 
       <div class="form" v-if="app">
-        <AppDetailsPreview :app="app" class="bt bb" />
+        <AppDetailsPreview :app="app" class="sbt sbb" />
 
         <div>
           <p>Info required by app:</p>
@@ -77,12 +77,6 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.bt {
-  border-top: 1px solid #ddd;
-}
-.bb {
-  border-bottom: 1px solid #ddd;
-}
 .trust {
   padding-top: 20px;
 }
