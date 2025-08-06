@@ -10,10 +10,10 @@
         @input="handleInput(inputRef)"
       />
     </div>
-    <div class="errorArea hidden">
+    <div class="errorArea" :style="!error && 'display: none'">
       <!-- prettier-ignore -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M248,64C146.39,64,64,146.39,64,248s82.39,184,184,184,184-82.39,184-184S349.61,64,248,64Z" style="fill:none;stroke:#FFF;stroke-miterlimit:10;stroke-width:32px"/><polyline points="220 220 252 220 252 336" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line x1="208" y1="340" x2="296" y2="340" style="fill:none;stroke:#FFF;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"/><path style="fill:#FFF" d="M248,130a26,26,0,1,0,26,26A26,26,0,0,0,248,130Z"/></svg>
-      <h6 id="error"></h6>
+      <h6 id="error">{{ error }}</h6>
     </div>
   </div>
 </template>
@@ -177,24 +177,5 @@ const handleInputChange = (i) => {
   errorArea.classList.add("hidden");
   errorArea.querySelector("h6").innerText = "";
   delete i.dataset?.error;
-};
-
-const animateButton = (state) => {
-  const button = document.getElementById("submit");
-  if (state === "default") {
-    button.innerHTML = "Sign in";
-    button.style.backgroundColor = "#97acdf";
-    button.style.cursor = "pointer";
-  }
-  if (state === "loading") {
-    button.innerHTML = '<div class="loader"></div>';
-    button.style.backgroundColor = "#889dcd";
-    button.style.cursor = "default";
-  }
-  if (state === "success") {
-    button.innerHTML = "Success!";
-    button.style.backgroundColor = "#55b94e";
-    button.style.cursor = "not-allowed";
-  }
 };
 </script>

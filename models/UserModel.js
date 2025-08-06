@@ -126,6 +126,7 @@ const UserValidation = Joi.object({
     .lowercase()
     .valid("en")
     .messages({ "any.only": "Only en supported" }),
+  use2FA: Joi.boolean(),
 });
 
 const LooseUserValidation = UserValidation.fork(

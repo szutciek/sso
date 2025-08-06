@@ -1,16 +1,29 @@
 <template>
   <div class="form">
     <div class="form">
-      <LabelledTextInput :config="usernameConfig" @input="handleInput" />
-      <LabelledTextInput :config="emailConfig" @input="handleInput" />
+      <LabelledTextInput
+        :config="usernameConfig"
+        @input="handleInput"
+        :error="errors.username"
+      />
+      <LabelledTextInput
+        :config="emailConfig"
+        @input="handleInput"
+        :error="errors.email"
+      />
     </div>
 
     <div class="form">
-      <LabelledDateInput :config="birthdayConfig" @input="handleInput" />
+      <LabelledDateInput
+        :config="birthdayConfig"
+        @input="handleInput"
+        :error="errors.birthday"
+      />
       <LabelledEnumInput
         :config="genderConfig"
         :selected="user.gender"
         @input="handleInput"
+        :error="errors.gender"
       />
     </div>
 
@@ -19,11 +32,13 @@
         :config="localeConfig"
         :selected="user.locale"
         @input="handleInput"
+        :error="errors.locale"
       />
       <LabelledEnumInput
         :config="languageConfig"
         :selected="user.language"
         @input="handleInput"
+        :error="errors.language"
       />
     </div>
 
@@ -32,19 +47,28 @@
         :config="use2FAConfig"
         :selected="user.use2FA"
         @input="handleInput"
+        :error="errors.use2FA"
       />
     </div>
 
     <div class="form">
-      <LabelledTextInput :config="passwordConfig" @input="handleInput" />
-      <LabelledTextInput :config="repeatPasswordConfig" @input="handleInput" />
+      <LabelledTextInput
+        :config="passwordConfig"
+        @input="handleInput"
+        :error="errors.password"
+      />
+      <LabelledTextInput
+        :config="repeatPasswordConfig"
+        @input="handleInput"
+        :error="errors.passwordRepeat"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
 import { defineEmits, defineProps } from "vue";
-const { user } = defineProps(["user"]);
+const { user, errors } = defineProps(["user", "errors"]);
 const emit = defineEmits(["input"]);
 const handleInput = (value, field) => {
   emit("input", value, field);

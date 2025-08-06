@@ -60,9 +60,15 @@ button.default:hover {
 
 <script setup>
 import { defineProps, defineEmits, onMounted, onUnmounted } from "vue";
+const { state, text, ignoreEnter } = defineProps([
+  "state",
+  "text",
+  "ignoreEnter",
+]);
 
 const submitViaKey = (e) => {
   if (e.key === "Enter" && state === "default") {
+    if (ignoreEnter) return;
     emit("submit");
   }
 };
@@ -74,6 +80,4 @@ onUnmounted(() => {
 });
 
 const emit = defineEmits(["submit"]);
-
-const { state, text } = defineProps(["state", "text"]);
 </script>

@@ -23,4 +23,17 @@ export default reactive({
     this.profiles.push(profile);
     this.selectNewProfile(this.profiles.length - 1);
   },
+
+  saveProfileState() {
+    const data = {
+      profiles: this.profiles,
+      selectedProfileIndex: this.selectedProfileIndex,
+    };
+    window.localStorage.setItem("profileState", JSON.stringify(data));
+  },
+
+  loadProfileState() {
+    const data = window.localStorage.getItem("profileState");
+    console.log(data);
+  },
 });

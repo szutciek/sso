@@ -12,7 +12,11 @@
       <ul class="keyVal">
         <li>
           <span>Birthday</span>
-          <span>{{ user.birthday?.toLocaleDateString() || "..." }}</span>
+          <span>{{
+            user.birthday
+              ? new Date(user.birthday)?.toLocaleDateString()
+              : "..."
+          }}</span>
         </li>
         <li>
           <span>Gender</span><span>{{ user.gender || "..." }}</span>
