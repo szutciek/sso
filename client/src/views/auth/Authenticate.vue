@@ -99,7 +99,7 @@ const handleSubmit = () => {
         if (data.details.use2FA === true && data.details.used2FA !== true) {
           router.push(`/en/authenticate/2fa`);
         } else {
-          router.push(`/en`);
+          router.push(`/user/panel`);
         }
       })
       .catch((err) => {

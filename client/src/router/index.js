@@ -13,17 +13,6 @@ import Authorize from "@/views/auth/Authorize.vue";
 
 const routes = [
   {
-    path: "/",
-    redirect: "/en",
-  },
-  {
-    path: "/:locale/home",
-    redirect: (to) => {
-      return { path: `/${to.params.locale}` };
-    },
-  },
-
-  {
     path: "/authorize",
     name: "authorizeCatch",
     components: {
@@ -35,7 +24,20 @@ const routes = [
 
   {
     path: "/:locale",
-    name: "home",
+    name: "redirection",
+    redirect: (to) => {
+      const profileList = window.localStorage.getItem("profileState");
+      if (!profileList) return { path: `/${to.params.locale}/home` };
+      const profileListEmpty = profileList.includes(`"profiles":[]`);
+      if (!profileListEmpty) {
+        return { path: `/user/panel` };
+      }
+      return { path: `/home` };
+    },
+  },
+
+  {
+    path: "/:locale/home",
     components: {
       default: () => import("../views/Home.vue"),
       navigation: NavigationComponent,

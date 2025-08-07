@@ -87,7 +87,7 @@ const handleSubmit = () => {
           return router.push(route.query.redirect);
         }
 
-        router.push(`/en`);
+        router.push(`/user/panel`);
       })
       .catch((err) => {
         if (err.details) {
