@@ -5,7 +5,7 @@
         <UserDetailsPreview
           v-if="profile.user"
           :user="profile.user"
-          :showEdit="focusedIndex === i"
+          :showView="focusedIndex === i"
           :showDefault="!profile.isDefault && focusedIndex === i"
           :token="profile.token"
         />
@@ -75,6 +75,31 @@ onMounted(() => {
 
   handleScroll();
   scrollArea.value.addEventListener("scroll", handleScroll);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      const boxes = scrollArea.value.querySelectorAll(".box");
+      if (focusedIndex > 0) {
+        const boxX = boxes[focusedIndex - 1].getBoundingClientRect().x;
+        const areaX = scrollArea.value.getBoundingClientRect().x;
+        scrollArea.value.scrollBy({
+          left: boxX - areaX,
+          behavior: "smooth",
+        });
+      }
+    }
+    if (e.key === "ArrowRight") {
+      const boxes = scrollArea.value.querySelectorAll(".box");
+      if (focusedIndex < boxes.length - 1) {
+        const boxX = boxes[focusedIndex + 1].getBoundingClientRect().x;
+        const areaX = scrollArea.value.getBoundingClientRect().x;
+        scrollArea.value.scrollBy({
+          left: boxX - areaX,
+          behavior: "smooth",
+        });
+      }
+    }
+  });
 });
 </script>
 

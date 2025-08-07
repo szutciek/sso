@@ -17,31 +17,18 @@
     />
 
     <div
-      class="content-wrapper"
+      class="content-wrapper secondRow"
       ref="trustedAppsWrapper"
       v-show="focusedIndex != undefined"
     >
       <div class="content container-standard wide">
         <div class="box">
-          <!-- <div class="row">
-            <h1>Apps Trusted by Profile</h1>
-          </div>
-          <h2>List of apps this profile has interacted with.</h2> -->
-
           <div class="form" v-if="focusedIndex != null">
-            <div
-              class="app sbt"
+            <AppDetailsUsersPerspective
               v-for="app of profileStore.profiles[focusedIndex].user?.apps"
-            >
-              <h2>{{ app.app.name }}</h2>
-              <p>{{ app.status }}</p>
-            </div>
-            <div
-              class="app sbt"
-              v-if="profileStore.profiles[focusedIndex].user?.apps.length === 0"
-            >
-              <p>No apps</p>
-            </div>
+              :app="app"
+              :profile="profileStore.profiles[focusedIndex]"
+            />
           </div>
         </div>
       </div>
@@ -50,6 +37,9 @@
 </template>
 
 <style scoped>
+.secondRow {
+  margin-top: 20px;
+}
 .userPanel {
   margin-bottom: 30vh;
 }
@@ -73,7 +63,7 @@
 <script setup>
 import lS from "@/store/localeStore.js";
 import ProfileCarousel from "@/components/user/ProfileCarousel.vue";
-import AppDetailsPreview from "@/components/app/AppDetailsPreview.vue";
+import AppDetailsUsersPerspective from "@/components/app/AppDetailsUsersPerspective.vue";
 
 import profileStore from "@/store/profileStore.js";
 profileStore.getFullProfileList().catch((err) => {

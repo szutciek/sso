@@ -20,13 +20,16 @@ const mongooseUserSchema = new mongoose.Schema({
     type: String,
     select: false,
   },
-  age: {
+  birthday: {
     type: Number,
   },
   gender: {
     type: String,
   },
   locale: {
+    type: String,
+  },
+  language: {
     type: String,
   },
 
@@ -111,13 +114,10 @@ const UserValidation = Joi.object({
   email: Joi.string().required().email().max(100).lowercase().trim(),
   profile: Joi.string(),
   password: Joi.string().required().min(8).max(100),
-  birthday: Joi.date()
+  birthday: Joi.number()
     .required()
-    .timestamp("unix")
-    .min(eighteenYearsAgo)
-    .messages({
-      "date.min": "Minimum age is 18 years",
-    }),
+    .min(new Date("1900-01-01").getTime())
+    .max(new Date(eighteenYearsAgo).getTime()),
   gender: Joi.string().required().valid("male", "female", "other"),
   locale: Joi.string().required().length(2).lowercase(),
   language: Joi.string()

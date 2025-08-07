@@ -19,8 +19,10 @@ nav {
 
   padding: 50px 10px 10px 10px;
 
-  background-color: #fff;
+  /* background-color: #fff; */
   /* border-bottom: 1px solid #ddd; */
+  background-color: #fff4;
+  backdrop-filter: blur(5px);
 }
 .bar {
   display: flex;

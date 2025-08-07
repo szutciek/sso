@@ -19,7 +19,7 @@ const { item } = defineProps(["item"]);
   align-items: center;
   grid-template-columns: 20px auto;
   gap: 10px;
-  padding: 5px 10px;
+  padding: 5px 0;
 }
 .appSharedItem img {
   width: 100%;

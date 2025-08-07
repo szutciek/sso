@@ -13,7 +13,10 @@ export const getUserById = async (userId, selectString) => {
   const user = await User.findById(validId)
     .select(selectString)
     .populate([
-      { path: "apps.app" },
+      {
+        path: "apps.app",
+        populate: { path: "developer", populate: { path: "user" } },
+      },
       { path: "developer", populate: { path: "apps.app" } },
     ]);
   if (!user) {
@@ -27,7 +30,10 @@ export const getUserByProperty = async (property, selectString) => {
   const user = await User.findOne(validated)
     .select(selectString)
     .populate([
-      { path: "apps.app" },
+      {
+        path: "apps.app",
+        populate: { path: "developer", populate: { path: "user" } },
+      },
       { path: "developer", populate: { path: "apps.app" } },
     ]);
   if (!user) {

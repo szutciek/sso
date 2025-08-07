@@ -51,12 +51,12 @@
         </li>
       </ul>
     </div>
-    <div class="section buttons sbt" v-if="showEdit || showDefault">
+    <div class="section buttons sbt" v-if="showView || showDefault">
       <ReactiveStateButtonEmpty
-        v-if="showEdit"
-        text="Edit"
+        v-if="showView"
+        text="Details"
         state="default"
-        @submit="$router.push(`/user/${user._id}/edit`)"
+        @submit="$router.push(`/user/${user._id}/details`)"
       />
       <ReactiveStateButton
         v-if="showDefault"
@@ -75,9 +75,9 @@ import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import { defineProps, ref } from "vue";
-const { user, showEdit, showDefault, token } = defineProps([
+const { user, showView, showDefault, token } = defineProps([
   "user",
-  "showEdit",
+  "showView",
   "showDefault",
   "token",
 ]);
@@ -97,7 +97,7 @@ const handleSetDefault = () => {
   notificationStore.createNotif({
     type: "info",
     title: "Setting Default Profile",
-    details: "Default pofile has been successfully set",
+    details: `"${user.username}" is now your default profile`,
     duration: 10000,
     promise: {
       promise: defaultRequest,

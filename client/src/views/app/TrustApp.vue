@@ -7,10 +7,10 @@
       <h2>Review the details of the app and required info.</h2>
 
       <div class="form" v-if="app">
-        <AppDetailsPreview :app="app" class="sbt sbb" />
+        <AppDetailsBriefPreview :app="app" class="sbt sbb" />
 
-        <div>
-          <p>Info required by app:</p>
+        <div class="permissions">
+          <p>Info requested by app:</p>
           <ul>
             <AppSharedItem v-for="item of app.scope" :item="item" />
           </ul>
@@ -32,7 +32,7 @@ const route = useRoute();
 const router = useRouter();
 import { ref } from "vue";
 import wrappedFetch from "@/assets/wrappedFetch.js";
-import AppDetailsPreview from "@/components/app/AppDetailsPreview.vue";
+import AppDetailsBriefPreview from "@/components/app/AppDetailsBriefPreview.vue";
 import AppSharedItem from "@/components/app/AppSharedItem.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 
@@ -79,5 +79,8 @@ const handleSubmit = async () => {
 <style scoped>
 .trust {
   padding-top: 20px;
+}
+.permissions {
+  padding: 0 10px;
 }
 </style>

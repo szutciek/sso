@@ -1,6 +1,7 @@
 import NavigationComponentLite from "@/components/NavigationComponentLite.vue";
 import UserPanel from "@/views/user/UserPanel.vue";
 import CreateUser from "@/views/user/CreateUser.vue";
+import UserDetails from "@/views/user/UserDetails.vue";
 import EditUser from "@/views/user/EditUser.vue";
 
 export default [
@@ -17,6 +18,14 @@ export default [
     name: "UserPanel",
     components: {
       default: UserPanel,
+      navigation: NavigationComponentLite,
+    },
+  },
+  {
+    path: `/user/:_id/details`,
+    name: "UserDetails",
+    components: {
+      default: UserDetails,
       navigation: NavigationComponentLite,
     },
   },

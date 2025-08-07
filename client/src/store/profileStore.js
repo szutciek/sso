@@ -20,12 +20,12 @@ export default reactive({
           if (!res.ok) {
             console.warn(res);
           }
-          if (res.status === 401) {
+          if (res.status === 401 || res.status === 404) {
             this.removeProfile(profile._id);
             return this.saveProfileState();
           }
-
           profile.user = data;
+          profile.decodedToken = decodeJWT(profile.token);
         } catch (err) {
           console.error("Error fetching profile:", profile._id, err);
         }
@@ -43,6 +43,10 @@ export default reactive({
 
   getCurrentProfile() {
     return this.profiles.find((p) => p.isDefault === true);
+  },
+
+  getProfileById(id) {
+    return this.profiles.find((p) => p._id === id);
   },
 
   removeProfile(id) {
