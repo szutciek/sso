@@ -138,7 +138,7 @@ const handleContinue = () => {
   margin-bottom: 30vh;
 }
 .stickyRail {
-  height: 100%;
+  flex: 1;
 }
 .stickyCart {
   position: sticky;

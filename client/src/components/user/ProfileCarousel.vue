@@ -3,7 +3,6 @@
     <div class="scrollBox">
       <div class="box" v-for="(profile, i) in profiles" :key="profile.token">
         <UserDetailsPreview
-          v-if="profile.user"
           :class="['pfl', focusedIndex === i && 'active']"
           :user="profile.user"
           :showView="focusedIndex === i"

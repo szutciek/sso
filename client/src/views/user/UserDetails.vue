@@ -7,31 +7,55 @@
       <h2>View details and manage the account.</h2>
 
       <div class="form">
-        <UserDetailsPreview
-          v-if="profileStore.getProfileById($route.params._id)?.user"
-          :user="profileStore.getProfileById($route.params._id)?.user"
-        />
+        <div class="buttons">
+          <ReactiveStateButtonEmpty
+            state="default"
+            text="Back to Panel"
+            :ignoreEnter="true"
+            @submit="$router.push('/user/panel')"
+          />
+        </div>
       </div>
     </div>
 
     <div class="box stickyRail">
       <div class="stickyCart">
-        <ReactiveStateButtonEmpty
-          state="default"
-          text="Go Back To Panel"
-          :ignoreEnter="true"
-          @submit="$router.push('/user/panel')"
+        <UserDetailsPreview
+          :user="profileStore.getProfileById($route.params._id)?.user"
         />
+
+        <div class="actions">
+          <ReactiveStateButton
+            state="default"
+            text="Edit Account"
+            :ignoreEnter="true"
+            @submit="$router.push(`/user/${$route.params._id}/edit`)"
+          />
+          <div class="buttons">
+            <ReactiveStateButtonEmpty
+              state="default"
+              text="Forget Account"
+              :ignoreEnter="true"
+              @submit="handleAccountForget"
+            />
+            <BadReactiveStateButton
+              state="default"
+              text="Delete Account"
+              :ignoreEnter="true"
+              @submit="handleAccountDelete"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import EditUserForm from "@/components/user/EditUserForm.vue";
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
+import BadReactiveStateButton from "@/components/buttons/BadReactiveStateButton.vue";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
@@ -134,7 +158,7 @@ const handleSubmit = () => {
   margin-bottom: 30vh;
 }
 .stickyRail {
-  height: 100%;
+  flex: 1;
 }
 .stickyCart {
   position: sticky;
@@ -142,5 +166,10 @@ const handleSubmit = () => {
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
 }
 </style>

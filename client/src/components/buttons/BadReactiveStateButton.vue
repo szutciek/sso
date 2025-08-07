@@ -1,0 +1,83 @@
+<template>
+  <button
+    :class="[`button`, state]"
+    @click="state === `default` && emit(`submit`)"
+  >
+    <div v-if="state === 'loading'" class="loader"></div>
+    {{ state !== "loading" ? text || "&nbsp;" : "" }}
+  </button>
+</template>
+
+<style scoped>
+button {
+  width: 100%;
+  padding: 0.75rem;
+
+  border: none;
+  border-radius: 2px;
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: white;
+
+  background-color: #f23434;
+  border: 1px solid #f23434;
+  cursor: pointer;
+}
+button.default:hover {
+  background-color: #d42525;
+  border: 1px solid #d42525;
+}
+.loading {
+  background-color: #889dcd;
+  border: 1px solid #889dcd;
+  cursor: not-allowed;
+}
+.success {
+  background-color: #55b94e;
+  border: 1px solid #55b94e;
+  cursor: not-allowed;
+}
+
+.loader {
+  border: 0.2rem solid #fff6;
+  border-left: 0.2rem solid #0004;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+<script setup>
+import { defineProps, defineEmits, onMounted, onUnmounted } from "vue";
+const { state, text, ignoreEnter } = defineProps([
+  "state",
+  "text",
+  "ignoreEnter",
+]);
+
+const submitViaKey = (e) => {
+  if (e.key === "Enter" && state === "default") {
+    if (ignoreEnter) return;
+    emit("submit");
+  }
+};
+onMounted(() => {
+  window.addEventListener("keypress", submitViaKey);
+});
+onUnmounted(() => {
+  window.removeEventListener("keypress", submitViaKey);
+});
+
+const emit = defineEmits(["submit"]);
+</script>

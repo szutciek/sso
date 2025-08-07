@@ -1,53 +1,57 @@
 <template>
   <div class="userDetails sb">
     <div class="section main sbb">
-      <img :src="user.profile" :alt="user.username" />
+      <div :class="['img', loading && 'loadingItem']">
+        <img :src="display.profile" :alt="display.username" />
+      </div>
       <div>
-        <h2>{{ user.username || "..." }}</h2>
-        <p>{{ user.email || "..." }}</p>
+        <h2 :class="loading && 'loadingItem'">
+          {{ display.username || "..." }}
+        </h2>
+        <p :class="loading && 'loadingItem'">{{ display.email || "..." }}</p>
       </div>
     </div>
     <div class="section">
-      <p>Personal Details</p>
+      <p :class="loading && 'loadingItem'">Personal Details</p>
       <ul class="keyVal">
-        <li>
+        <li :class="loading && 'loadingItem'">
           <span>Birthday</span>
           <span>{{
-            user.birthday
-              ? new Date(user.birthday)?.toLocaleDateString()
+            display.birthday
+              ? new Date(display.birthday)?.toLocaleDateString()
               : "..."
           }}</span>
         </li>
-        <li>
-          <span>Gender</span><span>{{ user.gender || "..." }}</span>
+        <li :class="loading && 'loadingItem'">
+          <span>Gender</span><span>{{ display.gender || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p>Locale & Language</p>
+      <p :class="loading && 'loadingItem'">Locale & Language</p>
       <ul class="keyVal">
-        <li>
+        <li :class="loading && 'loadingItem'">
           <span>Locale</span>
-          <span>{{ user.locale || "..." }}</span>
+          <span>{{ display.locale || "..." }}</span>
         </li>
-        <li>
+        <li :class="loading && 'loadingItem'">
           <span>Language</span>
-          <span>{{ user.language || "..." }}</span>
+          <span>{{ display.language || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p>Security Settings</p>
+      <p :class="loading && 'loadingItem'">Security Settings</p>
       <ul class="keyVal">
-        <li>
+        <li :class="loading && 'loadingItem'">
           <span>Require 2FA</span>
           <span>{{
-            user.use2FA === null ? "..." : user.use2FA.toString()
+            display.use2FA === null ? "..." : display.use2FA.toString()
           }}</span>
         </li>
-        <li>
+        <li :class="loading && 'loadingItem'">
           <span>Password</span>
-          <span>{{ user.password?.replace(/./g, "*") || "..." }}</span>
+          <span>{{ display.password?.replace(/./g, "*") || "..." }}</span>
         </li>
       </ul>
     </div>
@@ -74,13 +78,32 @@ import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEm
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
 import wrappedFetch from "@/assets/wrappedFetch.js";
-import { defineProps, ref } from "vue";
+import { defineProps, ref, computed } from "vue";
 const { user, showView, showDefault, token } = defineProps([
   "user",
   "showView",
   "showDefault",
   "token",
 ]);
+
+const display = computed(() => {
+  if (user) return user;
+  return {
+    username: "PLACEHOLDER",
+    email: "PLACEHOLDER",
+    profile: "https://assets.kanapka.eu/images/user.png",
+    use2FA: null,
+    birthday: null,
+    gender: null,
+    locale: null,
+    language: null,
+    password: null,
+  };
+});
+const loading = computed(() => {
+  if (!user) return true;
+  return false;
+});
 
 const defaultButtonState = ref("default");
 
@@ -140,10 +163,15 @@ const handleSetDefault = () => {
   gap: 20px;
   padding-bottom: 20px;
 }
+.main .img {
+  display: block;
+  border-radius: 50%;
+}
 .main img {
+  display: block;
+  border-radius: 50%;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
   background-color: #eee;
 }
 .main h2 {
@@ -158,12 +186,14 @@ const handleSetDefault = () => {
 }
 .section p {
   color: #888;
+  display: inline;
 }
 ul.keyVal li {
   display: flex;
   justify-content: space-between;
   list-style: none;
   color: #2d2d2d;
+  margin-top: 2px;
 }
 .buttons {
   display: flex;

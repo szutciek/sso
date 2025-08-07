@@ -193,6 +193,13 @@ a {
   overflow: hidden;
 }
 
+.loadingItem {
+  pointer-events: none;
+  animation: 1.5s loading linear infinite;
+}
+.loadingItem * {
+  opacity: 0;
+}
 @keyframes loading {
   from {
     background-color: #ededed;
