@@ -7,7 +7,7 @@ export default [
     components: {
       default: () => import("../views/developer/DeveloperPanel.vue"),
       navigation: () =>
-        import("../components/developer/NavigationComponent.vue"),
+        import("../components/developer/NavigationComponentDeveloper.vue"),
       footer: FooterComponent,
     },
   },
