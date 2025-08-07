@@ -20,6 +20,9 @@ import ToasterManager from "@/components/ToasterManager.vue";
 import localeStore from "@/store/localeStore.js";
 localeStore.loadLocaleFromUrl();
 
+import profileStore from "@/store/profileStore";
+profileStore.loadProfileState();
+
 import { ref } from "vue";
 const navHeight = ref(126);
 const updateNavHeight = (newHeight) => {
@@ -234,39 +237,47 @@ a {
 .container-standard.wide {
   grid-template-columns: 420px 420px;
 }
+.container-theme .box,
 .container-standard .box {
   margin: 30px 0;
   width: 100%;
 }
+.container-theme .row,
 .container-standard .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
+.container-theme .row img,
 .container-standard .row img,
+.container-theme .row svg,
 .container-standard .row svg {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background-color: #efefef;
 }
+.container-theme .form,
 .container-standard .form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin: 20px 0;
 }
+.container-theme h1,
 .container-standard h1 {
   font-size: 32px;
   font-weight: 600;
   color: #1a1a1a;
 }
+.container-theme h2,
 .container-standard h2 {
   font-size: 16px;
   font-weight: 400;
   color: #535353;
 }
+.container-theme p,
 .container-standard p {
   font-size: 16px;
   font-weight: 400;

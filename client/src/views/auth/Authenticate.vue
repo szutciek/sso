@@ -87,11 +87,9 @@ const handleSubmit = () => {
     loginRequest
       .then((data) => {
         buttonState.value = "success";
-        profileStore.addProfile({
+
+        profileStore.addDefaultProfile({
           token: data.token,
-          _id: data.details._id,
-          use2FA: data.details.use2FA,
-          used2FA: data.details.used2FA,
         });
 
         if (route.query.redirect) {

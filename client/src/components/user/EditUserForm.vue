@@ -95,7 +95,7 @@ const birthdayConfig = {
 };
 const genderConfig = {
   field: "gender",
-  enum: ["male", "female", "ermm"],
+  enum: ["male", "female", "other"],
   label: "Gender",
 };
 const localeConfig = {

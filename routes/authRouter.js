@@ -14,6 +14,8 @@ router.post("/", verifyCredentials, generateToken);
 router.post("/2fa", authenticate, verify2FA, generateToken);
 router.post("/2fa/request-code", authenticate, send2FACode);
 
-router.post("/set-default-token", authenticate, setDefaultToken);
+// Authentication should not be necessary, since validity of token gets checked
+router.post("/set-default-token", setDefaultToken);
+// router.post("/set-default-token", authenticate, setDefaultToken);
 
 export default router;

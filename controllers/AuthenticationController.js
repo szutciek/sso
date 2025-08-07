@@ -20,7 +20,7 @@ export const verifyCredentials = async (req, res, next) => {
     );
     const passwordValid = await user.checkPassword(credentials.password);
     if (!passwordValid) {
-      throw new AppError("Invalid email or password", 401);
+      throw new AppError("Invalid email or password", 403);
     }
     // if (user.verifiedEmail !== true) {
     //   throw new AppError("Email not verified", 403);
@@ -65,7 +65,9 @@ export const setDefaultToken = async (req, res, next) => {
     }
     decodeToken(newToken);
     setAuthCookies(res, newToken);
-    res.status(200).json({ message: "Default token changed successfully" });
+    res
+      .status(200)
+      .json({ message: "Default token changed successfully", token: newToken });
   } catch (error) {
     next(error);
   }
@@ -121,7 +123,7 @@ export const verify2FA = async (req, res, next) => {
       "+code2FA +last2FAGeneration"
     );
     if (user.code2FA !== code) {
-      throw new AppError("Invalid 2FA code", 401, { code: "Invalid 2FA Code" });
+      throw new AppError("Invalid 2FA code", 400, { code: "Invalid 2FA Code" });
     }
     user.code2FA = null;
     user.last2FAGeneration = new Date(0);

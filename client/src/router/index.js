@@ -43,20 +43,16 @@ const routes = [
     },
   },
 
-  // Website authentication pages
   ...authRoutes.map((r) => {
     r.path = `/:locale${r.path}`;
     return r;
   }),
 
-  // Website from the perspecive of a normal user
   ...userRoutes.map((r) => {
     r.path = `/:locale${r.path}`;
     return r;
   }),
 
-  ,
-  // Website from the perspective of a app admin
   ...appRoutes.map((r) => {
     r.path = `/:locale${r.path}`;
     return r;

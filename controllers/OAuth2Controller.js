@@ -19,7 +19,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       req._targetAppPath = `/authenticate?redirect=${currentUrl}`;
       if (sendAppOnFail) return next();
       return next(
-        new AppError("Not authenticated", 401, {
+        new AppError("Not authenticated", 403, {
           redirect: req._targetAppPath,
         })
       );
@@ -31,7 +31,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       req._targetAppPath = `/authenticate/2fa?redirect=${currentUrl}`;
       if (sendAppOnFail) return next();
       return next(
-        new AppError("2FA login required", 401, {
+        new AppError("2FA login required", 403, {
           require2FA: true,
           redirect: req._targetAppPath,
         })
@@ -43,7 +43,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       req._targetAppPath = `/authenticate/2fa?redirect=${currentUrl}`;
       if (sendAppOnFail) return next();
       return next(
-        new AppError("2FA login required to access app", 401, {
+        new AppError("2FA login required to access app", 403, {
           require2FA: true,
           redirect: req._targetAppPath,
         })
@@ -66,7 +66,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       req._targetAppPath = `/trust/${app._id}?redirect=${currentUrl}`;
       if (sendAppOnFail) return next();
       return next(
-        new AppError("App not trusted by user", 401, {
+        new AppError("App not trusted by user", 403, {
           redirect: req._targetAppPath,
         })
       );

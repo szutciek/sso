@@ -118,7 +118,7 @@ const UserValidation = Joi.object({
     .messages({
       "date.min": "Minimum age is 18 years",
     }),
-  gender: Joi.string().required().valid("male", "female", "ermm"),
+  gender: Joi.string().required().valid("male", "female", "other"),
   locale: Joi.string().required().length(2).lowercase(),
   language: Joi.string()
     .required()

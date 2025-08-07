@@ -1,6 +1,10 @@
 import sendFrontend from "./sendFrontend.js";
+import { clearAuthCookies } from "../utils/cookieUtilityFunctions.js";
 
 export default function safeErrorHandler(err, req, res, next) {
+  if (err.code === 401) {
+    clearAuthCookies(res);
+  }
   if (err.isOperational) {
     if (req.accepts().includes("text/html")) {
       return sendFrontend(req, res);

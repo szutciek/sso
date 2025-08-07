@@ -3,7 +3,7 @@ import * as DeveloperController from "./DeveloperController.js";
 
 export const getCurrentUser = async (req, res, next) => {
   try {
-    const user = await UserCrud.getUserById(req.user._id.toString());
+    const user = await UserCrud.getUserById(req.user._id.toString(), "+email");
     res.status(200).json(user);
   } catch (error) {
     next(error);
