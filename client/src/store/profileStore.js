@@ -51,6 +51,10 @@ export default reactive({
 
   removeProfile(id) {
     this.profiles = this.profiles.filter((p) => p._id !== id);
+    if (this.getCurrentProfile()._id === id) {
+      console.warn("removing active profile");
+      // clear cookies
+    }
   },
 
   clearDefaultStatus() {

@@ -22,14 +22,14 @@
       v-show="focusedIndex != undefined"
     >
       <div class="content container-standard wide">
-        <div class="box">
-          <div class="form" v-if="focusedIndex != null">
-            <AppDetailsUsersPerspective
-              v-for="app of profileStore.profiles[focusedIndex].user?.apps"
-              :app="app"
-              :profile="profileStore.profiles[focusedIndex]"
-            />
-          </div>
+        <div class="form" v-if="focusedIndex != null">
+          <AppDetailsUsersPerspective
+            v-for="(app, i) of profileStore.profiles[focusedIndex].user?.apps"
+            class="appItem"
+            :style="`z-index: ${Math.min(i, 10)}`"
+            :app="app"
+            :profile="profileStore.profiles[focusedIndex]"
+          />
         </div>
       </div>
     </div>
@@ -55,8 +55,9 @@
 .content-wrapper.open {
   max-height: 10000px;
 }
-.app {
-  padding: 20px 10px;
+.appItem {
+  position: relative;
+  box-shadow: 10px 10px 30px #00000014;
 }
 </style>
 
@@ -72,10 +73,10 @@ profileStore.getFullProfileList().catch((err) => {
 
 import { ref } from "vue";
 const trustedAppsWrapper = ref();
-const focusedIndex = ref(null);
+const focusedIndex = ref(undefined);
 
 const handleCarouselSpin = () => {
-  focusedIndex.value = null;
+  focusedIndex.value = undefined;
   trustedAppsWrapper.value.classList.remove("open");
 };
 const handleCarouselSnap = (profileIndex) => {

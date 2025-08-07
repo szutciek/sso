@@ -4,6 +4,7 @@
       <div class="box" v-for="(profile, i) in profiles" :key="profile.token">
         <UserDetailsPreview
           v-if="profile.user"
+          :class="['pfl', focusedIndex === i && 'active']"
           :user="profile.user"
           :showView="focusedIndex === i"
           :showDefault="!profile.isDefault && focusedIndex === i"
@@ -11,7 +12,7 @@
         />
       </div>
       <div class="box">
-        <AddProfileCard />
+        <AddProfileCard :class="['pfl', focusedIndex === null && 'active']" />
       </div>
     </div>
   </div>
@@ -107,13 +108,16 @@ onMounted(() => {
 .scrollArea {
   width: 100vw;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 
   scroll-padding-left: calc((100vw - 1240px) / 2 + 20px);
   scrollbar-width: none;
   outline: none;
+
+  margin: -40px 0;
+  padding: 40px 0;
 }
 .scrollArea::-webkit-scrollbar {
   display: none;
@@ -130,6 +134,18 @@ onMounted(() => {
 .box,
 .ignoredBox {
   scroll-snap-align: start;
+}
+.pfl {
+  filter: grayscale(1);
+  opacity: 0.5;
+  transform: scale(0.98);
+  transition: 0.2s;
+}
+.active {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 10px 10px 30px #00000014;
 }
 @media only screen and (max-width: 1240px) {
   .scrollArea {

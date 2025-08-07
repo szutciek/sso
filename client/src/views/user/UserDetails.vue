@@ -1,10 +1,10 @@
 <template>
   <div class="container-standard wide">
-    <div class="box tallBox">
+    <div class="box">
       <div class="row">
         <h1>Account Details</h1>
       </div>
-      <!-- <h2>Make changes and submit to update.</h2> -->
+      <h2>View details and manage the account.</h2>
 
       <div class="form">
         <UserDetailsPreview
@@ -18,7 +18,7 @@
       <div class="stickyCart">
         <ReactiveStateButtonEmpty
           state="default"
-          text="To Panel &rarr;"
+          text="Go Back To Panel"
           :ignoreEnter="true"
           @submit="$router.push('/user/panel')"
         />
@@ -32,12 +32,19 @@ import EditUserForm from "@/components/user/EditUserForm.vue";
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
 const router = useRouter();
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
+
+onMounted(() => {
+  if (!profileStore.getProfileById(route.params._id).user) {
+    profileStore.getFullProfileList().catch((err) => {});
+  }
+});
 
 const user = ref({
   username: null,

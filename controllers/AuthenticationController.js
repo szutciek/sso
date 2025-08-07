@@ -4,7 +4,10 @@ import { jwt as jwtConfig } from "../config.js";
 import { LooseUserValidation } from "../models/UserModel.js";
 import performValidation from "../utils/performValidation.js";
 import { signToken, decodeToken } from "../utils/JWTUtilityFunctions.js";
-import { setAuthCookies } from "../utils/cookieUtilityFunctions.js";
+import {
+  setAuthCookies,
+  clearAuthCookies,
+} from "../utils/cookieUtilityFunctions.js";
 import { send2FAEmail } from "../utils/mailer.js";
 import Joi from "joi";
 
@@ -71,6 +74,11 @@ export const setDefaultToken = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const clearCookies = (req, res, next) => {
+  clearAuthCookies(res);
+  res.status(200).json({ message: "Auth cookies cleared" });
 };
 
 export const send2FACode = async (req, res, next) => {
