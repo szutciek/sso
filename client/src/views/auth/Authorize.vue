@@ -1,5 +1,5 @@
 <template>
-  <div class="container-standard">
+  <div class="container-standard wide">
     <div class="box">
       <div class="row">
         <h1>Authorize App</h1>
