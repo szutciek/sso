@@ -48,7 +48,7 @@
     "shared": "Shared data"
   },
   "UserPanel": {
-    "title": "Available Profiles",
+    "title": "Accounts & Trusted Apps",
     "description": "Scroll to a profile to get more information."
   }
 }

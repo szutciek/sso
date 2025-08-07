@@ -131,4 +131,23 @@ onMounted(() => {
 .ignoredBox {
   scroll-snap-align: start;
 }
+@media only screen and (max-width: 1240px) {
+  .scrollArea {
+    scroll-padding-left: 20px;
+  }
+  .scrollBox {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .scrollBox {
+    gap: 40px;
+  }
+}
+@media only screen and (max-width: 460px) {
+  .scrollBox {
+    grid-auto-columns: calc(100vw - 40px);
+  }
+}
 </style>

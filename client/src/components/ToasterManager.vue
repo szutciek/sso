@@ -376,7 +376,6 @@ const handler = new Handler();
 onMounted(() => {
   if (window.innerWidth - 20 < 380) {
     handler.boxWidth = window.innerWidth - 20;
-    console.log(handler.boxWidth);
   }
   handler.setElement(document.querySelector(".notif-Toaster-Box"));
 });

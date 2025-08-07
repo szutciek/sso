@@ -248,6 +248,7 @@ a {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  white-space: wrap;
 }
 .container-theme .row img,
 .container-standard .row img,
@@ -305,6 +306,18 @@ a {
   }
   .container-standard.wide {
     grid-template-columns: 420px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .container-standard,
+  .container-standard.wide {
+    gap: 40px;
+  }
+}
+@media only screen and (max-width: 460px) {
+  .container-standard,
+  .container-standard.wide {
+    grid-template-columns: calc(100vw - 40px);
   }
 }
 </style>
