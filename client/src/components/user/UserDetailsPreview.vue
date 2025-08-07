@@ -67,12 +67,14 @@
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
 import notificationStore from "@/store/notificationStore.js";
+import profileStore from "@/store/profileStore.js";
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import { defineProps, ref } from "vue";
-const { user, showEdit, showDefault } = defineProps([
+const { user, showEdit, showDefault, token } = defineProps([
   "user",
   "showEdit",
   "showDefault",
+  "token",
 ]);
 
 const defaultButtonState = ref("default");
@@ -83,7 +85,7 @@ const handleSetDefault = () => {
   const defaultRequest = wrappedFetch("/authenticate/set-default-token", {
     method: "POST",
     body: JSON.stringify({
-      token: "123",
+      token: token,
     }),
   });
 
@@ -101,10 +103,13 @@ const handleSetDefault = () => {
   defaultRequest
     .then((data) => {
       defaultButtonState.value = "success";
-      console.log(data);
 
       profileStore.addDefaultProfile({
         token: data.token,
+      });
+
+      profileStore.getFullProfileList().catch((err) => {
+        console.warn(err);
       });
     })
     .catch((err) => {

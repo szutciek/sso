@@ -1,12 +1,13 @@
 <template>
   <div class="scrollArea" ref="scrollArea">
     <div class="scrollBox">
-      <div class="box" v-for="(profile, i) in profiles">
+      <div class="box" v-for="(profile, i) in profiles" :key="profile.token">
         <UserDetailsPreview
           v-if="profile.user"
           :user="profile.user"
           :showEdit="focusedIndex === i"
           :showDefault="!profile.isDefault && focusedIndex === i"
+          :token="profile.token"
         />
       </div>
       <div class="noResults" v-if="profiles.length === 0">

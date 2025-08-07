@@ -80,7 +80,7 @@ import AppDetailsPreview from "@/components/app/AppDetailsPreview.vue";
 
 import profileStore from "@/store/profileStore.js";
 profileStore.getFullProfileList().catch((err) => {
-  console.log(err);
+  console.warn(err);
 });
 
 import { ref } from "vue";
