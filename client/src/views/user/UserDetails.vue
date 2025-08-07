@@ -26,6 +26,7 @@
 
         <div class="actions">
           <ReactiveStateButton
+            :class="loading && 'loadingItem'"
             state="default"
             text="Edit Account"
             :ignoreEnter="true"
@@ -33,16 +34,18 @@
           />
           <div class="buttons">
             <ReactiveStateButtonEmpty
-              state="default"
+              :class="loading && 'loadingItem'"
+              :state="forgetState"
               text="Forget Account"
               :ignoreEnter="true"
-              @submit="handleAccountForget"
+              @submit="handleAccountForget($route.params._id)"
             />
             <BadReactiveStateButton
-              state="default"
+              :class="loading && 'loadingItem'"
+              :state="deleteState"
               text="Delete Account"
               :ignoreEnter="true"
-              @submit="handleAccountDelete"
+              @submit="handleAccountDelete($route.params._id)"
             />
           </div>
         </div>
@@ -56,7 +59,7 @@ import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
 import BadReactiveStateButton from "@/components/buttons/BadReactiveStateButton.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
@@ -64,91 +67,68 @@ import wrappedFetch from "@/assets/wrappedFetch.js";
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
 
+const loading = computed(() => {
+  const profile = profileStore.getProfileById(route.params._id);
+  if (!profile || !profile.user) return true;
+  return false;
+});
+
 onMounted(() => {
-  if (!profileStore.getProfileById(route.params._id).user) {
+  const profile = profileStore.getProfileById(route.params._id);
+  if (!profile || !profile.user) {
     profileStore.getFullProfileList().catch((err) => {});
   }
 });
 
-const user = ref({
-  username: null,
-  email: null,
-  profile: "https://assets.kanapka.eu/images/user.png",
-  use2FA: null,
-  birthday: null,
-  gender: null,
-  locale: null,
-  language: null,
-  password: null,
-  passwordRepeat: null,
-});
+const deleteState = ref("default");
+const handleAccountDelete = (id) => {
+  deleteState.value = "loading";
 
-const errors = ref({
-  username: null,
-  email: null,
-  profile: null,
-  use2FA: null,
-  birthday: null,
-  gender: null,
-  locale: null,
-  language: null,
-  password: null,
-  passwordRepeat: null,
-});
-
-const handleInput = (value, field) => {
-  errors.value[field] = "";
-  user.value[field] = value;
-  if (field === "password" || field === "passwordRepeat") {
-    if (user.value.password !== user.value.passwordRepeat) {
-      errors.value.passwordRepeat = "Passwords are not the same";
-    }
-  }
-};
-
-const buttonText = ref("Submit Changes");
-const buttonState = ref("default");
-
-const handleSubmit = () => {
-  if (user.value.password !== user.value.passwordRepeat) {
-    errors.value.passwordRepeat = "Passwords are not the same";
-    return;
-  }
-
-  const cleanUser = { ...user.value };
-  delete cleanUser.passwordRepeat;
-
-  buttonState.value = "loading";
-
-  const createRequest = wrappedFetch("/api/users", {
-    method: "POST",
-    body: JSON.stringify(cleanUser),
+  const selectedProfile = profileStore.getProfileById(id);
+  const deleteRequest = wrappedFetch(`/api/users/me`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${selectedProfile.token}`,
+    },
   });
 
   notificationStore.createNotif({
     type: "info",
-    title: "Account Creation",
-    details: "Account created successfully",
+    title: "Deleting Account",
+    details: `Account has been deleted`,
     duration: 10000,
     promise: {
-      promise: createRequest,
-      while: "Processing your request...",
+      promise: deleteRequest,
+      while: "Deleting your account...",
     },
   });
 
-  createRequest
+  deleteRequest
     .then((data) => {
-      buttonState.value = "success";
-
-      console.log(data);
+      profileStore
+        .removeProfile(id)
+        .then(() => {
+          deleteState.value = "success";
+        })
+        .catch(() => {
+          deleteState.value = "default";
+        });
     })
     .catch((err) => {
-      if (err.details) {
-        Object.entries(err.details).forEach(([key, value]) => {
-          errors.value[key] = value;
-        });
-      }
-      buttonState.value = "default";
+      deleteState.value = "default";
+    });
+};
+
+const forgetState = ref("default");
+const handleAccountForget = (id) => {
+  forgetState.value = "loading";
+  profileStore
+    .removeProfile(id)
+    .then(() => {
+      forgetState.value = "success";
+    })
+    .catch(() => {
+      forgetState.value = "default";
     });
 };
 </script>

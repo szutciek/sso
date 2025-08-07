@@ -58,7 +58,7 @@ export const deleteDeveloper = async (req, res, next) => {
   try {
     const developerId = req.user.developer._id.toString();
     await handleDeveloperDeletion(developerId);
-    res.status(204).send();
+    res.status(204).json();
   } catch (err) {
     return next(err);
   }

@@ -139,6 +139,10 @@ const handleSetDefault = () => {
       profileStore.getFullProfileList().catch((err) => {
         console.warn(err);
       });
+
+      setTimeout(() => {
+        defaultButtonState.value = "default";
+      }, 1000);
     })
     .catch((err) => {
       defaultButtonState.value = "default";

@@ -57,7 +57,7 @@ export const deleteAppById = async (req, res, next) => {
       throw new AppError("Not allowed to delete this app", 403);
     }
     await handleAppDeletion(app._id);
-    res.status(204).send();
+    res.status(204).json();
   } catch (err) {
     return next(err);
   }

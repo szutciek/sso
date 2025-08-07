@@ -1,5 +1,7 @@
 import decodeJWT from "@/assets/decodeJWT.js";
+import wrappedFetch from "@/assets/wrappedFetch";
 import { reactive } from "vue";
+import notificationStore from "./notificationStore.js";
 
 export default reactive({
   loadedProfiles: false,
@@ -50,11 +52,57 @@ export default reactive({
   },
 
   removeProfile(id) {
-    this.profiles = this.profiles.filter((p) => p._id !== id);
-    if (this.getCurrentProfile()._id === id) {
-      console.warn("removing active profile");
-      // clear cookies
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        const currentProfile = this.getCurrentProfile();
+        if (currentProfile?._id !== id) {
+          this.profiles = this.profiles.filter((p) => p._id !== id);
+          this.saveProfileState();
+
+          notificationStore.createNotif({
+            type: "info",
+            title: "Forgetting Profile",
+            details: `Profile was forgotten`,
+            duration: 5000,
+            promise: {
+              promise: new Promise((resolve) => resolve()),
+              while: "Forgetting profile...",
+            },
+          });
+
+          return resolve();
+        }
+
+        const clearRequest = wrappedFetch("/authenticate/clear-auth-cookies", {
+          method: "POST",
+          body: JSON.stringify({
+            token: currentProfile.token,
+          }),
+        });
+
+        notificationStore.createNotif({
+          type: "info",
+          title: "Forgetting Profile",
+          details: `Profile was forgotten`,
+          duration: 5000,
+          promise: {
+            promise: clearRequest,
+            while: "Forgetting profile...",
+          },
+        });
+
+        clearRequest
+          .then((data) => {
+            this.profiles = this.profiles.filter((p) => p._id !== id);
+            this.saveProfileState();
+            resolve();
+          })
+          .catch((err) => reject());
+      } catch (err) {
+        console.log(err);
+        reject(err);
+      }
+    });
   },
 
   clearDefaultStatus() {
@@ -64,14 +112,18 @@ export default reactive({
   },
 
   addDefaultProfile(profile) {
-    const payload = decodeJWT(profile.token);
-    profile._id = payload._id;
-    this.clearDefaultStatus();
-    profile.isDefault = true;
-    this.removeProfile(profile._id);
-    this.profiles.push(profile);
-    this.sortProfiles();
-    this.saveProfileState();
+    try {
+      const payload = decodeJWT(profile.token);
+      profile._id = payload._id;
+      this.clearDefaultStatus();
+      profile.isDefault = true;
+      this.profiles = this.profiles.filter((p) => p._id !== profile._id);
+      this.profiles.push(profile);
+      this.sortProfiles();
+      this.saveProfileState();
+    } catch (err) {
+      console.warn(err);
+    }
   },
 
   saveProfileState() {

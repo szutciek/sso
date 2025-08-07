@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[`button`, state]"
-    @click="state === `default` && emit(`submit`)"
+    @click.stop="state === `default` && emit(`submit`)"
   >
     <div v-if="state === 'loading'" class="loader"></div>
     {{ state !== "loading" ? text || "&nbsp;" : "" }}

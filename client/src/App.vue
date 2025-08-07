@@ -194,8 +194,9 @@ a {
 }
 
 .loadingItem {
-  pointer-events: none;
-  animation: 1.5s loading linear infinite;
+  pointer-events: none !important;
+  animation: 1.5s loading linear infinite !important;
+  border: none !important;
 }
 .loadingItem * {
   opacity: 0;

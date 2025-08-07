@@ -68,7 +68,7 @@ const handleSubmit = () => {
       type: "info",
       title: "Authentication",
       details: "You have been successfully authenticated",
-      duration: 10000,
+      duration: 5000,
       promise: {
         promise: loginRequest,
         while: "Checking the provided 2FA code...",

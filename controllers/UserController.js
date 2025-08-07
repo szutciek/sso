@@ -1,5 +1,6 @@
 import * as UserCrud from "../crud/UserCrud.js";
 import * as DeveloperController from "./DeveloperController.js";
+import { clearAuthCookies } from "../utils/cookieUtilityFunctions.js";
 
 export const getCurrentUser = async (req, res, next) => {
   try {
@@ -26,7 +27,8 @@ export const deleteCurrentUser = async (req, res, next) => {
       await DeveloperController.handleDeveloperDeletion(developerId);
     }
     await req.user.deleteOne();
-    res.status(204).send();
+    clearAuthCookies(res);
+    res.status(204).json();
   } catch (error) {
     next(error);
   }

@@ -107,6 +107,8 @@ mongooseUserSchema.methods.checkPassword = function (password) {
 
 const eighteenYearsAgo = new Date();
 eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+const oneHundredYearsAgo = new Date();
+oneHundredYearsAgo.setFullYear(oneHundredYearsAgo.getFullYear() - 100);
 
 const UserValidation = Joi.object({
   _id: Joi.string().hex().length(24),
@@ -116,8 +118,12 @@ const UserValidation = Joi.object({
   password: Joi.string().required().min(8).max(100),
   birthday: Joi.number()
     .required()
-    .min(new Date("1900-01-01").getTime())
-    .max(new Date(eighteenYearsAgo).getTime()),
+    .min(new Date(oneHundredYearsAgo).getTime())
+    .max(new Date(eighteenYearsAgo).getTime())
+    .messages({
+      "number.min": `"birthday" must be sooner than 100 years ago.`,
+      "number.max": `"birthday" must be later than 18 years ago.`,
+    }),
   gender: Joi.string().required().valid("male", "female", "other"),
   locale: Joi.string().required().length(2).lowercase(),
   language: Joi.string()

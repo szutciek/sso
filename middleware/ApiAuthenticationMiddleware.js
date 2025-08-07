@@ -2,14 +2,17 @@ import AppError from "../utils/AppError.js";
 import { getUserById } from "../crud/UserCrud.js";
 import { decodeToken } from "../utils/JWTUtilityFunctions.js";
 
-const pathsOverride2FA = [
-  "/authenticate/2fa",
-  "/authenticate/2fa/request-code",
-  "/api/users/me",
-  "/api/users/me/email-provider",
+const requestsOverride2FA = [
+  "post:/authenticate/2fa",
+  "post:/authenticate/2fa/request-code",
+  "get:/api/users/me",
+  "get:/api/users/me/email-provider",
 ];
-const overrides2FARequirement = (path) => {
-  return pathsOverride2FA.some((p) => p === path);
+const overrides2FARequirement = (method, path) => {
+  return requestsOverride2FA.some((r) => {
+    const [m, p] = r.split(":");
+    return m === method && p === path;
+  });
 };
 
 export const authenticate = async (req, res, next) => {
@@ -26,7 +29,10 @@ export const authenticate = async (req, res, next) => {
     req.user = await getUserById(decoded._id);
     req._used2FA = decoded.used2FA;
     const userRequires2FA = req.user.use2FA === true && req._used2FA !== true;
-    if (userRequires2FA && !overrides2FARequirement(req.originalUrl)) {
+    if (
+      userRequires2FA &&
+      !overrides2FARequirement(req.method, req.originalUrl)
+    ) {
       return next(
         new AppError("2FA login required", 403, {
           require2FA: true,

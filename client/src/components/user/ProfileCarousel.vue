@@ -1,7 +1,11 @@
 <template>
   <div class="scrollArea" ref="scrollArea">
     <div class="scrollBox">
-      <div class="box" v-for="(profile, i) in profiles" :key="profile.token">
+      <div
+        class="box carousel-Bubble-Catcher"
+        v-for="(profile, i) in profiles"
+        :key="profile.token"
+      >
         <UserDetailsPreview
           :class="['pfl', focusedIndex === i && 'active']"
           :user="profile.user"
@@ -10,7 +14,7 @@
           :token="profile.token"
         />
       </div>
-      <div class="box">
+      <div class="box carousel-Bubble-Catcher">
         <AddProfileCard :class="['pfl', focusedIndex === null && 'active']" />
       </div>
     </div>
@@ -51,15 +55,17 @@ onMounted(() => {
   };
 
   const handleScroll = () => {
-    if (!isSpinning) {
-      emit("spinStart");
-    }
+    if (!isSpinning) emit("spinStart");
     isSpinning = true;
+
     const boxes = scrollArea.value.querySelectorAll(".box");
     if (boxes.length === 0) return;
+
     lastXPosition = boxes[0].getBoundingClientRect().x;
-    clearTimeout(stillSpinningCheck);
     const snappedBoxIndex = getLeftmostBoxIndex(boxes);
+
+    clearTimeout(stillSpinningCheck);
+
     stillSpinningCheck = setTimeout(() => {
       const newXPosition = boxes[0].getBoundingClientRect().x;
       if (newXPosition === lastXPosition) {
@@ -67,14 +73,28 @@ onMounted(() => {
         if (snappedBoxIndex === boxes.length - 1) {
           emit("snappedTo", null);
         } else {
-          emit("snappedTo", snappedBoxIndex);
+          if (snappedBoxIndex !== focusedIndex) {
+            emit("snappedTo", snappedBoxIndex);
+          }
         }
       }
-    }, 150);
+    }, 80);
   };
 
   handleScroll();
   scrollArea.value.addEventListener("scroll", handleScroll);
+
+  scrollArea.value.addEventListener("click", (e) => {
+    if (!scrollArea.value) return;
+    const targetBox = e.target.closest(".carousel-Bubble-Catcher");
+    if (!targetBox) return;
+    const boxX = targetBox.getBoundingClientRect().x;
+    const areaX = scrollArea.value.getBoundingClientRect().x;
+    scrollArea.value.scrollBy({
+      left: boxX - areaX,
+      behavior: "smooth",
+    });
+  });
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
@@ -139,12 +159,14 @@ onMounted(() => {
   opacity: 0.5;
   transform: scale(0.98);
   transition: 0.2s;
+  cursor: pointer;
 }
 .active {
   filter: grayscale(0);
   opacity: 1;
   transform: scale(1);
   box-shadow: 10px 10px 30px #00000014;
+  cursor: unset;
 }
 @media only screen and (max-width: 1240px) {
   .scrollArea {
@@ -152,7 +174,7 @@ onMounted(() => {
   }
   .scrollBox {
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: calc(100vw - 440px);
   }
 }
 @media only screen and (max-width: 540px) {

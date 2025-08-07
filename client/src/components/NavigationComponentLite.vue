@@ -19,8 +19,6 @@ nav {
 
   padding: 50px 10px 10px 10px;
 
-  /* background-color: #fff; */
-  /* border-bottom: 1px solid #ddd; */
   background-color: #fff4;
   backdrop-filter: blur(5px);
 }
@@ -32,6 +30,7 @@ nav {
 
 .bar .logo {
   position: relative;
+  transition: 0.2s;
 }
 .bar .logo .extension {
   position: absolute;
@@ -44,6 +43,10 @@ nav {
 
   overflow: hidden;
   border-radius: 0 0 4px 4px;
+}
+
+.bar .logo:hover {
+  transform: translateY(10px);
 }
 
 @media screen and (max-width: 800px) {

@@ -115,8 +115,6 @@ const handleSubmit = () => {
     .then((data) => {
       buttonState.value = "success";
       createdAnAccount.value = true;
-
-      console.log(data);
     })
     .catch((err) => {
       if (err.details) {

@@ -11,6 +11,7 @@ export default (url, options) => {
     }
     fetch(url, options)
       .then((response) => {
+        if (response.status === 204) resolve(null);
         response
           .json()
           .then((data) => {

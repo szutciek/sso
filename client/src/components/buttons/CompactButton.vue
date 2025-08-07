@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('submit')">{{ text }}</button>
+  <button @click.stop="$emit('submit')">{{ text }}</button>
 </template>
 
 <script setup>
