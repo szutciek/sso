@@ -22,29 +22,6 @@ const routes = [
     },
   },
 
-  {
-    path: "/:locale",
-    name: "redirection",
-    redirect: (to) => {
-      const profileList = window.localStorage.getItem("profileState");
-      if (!profileList) return { path: `/${to.params.locale}/home` };
-      const profileListEmpty = profileList.includes(`"profiles":[]`);
-      if (!profileListEmpty) {
-        return { path: `/user/panel` };
-      }
-      return { path: `/home` };
-    },
-  },
-
-  {
-    path: "/:locale/home",
-    components: {
-      default: () => import("../views/Home.vue"),
-      navigation: NavigationComponent,
-      footer: FooterComponent,
-    },
-  },
-
   ...authRoutes.map((r) => {
     r.path = `/:locale${r.path}`;
     return r;
@@ -60,11 +37,44 @@ const routes = [
     return r;
   }),
 
-  // Website from the perspective of a broader admin
   ...developerRoutes.map((r) => {
     r.path = `/:locale${r.path}`;
     return r;
   }),
+
+  {
+    path: "/:locale/home",
+    components: {
+      default: () => import("../views/Home.vue"),
+      navigation: NavigationComponent,
+      footer: FooterComponent,
+    },
+  },
+
+  {
+    path: "/",
+    name: "redirection",
+    redirect: (to) => {
+      const locale = lS.locale;
+      const profileList = window.localStorage.getItem("profileState");
+      if (!profileList) return { path: `/${locale}/home` };
+      const profileListEmpty = profileList.includes(`"profiles":[]`);
+      if (!profileListEmpty) {
+        return { path: `/${locale}/user/panel` };
+      }
+      return { path: `/${locale}/home` };
+    },
+  },
+
+  {
+    path: "/:locale",
+    name: "homeLocale",
+    components: {
+      default: () => import("../views/Home.vue"),
+      navigation: NavigationComponent,
+      footer: FooterComponent,
+    },
+  },
 
   {
     path: "/:catchAll(.*)",

@@ -16,8 +16,8 @@ button {
   border: none;
   border-radius: 2px;
 
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 500;
   color: white;
 

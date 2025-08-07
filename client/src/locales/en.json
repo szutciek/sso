@@ -36,12 +36,8 @@
         "topics": []
       }
     ],
-    "action": "Secure My App"
+    "action": "Manage Profiles"
   },
-  "AccountList": {
-    "test": "AAAAAAAAAAAA"
-  },
-  "UserPanel": {},
   "UserProfile": {
     "birthday": "Birthday",
     "gender": "Gender",
@@ -50,5 +46,9 @@
   },
   "UserApp": {
     "shared": "Shared data"
+  },
+  "UserPanel": {
+    "title": "Available Profiles",
+    "description": "Scroll to a profile to get more information."
   }
 }

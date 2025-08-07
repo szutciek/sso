@@ -52,7 +52,12 @@
       </ul>
     </div>
     <div class="section buttons sbt" v-if="showEdit || showDefault">
-      <ReactiveStateButtonEmpty v-if="showEdit" text="Edit" state="default" />
+      <ReactiveStateButtonEmpty
+        v-if="showEdit"
+        text="Edit"
+        state="default"
+        @submit="$router.push(`/user/${user._id}/edit`)"
+      />
       <ReactiveStateButton
         v-if="showDefault"
         text="Set default"

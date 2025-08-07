@@ -23,7 +23,7 @@
         </button>
         <button
           class="primary action hoverShadow"
-          @click="$router.push(`${lS.locale}/developers/`)"
+          @click="$router.push(`/user/panel`)"
         >
           {{ lS.localeKeys.NavigationComponent.action }}
         </button>

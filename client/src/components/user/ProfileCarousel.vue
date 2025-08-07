@@ -10,8 +10,8 @@
           :token="profile.token"
         />
       </div>
-      <div class="noResults" v-if="profiles.length === 0">
-        <p>No profiles</p>
+      <div class="box">
+        <AddProfileCard />
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@
 
 <script setup>
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
+import AddProfileCard from "@/components/user/AddProfileCard.vue";
 
 import { ref, defineProps, defineEmits, onMounted } from "vue";
 const { profiles, focusedIndex } = defineProps(["profiles", "focusedIndex"]);
@@ -63,7 +64,11 @@ onMounted(() => {
       const newXPosition = boxes[0].getBoundingClientRect().x;
       if (newXPosition === lastXPosition) {
         isSpinning = false;
-        emit("snappedTo", snappedBoxIndex);
+        if (snappedBoxIndex === boxes.length - 1) {
+          emit("snappedTo", null);
+        } else {
+          emit("snappedTo", snappedBoxIndex);
+        }
       }
     }, 150);
   };
@@ -83,6 +88,7 @@ onMounted(() => {
 
   scroll-padding-left: calc((100vw - 1240px) / 2 + 20px);
   scrollbar-width: none;
+  outline: none;
 }
 .scrollArea::-webkit-scrollbar {
   display: none;
@@ -96,7 +102,8 @@ onMounted(() => {
   grid-auto-columns: 420px;
   gap: 80px;
 }
-.box {
+.box,
+.ignoredBox {
   scroll-snap-align: start;
 }
 </style>

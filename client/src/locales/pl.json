@@ -36,12 +36,8 @@
         "topics": []
       }
     ],
-    "action": "Zabezpiecz Moją Stronę"
+    "action": "Zarządzaj Profilami"
   },
-  "AccountList": {
-    "test": "BBBBBBBBBBBB"
-  },
-  "UserPanel": {},
   "UserProfile": {
     "birthday": "Data urodzin",
     "gender": "Płeć",
@@ -50,5 +46,9 @@
   },
   "UserApp": {
     "shared": "Udostępnione dane"
+  },
+  "UserPanel": {
+    "title": "Dostępne Profile",
+    "description": "Przescrolluj do profilu aby uzyskać więcej informacji."
   }
 }
