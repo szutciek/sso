@@ -1,20 +1,41 @@
 <template>
   <div class="userDetails sb">
     <div class="section main sbb">
-      <div :class="['img', loading && 'loadingItem']">
-        <img :src="display.profile" :alt="display.username" />
+      <div :class="[loading && 'loadingItem']">
+        <img
+          :src="display.profile"
+          :alt="display.username"
+          :class="highlight?.includes('profile') && 'highlightImage'"
+        />
       </div>
       <div>
-        <h2 :class="loading && 'loadingItem'">
+        <h2
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('username') && 'highlight',
+          ]"
+        >
           {{ display.username || "..." }}
         </h2>
-        <p :class="loading && 'loadingItem'">{{ display.email || "..." }}</p>
+        <p
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('email') && 'highlight',
+          ]"
+        >
+          {{ display.email || "..." }}
+        </p>
       </div>
     </div>
     <div class="section">
       <p :class="loading && 'loadingItem'">Personal Details</p>
       <ul class="keyVal">
-        <li :class="loading && 'loadingItem'">
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('birthday') && 'highlight',
+          ]"
+        >
           <span>Birthday</span>
           <span>{{
             display.birthday
@@ -22,19 +43,34 @@
               : "..."
           }}</span>
         </li>
-        <li :class="loading && 'loadingItem'">
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('gender') && 'highlight',
+          ]"
+        >
           <span>Gender</span><span>{{ display.gender || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">Locale & Language</p>
+      <p :class="loading && 'loadingItem'">Region & Language</p>
       <ul class="keyVal">
-        <li :class="loading && 'loadingItem'">
-          <span>Locale</span>
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('locale') && 'highlight',
+          ]"
+        >
+          <span>Region</span>
           <span>{{ display.locale || "..." }}</span>
         </li>
-        <li :class="loading && 'loadingItem'">
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('language') && 'highlight',
+          ]"
+        >
           <span>Language</span>
           <span>{{ display.language || "..." }}</span>
         </li>
@@ -43,13 +79,23 @@
     <div class="section">
       <p :class="loading && 'loadingItem'">Security Settings</p>
       <ul class="keyVal">
-        <li :class="loading && 'loadingItem'">
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('use2FA') && 'highlight',
+          ]"
+        >
           <span>Require 2FA</span>
           <span>{{
             display.use2FA === null ? "..." : display.use2FA.toString()
           }}</span>
         </li>
-        <li :class="loading && 'loadingItem'">
+        <li
+          :class="[
+            loading && 'loadingItem',
+            highlight?.includes('password') && 'highlight',
+          ]"
+        >
           <span>Password</span>
           <span>{{ display.password?.replace(/./g, "*") || "..." }}</span>
         </li>
@@ -79,11 +125,12 @@ import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import { defineProps, ref, computed } from "vue";
-const { user, showView, showDefault, token } = defineProps([
+const { user, showView, showDefault, token, highlight } = defineProps([
   "user",
   "showView",
   "showDefault",
   "token",
+  "highlight",
 ]);
 
 const display = computed(() => {
@@ -108,45 +155,7 @@ const loading = computed(() => {
 const defaultButtonState = ref("default");
 
 const handleSetDefault = () => {
-  defaultButtonState.value = "loading";
-
-  const defaultRequest = wrappedFetch("/authenticate/set-default-token", {
-    method: "POST",
-    body: JSON.stringify({
-      token: token,
-    }),
-  });
-
-  notificationStore.createNotif({
-    type: "info",
-    title: "Setting Default Profile",
-    details: `"${user.username}" is now your default profile`,
-    duration: 10000,
-    promise: {
-      promise: defaultRequest,
-      while: "Changing your default profile...",
-    },
-  });
-
-  defaultRequest
-    .then((data) => {
-      defaultButtonState.value = "success";
-
-      profileStore.addDefaultProfile({
-        token: data.token,
-      });
-
-      profileStore.getFullProfileList().catch((err) => {
-        console.warn(err);
-      });
-
-      setTimeout(() => {
-        defaultButtonState.value = "default";
-      }, 1000);
-    })
-    .catch((err) => {
-      defaultButtonState.value = "default";
-    });
+  profileStore.setDefaultProfile(user._id);
 };
 </script>
 
@@ -203,5 +212,13 @@ ul.keyVal li {
   display: flex;
   gap: 10px;
   padding-top: 20px;
+}
+.highlight {
+  background-color: #fff9c6;
+  margin: -2px -8px;
+  padding: 2px 8px;
+}
+.highlightImage {
+  border: 2px solid #fff9c6 !important;
 }
 </style>

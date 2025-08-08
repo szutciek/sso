@@ -43,7 +43,7 @@ export default reactive({
     });
   },
 
-  getCurrentProfile() {
+  getDefaultProfile() {
     return this.profiles.find((p) => p.isDefault === true);
   },
 
@@ -54,8 +54,8 @@ export default reactive({
   removeProfile(id) {
     return new Promise((resolve, reject) => {
       try {
-        const currentProfile = this.getCurrentProfile();
-        if (currentProfile?._id !== id) {
+        const defaultProfile = this.getDefaultProfile();
+        if (defaultProfile?._id !== id) {
           this.profiles = this.profiles.filter((p) => p._id !== id);
           this.saveProfileState();
 
@@ -76,7 +76,7 @@ export default reactive({
         const clearRequest = wrappedFetch("/authenticate/clear-auth-cookies", {
           method: "POST",
           body: JSON.stringify({
-            token: currentProfile.token,
+            token: defaultProfile.token,
           }),
         });
 
@@ -94,10 +94,56 @@ export default reactive({
         clearRequest
           .then((data) => {
             this.profiles = this.profiles.filter((p) => p._id !== id);
+            if (this.profiles.length !== 0) {
+              this.setDefaultProfile(this.profiles[0]._id)
+                .then(() => resolve())
+                .catch((err) => reject());
+            }
             this.saveProfileState();
-            resolve();
           })
           .catch((err) => reject());
+      } catch (err) {
+        console.log(err);
+        reject(err);
+      }
+    });
+  },
+
+  setDefaultProfile(id) {
+    return new Promise((resolve, reject) => {
+      try {
+        const profile = this.getProfileById(id);
+        const defaultRequest = wrappedFetch("/authenticate/set-default-token", {
+          method: "POST",
+          body: JSON.stringify({
+            token: profile.token,
+          }),
+        });
+
+        notificationStore.createNotif({
+          type: "info",
+          title: "Setting Default Profile",
+          details: `"${profile.user.username}" is now your default profile`,
+          duration: 10000,
+          promise: {
+            promise: defaultRequest,
+            while: "Changing your default profile...",
+          },
+        });
+
+        defaultRequest
+          .then((data) => {
+            this.addDefaultProfile({
+              token: data.token,
+            });
+
+            this.getFullProfileList().catch((err) => {
+              console.warn(err);
+            });
+
+            resolve();
+          })
+          .catch((err) => reject(err));
       } catch (err) {
         console.log(err);
         reject(err);

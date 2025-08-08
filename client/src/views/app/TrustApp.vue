@@ -23,6 +23,12 @@
         />
       </div>
     </div>
+    <div class="box">
+      <UserDetailsPreview
+        :user="profileStore.getDefaultProfile()?.user"
+        :highlight="app?.scope"
+      />
+    </div>
   </div>
 </template>
 
@@ -35,6 +41,11 @@ import wrappedFetch from "@/assets/wrappedFetch.js";
 import AppDetailsBriefPreview from "@/components/app/AppDetailsBriefPreview.vue";
 import AppSharedItem from "@/components/app/AppSharedItem.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
+import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
+import profileStore from "@/store/profileStore.js";
+profileStore.getFullProfileList().catch((err) => {
+  console.warn(err);
+});
 
 const app = ref(null);
 
