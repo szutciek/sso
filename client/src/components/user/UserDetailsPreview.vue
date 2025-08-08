@@ -5,14 +5,14 @@
         <img
           :src="display.profile"
           :alt="display.username"
-          :class="highlight?.includes('profile') && 'highlightImage'"
+          :class="!highlight?.includes('profile') && 'decreaseVisibility'"
         />
       </div>
       <div>
         <h2
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('username') && 'highlight',
+            !highlight?.includes('username') && 'decreaseVisibility',
           ]"
         >
           {{ display.username || "..." }}
@@ -20,7 +20,7 @@
         <p
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('email') && 'highlight',
+            !highlight?.includes('email') && 'decreaseVisibility',
           ]"
         >
           {{ display.email || "..." }}
@@ -33,7 +33,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('birthday') && 'highlight',
+            !highlight?.includes('birthday') && 'decreaseVisibility',
           ]"
         >
           <span>Birthday</span>
@@ -46,7 +46,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('gender') && 'highlight',
+            !highlight?.includes('gender') && 'decreaseVisibility',
           ]"
         >
           <span>Gender</span><span>{{ display.gender || "..." }}</span>
@@ -59,7 +59,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('locale') && 'highlight',
+            !highlight?.includes('locale') && 'decreaseVisibility',
           ]"
         >
           <span>Region</span>
@@ -68,7 +68,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('language') && 'highlight',
+            !highlight?.includes('language') && 'decreaseVisibility',
           ]"
         >
           <span>Language</span>
@@ -82,7 +82,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('use2FA') && 'highlight',
+            !highlight?.includes('use2FA') && 'decreaseVisibility',
           ]"
         >
           <span>Require 2FA</span>
@@ -93,7 +93,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            highlight?.includes('password') && 'highlight',
+            !highlight?.includes('password') && 'decreaseVisibility',
           ]"
         >
           <span>Password</span>
@@ -213,13 +213,8 @@ ul.keyVal li {
   gap: 10px;
   padding-top: 20px;
 }
-.highlight {
-  color: #fff !important;
-  background-color: #2d2d2d !important;
-  margin: -2px -8px;
-  padding: 2px 8px;
-}
-.highlightImage {
-  border: 4px solid #2d2d2d !important;
+.decreaseVisibility {
+  filter: blur(2px);
+  opacity: 0.5;
 }
 </style>
