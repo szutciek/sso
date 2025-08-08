@@ -214,11 +214,12 @@ ul.keyVal li {
   padding-top: 20px;
 }
 .highlight {
-  background-color: #fff9c6;
+  color: #fff !important;
+  background-color: #2d2d2d !important;
   margin: -2px -8px;
   padding: 2px 8px;
 }
 .highlightImage {
-  border: 2px solid #fff9c6 !important;
+  border: 4px solid #2d2d2d !important;
 }
 </style>
