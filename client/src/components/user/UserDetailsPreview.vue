@@ -5,14 +5,18 @@
         <img
           :src="display.profile"
           :alt="display.username"
-          :class="!highlight?.includes('profile') && 'decreaseVisibility'"
+          :class="
+            highlight && !highlight?.includes('profile') && 'decreaseVisibility'
+          "
         />
       </div>
       <div>
         <h2
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('username') && 'decreaseVisibility',
+            highlight &&
+              !highlight?.includes('username') &&
+              'decreaseVisibility',
           ]"
         >
           {{ display.username || "..." }}
@@ -20,7 +24,7 @@
         <p
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('email') && 'decreaseVisibility',
+            highlight && !highlight?.includes('email') && 'decreaseVisibility',
           ]"
         >
           {{ display.email || "..." }}
@@ -33,7 +37,9 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('birthday') && 'decreaseVisibility',
+            highlight &&
+              !highlight?.includes('birthday') &&
+              'decreaseVisibility',
           ]"
         >
           <span>Birthday</span>
@@ -46,7 +52,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('gender') && 'decreaseVisibility',
+            highlight && !highlight?.includes('gender') && 'decreaseVisibility',
           ]"
         >
           <span>Gender</span><span>{{ display.gender || "..." }}</span>
@@ -59,7 +65,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('locale') && 'decreaseVisibility',
+            highlight && !highlight?.includes('locale') && 'decreaseVisibility',
           ]"
         >
           <span>Region</span>
@@ -68,7 +74,9 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('language') && 'decreaseVisibility',
+            highlight &&
+              !highlight?.includes('language') &&
+              'decreaseVisibility',
           ]"
         >
           <span>Language</span>
@@ -82,7 +90,7 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('use2FA') && 'decreaseVisibility',
+            highlight && !highlight?.includes('use2FA') && 'decreaseVisibility',
           ]"
         >
           <span>Require 2FA</span>
@@ -93,7 +101,9 @@
         <li
           :class="[
             loading && 'loadingItem',
-            !highlight?.includes('password') && 'decreaseVisibility',
+            highlight &&
+              !highlight?.includes('password') &&
+              'decreaseVisibility',
           ]"
         >
           <span>Password</span>
