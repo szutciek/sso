@@ -9,6 +9,7 @@ const requestsOverride2FA = [
   "get:/api/users/me/email-provider",
 ];
 const overrides2FARequirement = (method, path) => {
+  method = method.toLowerCase();
   return requestsOverride2FA.some((r) => {
     const [m, p] = r.split(":");
     return m === method && p === path;
