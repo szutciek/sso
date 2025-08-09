@@ -5,21 +5,21 @@
         <h1>+</h1>
       </div>
       <div>
-        <h2>Add profile</h2>
-        <p>Click one of the buttons below.</p>
+        <h2>{{ lS.localeKeys.AddProfileCard.title }}</h2>
+        <p>{{ lS.localeKeys.AddProfileCard.description }}</p>
       </div>
     </div>
     <div class="section buttons">
       <div class="button">
         <CompactButtonEmpty
           @submit="handleReroute('/authenticate')"
-          text="Sign In"
+          :text="lS.localeKeys.AddProfileCard.signin"
         />
       </div>
       <div class="button">
         <CompactButtonEmpty
           @submit="handleReroute('/register')"
-          text="Create Account"
+          :text="lS.localeKeys.AddProfileCard.signup"
         />
       </div>
     </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import CompactButton from "@/components/buttons/CompactButton.vue";
 import CompactButtonEmpty from "@/components/buttons/CompactButtonEmpty.vue";
 import { useRouter } from "vue-router";

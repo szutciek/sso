@@ -1,10 +1,10 @@
 <template>
   <li class="appSharedItem">
     <img
-      :src="`https://assets.kanapka.eu/images/permission-${item}.png`"
+      :src="`https://assets.kanapka.eu/images/permission-${item.field}.png`"
       alt="."
     />
-    <p>{{ item }}</p>
+    <p>{{ item.label }}</p>
   </li>
 </template>
 

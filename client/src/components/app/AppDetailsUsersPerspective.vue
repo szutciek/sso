@@ -5,22 +5,37 @@
         <img :src="app.app.icon" :alt="app.name" />
         <div>
           <h2>{{ app.app.name }}</h2>
-          <p>By {{ app.app.developer.user.username }}</p>
+          <p>
+            {{ lS.localeKeys.AppDetails.byAuthor }}
+            {{ app.app.developer.user.username }}
+          </p>
         </div>
       </div>
 
       <div :class="['section', 'status', app.status]">
-        <p>{{ app.status === "trusted" ? "Trusted" : "Trust Revoked" }}</p>
+        <p>
+          {{
+            app.status === "trusted"
+              ? lS.localeKeys.AppDetails[`Trusted`]
+              : lS.localeKeys.AppDetails[`Trust Revoked`]
+          }}
+        </p>
       </div>
 
       <div class="section permissions">
         <div>
           <p>
-            Info
-            {{ app.status === "trusted" ? `requested by` : `shared with` }} app:
+            {{
+              app.status === "trusted"
+                ? lS.localeKeys.AppDetails.infoShared
+                : lS.localeKeys.AppDetails.infoRequested
+            }}:
           </p>
           <ul>
-            <AppSharedItem v-for="item of app.app.scope" :item="item" />
+            <AppSharedItem
+              v-for="item of app.app.scope"
+              :item="{ field: item, label: lS.localeKeys.Fields[item] }"
+            />
           </ul>
         </div>
       </div>
@@ -43,6 +58,7 @@ import wrappedFetch from "@/assets/wrappedFetch.js";
 import { ref, defineProps } from "vue";
 import profileStore from "@/store/profileStore";
 import notificationStore from "@/store/notificationStore";
+import lS from "@/store/localeStore.js";
 const { app, profile } = defineProps(["app", "profile"]);
 
 const buttonState = ref("default");

@@ -2,17 +2,20 @@
   <div class="container-standard wide">
     <div class="box">
       <div class="row">
-        <h1>Trust App</h1>
+        <h1>{{ lS.localeKeys.TrustApp.title }}</h1>
       </div>
-      <h2>Review the details of the app and required info.</h2>
+      <h2>{{ lS.localeKeys.TrustApp.description }}</h2>
 
       <div class="form" v-if="app">
         <AppDetailsBriefPreview :app="app" class="sbt sbb" />
 
         <div class="permissions">
-          <p>Info requested by app:</p>
+          <p>{{ lS.localeKeys.TrustApp.required }}:</p>
           <ul>
-            <AppSharedItem v-for="item of app.scope" :item="item" />
+            <AppSharedItem
+              v-for="item of app.scope"
+              :item="{ field: item, label: lS.localeKeys.Fields[item] }"
+            />
           </ul>
         </div>
 
@@ -33,6 +36,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
@@ -49,8 +53,8 @@ profileStore.getFullProfileList().catch((err) => {
 
 const app = ref(null);
 
-const buttonState = ref("default");
-const buttonText = ref(`Trust App`);
+const buttonState = ref("loading");
+const buttonText = ref(`...`);
 
 const appInfoRequest = wrappedFetch(`/api/apps/${route.params._id}`, {
   method: "GET",
@@ -59,7 +63,8 @@ const appInfoRequest = wrappedFetch(`/api/apps/${route.params._id}`, {
 appInfoRequest
   .then((data) => {
     app.value = data;
-    buttonText.value = `Trust ${app.value.name}`;
+    buttonState.value = "default";
+    buttonText.value = `${lS.localeKeys.TrustApp.trust} ${app.value.name}`;
   })
   .catch((err) => {
     console.warn(err);

@@ -50,5 +50,46 @@
   "UserPanel": {
     "title": "Konta & Zaufane Aplikacje",
     "description": "Przejdź do profilu aby uzyskać więcej informacji."
+  },
+  "AppDetails": {
+    "byAuthor": "Od",
+    "Trusted": "Zaufana",
+    "Trust Revoked": "Brak zaufania",
+    "infoRequested": "Dane wymagane przez aplikację",
+    "infoShared": "Dane udostępnione aplikacji"
+  },
+  "Dropdown": {
+    "interact": "Kliknij, aby wybrać"
+  },
+  "AddProfileCard": {
+    "title": "Dodaj profil",
+    "description": "Kliknij jeden z przycisków poniżej.",
+    "signin": "Zaloguj się",
+    "signup": "Utwórz konto"
+  },
+  "Fields": {
+    "username": "Nazwa użytkownika",
+    "email": "Email",
+    "profile": "Zdjęcie Profilowe",
+    "birthday": "Data urodzin",
+    "gender": "Płeć",
+    "locale": "Region",
+    "language": "Język",
+    "use2FA": "Wymagaj 2FA",
+    "password": "Hasło",
+    "passwordRepeat": "Powtórz hasło"
+  },
+  "UserDetailsPreview": {
+    "labels": {
+      "personal": "Dane Osobiste",
+      "location": "Region & Język",
+      "security": "Ustawienia Bezpieczeństwa"
+    }
+  },
+  "TrustApp": {
+    "title": "Zaufaj Aplikacji",
+    "description": "Przejrzyj szczegóły aplikacji i wymagane dane.",
+    "required": "Dane wymagane przez aplikację",
+    "trust": "Zaufaj"
   }
 }

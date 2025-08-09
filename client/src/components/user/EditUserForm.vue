@@ -74,6 +74,8 @@ const handleInput = (value, field) => {
   emit("input", value, field);
 };
 
+import lS from "@/store/localeStore";
+
 import LabelledTextInput from "../inputs/LabelledTextInput.vue";
 import LabelledDropdownInput from "../inputs/LabelledDropdownInput.vue";
 import LabelledEnumInput from "../inputs/LabelledEnumInput.vue";
@@ -82,46 +84,46 @@ import LabelledDateInput from "../inputs/LabelledDateInput.vue";
 const usernameConfig = {
   field: "username",
   type: "",
-  label: "Username",
+  label: lS.localeKeys.Fields.username,
 };
 const emailConfig = {
   field: "email",
   type: "email",
-  label: "Email",
+  label: lS.localeKeys.Fields.email,
 };
 const birthdayConfig = {
   field: "birthday",
-  label: "Birthday",
+  label: lS.localeKeys.Fields.birthday,
 };
 const genderConfig = {
   field: "gender",
   enum: ["male", "female", "other"],
-  label: "Gender",
+  label: lS.localeKeys.Fields.gender,
 };
 const localeConfig = {
   field: "locale",
   values: ["en", "pl", "nl"],
-  label: "Locale",
+  label: lS.localeKeys.Fields.locale,
 };
 const languageConfig = {
   field: "language",
   enum: ["en"],
-  label: "Language",
+  label: lS.localeKeys.Fields.language,
 };
 const use2FAConfig = {
   field: "use2FA",
   enum: [false, true],
-  label: "Require 2FA",
+  label: lS.localeKeys.Fields.use2FA,
 };
 const passwordConfig = {
   field: "password",
   type: "password",
-  label: "Password",
+  label: lS.localeKeys.Fields.password,
 };
 const repeatPasswordConfig = {
   field: "passwordRepeat",
   type: "password",
-  label: "Repeat Password",
+  label: lS.localeKeys.Fields.passwordRepeat,
 };
 </script>
 

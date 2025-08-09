@@ -50,5 +50,46 @@
   "UserPanel": {
     "title": "Accounts & Trusted Apps",
     "description": "Navigate to a profile to get more information."
+  },
+  "AppDetails": {
+    "byAuthor": "By",
+    "Trusted": "Trusted",
+    "Trust Revoked": "Trust Revoked",
+    "infoRequested": "Info requested by app",
+    "infoShared": "Info shared with app"
+  },
+  "Dropdown": {
+    "interact": "Click to select"
+  },
+  "AddProfileCard": {
+    "title": "Add profile",
+    "description": "Click one of the buttons below.",
+    "signin": "Sign in",
+    "signup": "Create account"
+  },
+  "Fields": {
+    "username": "Username",
+    "email": "Email",
+    "profile": "Profile Picture",
+    "birthday": "Birthday",
+    "gender": "Gender",
+    "locale": "Region",
+    "language": "Language",
+    "use2FA": "Require 2FA",
+    "password": "Password",
+    "passwordRepeat": "Repeat Password"
+  },
+  "UserDetailsPreview": {
+    "labels": {
+      "personal": "Personal Details",
+      "location": "Region & Locale",
+      "security": "Security Settings"
+    }
+  },
+  "TrustApp": {
+    "title": "Trust App",
+    "description": "Review the details of the app and the required info.",
+    "required": "Info requested by app",
+    "trust": "Trust"
   }
 }

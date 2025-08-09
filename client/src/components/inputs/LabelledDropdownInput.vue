@@ -11,7 +11,7 @@
         ref="dropdownRef"
       >
         <div :class="['selected', selected && 'active']">
-          <span>{{ selected || "Click to select" }}</span>
+          <span>{{ selected || lS.localeKeys.Dropdown.interact }}</span>
           <span class="chevron">{{ open ? "▲" : "▼" }}</span>
         </div>
 
@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore.js";
 import { ref, onMounted, defineProps, defineEmits, watch } from "vue";
 const { config, selected, error } = defineProps([
   "config",
@@ -88,6 +89,7 @@ const selectOption = (option) => {
   font-weight: 400;
   color: #a4a4a4;
   margin-bottom: 4px;
+  user-select: none;
 }
 .inputArea.errorState h1 {
   color: #ef5f5f;

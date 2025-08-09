@@ -57,6 +57,7 @@ const emit = defineEmits(["input"]);
   font-weight: 400;
   color: #a4a4a4;
   margin-bottom: 4px;
+  user-select: none;
 }
 .inputArea.errorState h1 {
   color: #ef5f5f;

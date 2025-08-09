@@ -32,7 +32,9 @@
       </div>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">Personal Details</p>
+      <p :class="loading && 'loadingItem'">
+        {{ lS.localeKeys.UserDetailsPreview.labels.personal }}
+      </p>
       <ul class="keyVal">
         <li
           :class="[
@@ -42,7 +44,7 @@
               'decreaseVisibility',
           ]"
         >
-          <span>Birthday</span>
+          <span>{{ lS.localeKeys.Fields.birthday }}</span>
           <span>{{
             display.birthday
               ? new Date(display.birthday)?.toLocaleDateString()
@@ -55,12 +57,15 @@
             highlight && !highlight?.includes('gender') && 'decreaseVisibility',
           ]"
         >
-          <span>Gender</span><span>{{ display.gender || "..." }}</span>
+          <span>{{ lS.localeKeys.Fields.gender }}</span
+          ><span>{{ display.gender || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">Region & Language</p>
+      <p :class="loading && 'loadingItem'">
+        {{ lS.localeKeys.UserDetailsPreview.labels.location }}
+      </p>
       <ul class="keyVal">
         <li
           :class="[
@@ -68,7 +73,7 @@
             highlight && !highlight?.includes('locale') && 'decreaseVisibility',
           ]"
         >
-          <span>Region</span>
+          <span>{{ lS.localeKeys.Fields.locale }}</span>
           <span>{{ display.locale || "..." }}</span>
         </li>
         <li
@@ -79,13 +84,15 @@
               'decreaseVisibility',
           ]"
         >
-          <span>Language</span>
+          <span>{{ lS.localeKeys.Fields.language }}</span>
           <span>{{ display.language || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">Security Settings</p>
+      <p :class="loading && 'loadingItem'">
+        {{ lS.localeKeys.UserDetailsPreview.labels.security }}
+      </p>
       <ul class="keyVal">
         <li
           :class="[
@@ -93,7 +100,7 @@
             highlight && !highlight?.includes('use2FA') && 'decreaseVisibility',
           ]"
         >
-          <span>Require 2FA</span>
+          <span>{{ lS.localeKeys.Fields.use2FA }}</span>
           <span>{{
             display.use2FA === null ? "..." : display.use2FA.toString()
           }}</span>
@@ -106,7 +113,7 @@
               'decreaseVisibility',
           ]"
         >
-          <span>Password</span>
+          <span>{{ lS.localeKeys.Fields.password }}</span>
           <span>{{ display.password?.replace(/./g, "*") || "..." }}</span>
         </li>
       </ul>
@@ -129,6 +136,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
 import notificationStore from "@/store/notificationStore.js";
