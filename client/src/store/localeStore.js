@@ -3,9 +3,10 @@ import { reactive } from "vue";
 import en from "@/locales/en.json";
 import pl from "@/locales/pl.json";
 import nl from "@/locales/nl.json";
+import es from "@/locales/es.json";
 
 export default reactive({
-  supportedLocales: ["en", "pl", "nl"],
+  supportedLocales: ["en", "pl", "nl", "es"],
   locale: "en",
   localeKeys: en,
 
@@ -29,6 +30,9 @@ export default reactive({
         break;
       case "nl":
         this.localeKeys = nl;
+        break;
+      case "es":
+        this.localeKeys = es;
         break;
       default:
         this.localeKeys = en;

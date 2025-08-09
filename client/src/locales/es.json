@@ -1,0 +1,175 @@
+{
+  "NavigationComponent": {
+    "items": [
+      {
+        "name": "Funciones",
+        "topics": [
+          {
+            "title": "Registros Automáticos",
+            "description": "Selecciona la cuenta predeterminada para usar al iniciar sesión en todo tipo de aplicaciones"
+          },
+          {
+            "title": "Flexibilidad",
+            "description": "Inicia sesión usando 2FA solo cuando sea necesario"
+          },
+          {
+            "title": "Funciones",
+            "list": ["2FA Seguro", "Gestión de Sesiones"]
+          }
+        ]
+      },
+      {
+        "name": "Guías",
+        "topics": [
+          {
+            "title": "Para Desarrolladores",
+            "description": "Descubre cómo integrar Kanapka SSO con tu aplicación"
+          },
+          {
+            "title": "Para Usuarios",
+            "description": "Aprende cómo usar Kanapka SSO"
+          }
+        ]
+      },
+      {
+        "name": "Acerca de",
+        "topics": []
+      }
+    ],
+    "action": "Gestionar Perfiles"
+  },
+  "UserProfile": {
+    "birthday": "Fecha de nacimiento",
+    "gender": "Género",
+    "edit": "Editar",
+    "forget": "Olvidar"
+  },
+  "UserApp": {
+    "shared": "Datos compartidos"
+  },
+  "UserPanel": {
+    "title": "Cuentas y Aplicaciones Confiables",
+    "description": "Navega a un perfil para obtener más información."
+  },
+  "AppDetails": {
+    "byAuthor": "Por",
+    "Trusted": "Confiable",
+    "Trust Revoked": "Confianza Revocada",
+    "infoRequested": "Información solicitada por la aplicación",
+    "infoShared": "Información compartida con la aplicación",
+    "buttonRevoke": "Revocar Confianza"
+  },
+  "Dropdown": {
+    "interact": "Haz clic para seleccionar"
+  },
+  "AddProfileCard": {
+    "title": "Agregar perfil",
+    "description": "Haz clic en uno de los botones de abajo.",
+    "signin": "Iniciar sesión",
+    "signup": "Crear cuenta"
+  },
+  "Fields": {
+    "username": "Nombre de usuario",
+    "email": "Dirección de correo electrónico",
+    "profile": "Foto de perfil",
+    "birthday": "Fecha de nacimiento",
+    "gender": "Género",
+    "locale": "Región",
+    "language": "Idioma",
+    "use2FA": "Requerir 2FA",
+    "password": "Contraseña",
+    "passwordRepeat": "Repetir contraseña",
+    "code2FA": "Código 2FA"
+  },
+  "UserDetailsPreview": {
+    "labels": {
+      "personal": "Detalles Personales",
+      "location": "Región y Localización",
+      "security": "Configuración de Seguridad"
+    },
+    "buttons": {
+      "details": "Detalles",
+      "default": "Establecer como Predeterminado"
+    }
+  },
+  "TrustApp": {
+    "title": "Confiar en la Aplicación",
+    "description": "Revisa los detalles de la aplicación y la información solicitada.",
+    "required": "Información solicitada por la aplicación",
+    "trust": "Confiar"
+  },
+  "Authenticate": {
+    "title": "Iniciar Sesión",
+    "description": "Usa el siguiente formulario para iniciar sesión con tu cuenta de Kanapka SSO.",
+    "notification": {
+      "title": "Autenticación",
+      "details": "Has sido autenticado correctamente",
+      "while": "Verificando tus credenciales..."
+    }
+  },
+  "Authenticate2FA": {
+    "title": "Verificación 2FA",
+    "description": [
+      "Introduce el código de autenticación de dos factores de ",
+      "tu bandeja de entrada"
+    ],
+    "notificationSubmit": {
+      "title": "Autenticación",
+      "details": "Has sido autenticado correctamente",
+      "while": "Verificando el código 2FA proporcionado..."
+    },
+    "notificationRequest": {
+      "title": "Envío del Código 2FA",
+      "details": "El código 2FA ha sido enviado a tu bandeja de entrada",
+      "while": "Enviando código 2FA a tu correo electrónico..."
+    }
+  },
+  "Button": {
+    "submit": "Enviar",
+    "continue": "Continuar",
+    "back": "Atrás"
+  },
+  "ToasterManager": {
+    "error": "Error"
+  },
+  "Authorize": {
+    "title": "Autorizar Aplicación",
+    "description": "Por favor, espera mientras procesamos tu solicitud."
+  },
+  "CreateUser": {
+    "title": "Crear Cuenta",
+    "description": "Introduce tus datos y envíalos para registrarte.",
+    "button": "Crear Cuenta",
+    "notification": {
+      "title": "Creación de Cuenta",
+      "details": "Cuenta creada exitosamente",
+      "while": "Procesando tu solicitud..."
+    }
+  },
+  "UserDetails": {
+    "title": "Detalles de la Cuenta",
+    "description": "Ver detalles y administrar la cuenta.",
+    "buttons": {
+      "edit": "Editar Cuenta",
+      "forget": "Olvidar Cuenta",
+      "delete": "Eliminar Cuenta"
+    },
+    "notificationDelete": {
+      "title": "Eliminando Cuenta",
+      "details": "La cuenta ha sido eliminada",
+      "while": "Eliminando tu cuenta..."
+    }
+  },
+  "profileStore": {
+    "notificationForget": {
+      "title": "Olvidando Perfil",
+      "details": "El perfil ha sido olvidado",
+      "while": "Olvidando perfil..."
+    },
+    "notificationDefault": {
+      "title": "Estableciendo Perfil Predeterminado",
+      "details": "ahora es tu perfil predeterminado",
+      "while": "Cambiando tu perfil predeterminado..."
+    }
+  }
+}
