@@ -2,9 +2,9 @@
   <div class="container-standard">
     <div class="box">
       <div class="row">
-        <h1>Sign in</h1>
+        <h1>{{ lS.localeKeys.Authenticate.title }}</h1>
       </div>
-      <h2>Use the form below to sign in with your Kanapka SSO account.</h2>
+      <h2>{{ lS.localeKeys.Authenticate.description }}</h2>
 
       <div class="form">
         <LabelledTextInput
@@ -22,7 +22,7 @@
       <div class="submit">
         <ReactiveStateButton
           :state="buttonState"
-          :text="buttonText"
+          :text="lS.localeKeys.Button.submit"
           @submit="handleSubmit()"
         />
       </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import { ref } from "vue";
 import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
@@ -44,19 +45,18 @@ const route = useRoute();
 const emailInputConfig = {
   field: "email",
   type: "email",
-  label: "Email address",
+  label: lS.localeKeys.Fields.email,
 };
 const passwordInputConfig = {
   field: "password",
   type: "password",
-  label: "Password",
+  label: lS.localeKeys.Fields.password,
 };
 
 const emailInputError = ref("");
 const passwordInputError = ref("");
 
 const buttonState = ref("default");
-const buttonText = ref("Submit");
 
 const email = ref("");
 const password = ref("");
@@ -75,12 +75,12 @@ const handleSubmit = () => {
 
     notificationStore.createNotif({
       type: "info",
-      title: "Authentication",
-      details: "You have been successfully authenticated",
+      title: lS.localeKeys.Authenticate.notification.title,
+      details: lS.localeKeys.Authenticate.notification.details,
       duration: 5000,
       promise: {
         promise: loginRequest,
-        while: "Checking your credentials...",
+        while: lS.localeKeys.Authenticate.notification.while,
       },
     });
 

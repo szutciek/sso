@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import notificationStore from "@/store/notificationStore.js";
 import { onMounted, watch } from "vue";
 
@@ -177,7 +178,9 @@ class Notif {
 
           const title = document.createElement("p");
           title.classList.add("title");
-          title.textContent = `Error: ${this.promise.while || this.title}`;
+          title.textContent = `${lS.localeKeys.ToasterManager.error}: ${
+            this.promise.while || this.title
+          }`;
 
           const details = document.createElement("p");
           details.classList.add("details");

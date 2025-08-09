@@ -2,12 +2,17 @@
   <div class="container-standard">
     <div class="box">
       <div class="row">
-        <h1>2FA Code</h1>
+        <h1>{{ lS.localeKeys.Authenticate2FA.title }}</h1>
       </div>
       <h2>
-        Enter the 2 factor authentication code from
-        <a v-if="emailUrl" :href="emailUrl" target="_blank">your inbox</a
-        ><span v-if="!emailUrl">your inbox</span>.
+        {{ lS.localeKeys.Authenticate2FA.description[0] }}
+        <a v-if="emailUrl" :href="emailUrl" target="_blank">{{
+          lS.localeKeys.Authenticate2FA.description[1]
+        }}</a
+        ><span v-if="!emailUrl">{{
+          lS.localeKeys.Authenticate2FA.description[1]
+        }}</span
+        >.
       </h2>
 
       <div class="form">
@@ -21,7 +26,7 @@
       <div class="submit">
         <ReactiveStateButton
           :state="buttonState"
-          :text="buttonText"
+          :text="lS.localeKeys.Button.submit"
           @submit="handleSubmit()"
         />
       </div>
@@ -30,6 +35,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import { ref } from "vue";
 import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
@@ -43,13 +49,12 @@ const route = useRoute();
 const codeInputConfig = {
   field: "code",
   type: "",
-  label: "2FA Code",
+  label: lS.localeKeys.Fields.code2FA,
 };
 
 const codeInputError = ref("");
 
 const buttonState = ref("default");
-const buttonText = ref("Submit");
 
 const code = ref("");
 
@@ -66,12 +71,12 @@ const handleSubmit = () => {
 
     notificationStore.createNotif({
       type: "info",
-      title: "Authentication",
-      details: "You have been successfully authenticated",
+      title: lS.localeKeys.Authenticate2FA.notificationSubmit.title,
+      details: lS.localeKeys.Authenticate2FA.notificationSubmit.details,
       duration: 5000,
       promise: {
         promise: loginRequest,
-        while: "Checking the provided 2FA code...",
+        while: lS.localeKeys.Authenticate2FA.notificationSubmit.while,
       },
     });
 
@@ -110,12 +115,12 @@ const emailRequest = wrappedFetch("/authenticate/2fa/request-code", {
 
 notificationStore.createNotif({
   type: "info",
-  title: "2FA Code Delivery",
-  details: "2FA code has been delivered to you inbox",
-  duration: 10000,
+  title: lS.localeKeys.Authenticate2FA.notificationRequest.title,
+  details: lS.localeKeys.Authenticate2FA.notificationRequest.details,
+  duration: 5000,
   promise: {
     promise: emailRequest,
-    while: "Sending 2FA code to your email...",
+    while: lS.localeKeys.Authenticate2FA.notificationRequest.while,
   },
 });
 

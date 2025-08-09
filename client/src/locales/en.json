@@ -56,7 +56,8 @@
     "Trusted": "Trusted",
     "Trust Revoked": "Trust Revoked",
     "infoRequested": "Info requested by app",
-    "infoShared": "Info shared with app"
+    "infoShared": "Info shared with app",
+    "buttonRevoke": "Revoke Trust"
   },
   "Dropdown": {
     "interact": "Click to select"
@@ -69,7 +70,7 @@
   },
   "Fields": {
     "username": "Username",
-    "email": "Email",
+    "email": "Email Address",
     "profile": "Profile Picture",
     "birthday": "Birthday",
     "gender": "Gender",
@@ -77,13 +78,18 @@
     "language": "Language",
     "use2FA": "Require 2FA",
     "password": "Password",
-    "passwordRepeat": "Repeat Password"
+    "passwordRepeat": "Repeat Password",
+    "code2FA": "2FA Code"
   },
   "UserDetailsPreview": {
     "labels": {
       "personal": "Personal Details",
       "location": "Region & Locale",
       "security": "Security Settings"
+    },
+    "buttons": {
+      "details": "Details",
+      "default": "Set Default"
     }
   },
   "TrustApp": {
@@ -91,5 +97,57 @@
     "description": "Review the details of the app and the required info.",
     "required": "Info requested by app",
     "trust": "Trust"
+  },
+  "Authenticate": {
+    "title": "Sign In",
+    "description": "Use the form below to sign in with your Kanapka SSO account.",
+    "notification": {
+      "title": "Authentication",
+      "details": "You have been successfully authenticated",
+      "while": "Checking your credentials..."
+    }
+  },
+  "Authenticate2FA": {
+    "title": "2FA Verification",
+    "description": [
+      "Enter the two factor authentication code from ",
+      "your inbox"
+    ],
+    "notificationSubmit": {
+      "title": "Authentication",
+      "details": "You have been successfully authenticated",
+      "while": "Checking the provided 2FA code..."
+    },
+    "notificationRequest": {
+      "title": "2FA Code Delivery",
+      "details": "2FA code has been delivered to you inbox",
+      "while": "Sending 2FA code to your email..."
+    }
+  },
+  "Button": {
+    "submit": "Submit",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "ToasterManager": {
+    "error": "Error"
+  },
+  "Authorize": {
+    "title": "Authorize App",
+    "description": "Please wait while we process your request."
+  },
+  "CreateUser": {
+    "title": "Create Account",
+    "description": "Enter your details and submit to register.",
+    "button": "Create Account",
+    "notification": {
+      "title": "Account Creation",
+      "details": "Account Created Successfully",
+      "while": "Processing your request..."
+    }
+  },
+  "UserDetails": {
+    "title": "",
+    "description": ""
   }
 }

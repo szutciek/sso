@@ -56,7 +56,8 @@
     "Trusted": "Zaufana",
     "Trust Revoked": "Brak zaufania",
     "infoRequested": "Dane wymagane przez aplikację",
-    "infoShared": "Dane udostępnione aplikacji"
+    "infoShared": "Dane udostępnione aplikacji",
+    "buttonRevoke": "Wycofaj Zaufanie"
   },
   "Dropdown": {
     "interact": "Kliknij, aby wybrać"
@@ -69,7 +70,7 @@
   },
   "Fields": {
     "username": "Nazwa użytkownika",
-    "email": "Email",
+    "email": "Adres Email",
     "profile": "Zdjęcie Profilowe",
     "birthday": "Data urodzin",
     "gender": "Płeć",
@@ -77,13 +78,18 @@
     "language": "Język",
     "use2FA": "Wymagaj 2FA",
     "password": "Hasło",
-    "passwordRepeat": "Powtórz hasło"
+    "passwordRepeat": "Powtórz hasło",
+    "code2FA": "Kod 2FA"
   },
   "UserDetailsPreview": {
     "labels": {
       "personal": "Dane Osobiste",
       "location": "Region & Język",
       "security": "Ustawienia Bezpieczeństwa"
+    },
+    "buttons": {
+      "details": "Szczegóły",
+      "default": "Ustaw jako domyślne"
     }
   },
   "TrustApp": {
@@ -91,5 +97,54 @@
     "description": "Przejrzyj szczegóły aplikacji i wymagane dane.",
     "required": "Dane wymagane przez aplikację",
     "trust": "Zaufaj"
+  },
+  "Authenticate": {
+    "title": "Zaloguj się",
+    "description": "Otrzymaj dostęp wprowadzając dane do formularza poniżej.",
+    "notification": {
+      "title": "Uwierzytelnianie",
+      "details": "Zastałeś(aś) skutecznie uwierzytelniony(a)",
+      "while": "Sprawdzanie twoich danych..."
+    }
+  },
+  "Authenticate2FA": {
+    "title": "Weryfikacja 2FA",
+    "description": [
+      "Wprowadź kod do weryfikacji dwuetapowej z ",
+      "twojego maila"
+    ],
+    "notificationSubmit": {
+      "title": "Uwierzytelnianie",
+      "details": "Zastałeś(aś) skutecznie uwierzytelniony(a)",
+      "while": "Sprawdzanie podanego kodu 2FA..."
+    },
+    "notificationRequest": {
+      "title": "Dostarczenie kodu 2FA",
+      "details": "Kod 2FA został dostarczony na twój adres email",
+      "while": "Wysyłanie kodu 2FA na twój adres email..."
+    }
+  },
+  "Button": {
+    "submit": "Zatwierdź",
+    "continue": "Kontynuuj",
+    "back": "Wróć"
+  },
+  "ToasterManager": {
+    "error": "Błąd",
+    "dsda": "dsda"
+  },
+  "Authorize": {
+    "title": "Autoryzuj Aplikację",
+    "description": "Proszę czekać, trwa weryfikacja żądania."
+  },
+  "CreateUser": {
+    "title": "Utwórz Konto",
+    "description": "Wypełnij pola swoimi danymi i zatwierdź, aby się zarejestrować.",
+    "button": "Utwórz Konto",
+    "notification": {
+      "title": "Tworzenie Konta",
+      "details": "Konto Skutecznie Utworzone",
+      "while": "Trwa procesowanie żądania..."
+    }
   }
 }

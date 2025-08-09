@@ -42,7 +42,7 @@
 
       <div class="section action" v-if="app.status === 'trusted'">
         <ReactiveStateButton
-          :text="buttonText"
+          :text="lS.localeKeys.AppDetails.buttonRevoke"
           :state="buttonState"
           @submit="handleRevoke"
         />
@@ -62,7 +62,6 @@ import lS from "@/store/localeStore.js";
 const { app, profile } = defineProps(["app", "profile"]);
 
 const buttonState = ref("default");
-const buttonText = ref("Revoke trust");
 
 const handleRevoke = () => {
   buttonState.value = "loading";

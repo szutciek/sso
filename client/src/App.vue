@@ -110,8 +110,6 @@ button {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  height: fit-content;
-  width: fit-content;
 }
 button.bold {
   font-size: 16px;

@@ -2,14 +2,17 @@
   <div class="container-standard wide">
     <div class="box">
       <div class="row">
-        <h1>Authorize App</h1>
+        <h1>
+          {{ lS.localeKeys.Authorize.title }}
+        </h1>
       </div>
-      <h2>Please wait while we process your request.</h2>
+      <h2>{{ lS.localeKeys.Authorize.description }}</h2>
     </div>
   </div>
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import notificationStore from "@/store/notificationStore.js";
 import { useRoute, useRouter } from "vue-router";

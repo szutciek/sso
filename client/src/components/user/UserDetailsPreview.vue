@@ -121,13 +121,13 @@
     <div class="section buttons sbt" v-if="showView || showDefault">
       <ReactiveStateButtonEmpty
         v-if="showView"
-        text="Details"
+        :text="lS.localeKeys.UserDetailsPreview.buttons.details"
         state="default"
         @submit="$router.push(`/user/${user._id}/details`)"
       />
       <ReactiveStateButton
         v-if="showDefault"
-        text="Set default"
+        :text="lS.localeKeys.UserDetailsPreview.buttons.default"
         :state="defaultButtonState"
         @submit="handleSetDefault"
       />
@@ -228,8 +228,11 @@ ul.keyVal li {
 }
 .buttons {
   display: flex;
+  align-items: stretch;
   gap: 10px;
   padding-top: 20px;
+}
+.buttons button {
 }
 .decreaseVisibility {
   filter: blur(2px);

@@ -2,15 +2,15 @@
   <div class="container-standard wide">
     <div class="box tallBox">
       <div class="row">
-        <h1>Create Account</h1>
+        <h1>{{ lS.localeKeys.CreateUser.title }}</h1>
       </div>
-      <h2>Enter your details and submit to register.</h2>
+      <h2>{{ lS.localeKeys.CreateUser.description }}</h2>
 
       <div class="form">
         <EditUserForm @input="handleInput" :user="user" :errors="errors" />
         <ReactiveStateButton
           :state="buttonState"
-          :text="buttonText"
+          :text="lS.localeKeys.CreateUser.button"
           :ignoreEnter="true"
           @submit="handleSubmit"
         />
@@ -23,7 +23,7 @@
         <ReactiveStateButtonEmpty
           v-if="createdAnAccount"
           state="default"
-          text="Continue &rarr;"
+          :text="`${lS.localeKeys.Button.continue} &rarr;`"
           :ignoreEnter="true"
           @submit="handleContinue"
         />
@@ -33,6 +33,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import EditUserForm from "@/components/user/EditUserForm.vue";
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
@@ -81,7 +82,6 @@ const handleInput = (value, field) => {
   }
 };
 
-const buttonText = ref("Create Account");
 const buttonState = ref("default");
 
 const handleSubmit = () => {
@@ -102,12 +102,12 @@ const handleSubmit = () => {
 
   notificationStore.createNotif({
     type: "info",
-    title: "Account Creation",
-    details: "Account created successfully",
+    title: lS.localeKeys.CreateUser.notification.title,
+    details: lS.localeKeys.CreateUser.notification.details,
     duration: 10000,
     promise: {
       promise: createRequest,
-      while: "Processing your request...",
+      while: lS.localeKeys.CreateUser.notification.while,
     },
   });
 
