@@ -146,5 +146,31 @@
       "details": "Konto Skutecznie Utworzone",
       "while": "Trwa procesowanie żądania..."
     }
+  },
+  "UserDetails": {
+    "title": "Szczegóły Konta",
+    "description": "Przeglądaj szczegóły i zarządzaj kontem.",
+    "buttons": {
+      "edit": "Edytuj Konto",
+      "forget": "Zapomnij Konto",
+      "delete": "Usuń Konto"
+    },
+    "notificationDelete": {
+      "title": "Usuwanie Konta",
+      "details": "Konto zostało usunięte",
+      "while": "Usuwanie Twojego Konta..."
+    }
+  },
+  "profileStore": {
+    "notificationForget": {
+      "title": "Zapominanie Konta",
+      "details": "Konto zostało zapomniane",
+      "while": "Zapominanie Twojego Konta..."
+    },
+    "notificationDefault": {
+      "title": "Ustawianie Domyślnego Konta",
+      "details": "jest teraz twoim domyślnym kontem",
+      "while": "Zmiana domyślnego konta..."
+    }
   }
 }

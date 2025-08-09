@@ -2,6 +2,7 @@ import decodeJWT from "@/assets/decodeJWT.js";
 import wrappedFetch from "@/assets/wrappedFetch";
 import { reactive } from "vue";
 import notificationStore from "./notificationStore.js";
+import lS from "./localeStore.js";
 
 export default reactive({
   loadedProfiles: false,
@@ -61,12 +62,12 @@ export default reactive({
 
           notificationStore.createNotif({
             type: "info",
-            title: "Forgetting Profile",
-            details: `Profile was forgotten`,
+            title: lS.localeKeys.profileStore.notificationForget.title,
+            details: lS.localeKeys.profileStore.notificationForget.details,
             duration: 5000,
             promise: {
               promise: new Promise((resolve) => resolve()),
-              while: "Forgetting profile...",
+              while: lS.localeKeys.profileStore.notificationForget.while,
             },
           });
 
@@ -82,12 +83,12 @@ export default reactive({
 
         notificationStore.createNotif({
           type: "info",
-          title: "Forgetting Profile",
-          details: `Profile was forgotten`,
+          title: lS.localeKeys.profileStore.notificationForget.title,
+          details: lS.localeKeys.profileStore.notificationForget.details,
           duration: 5000,
           promise: {
             promise: clearRequest,
-            while: "Forgetting profile...",
+            while: lS.localeKeys.profileStore.notificationForget.while,
           },
         });
 
@@ -122,12 +123,12 @@ export default reactive({
 
         notificationStore.createNotif({
           type: "info",
-          title: "Setting Default Profile",
-          details: `"${profile.user.username}" is now your default profile`,
-          duration: 10000,
+          title: lS.localeKeys.profileStore.notificationDefault.title,
+          details: `"${profile.user.username}" ${lS.localeKeys.profileStore.notificationDefault.details}`,
+          duration: 5000,
           promise: {
             promise: defaultRequest,
-            while: "Changing your default profile...",
+            while: lS.localeKeys.profileStore.notificationDefault.while,
           },
         });
 

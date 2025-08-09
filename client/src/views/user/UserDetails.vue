@@ -2,17 +2,17 @@
   <div class="container-standard wide">
     <div class="box">
       <div class="row">
-        <h1>Account Details</h1>
+        <h1>{{ lS.localeKeys.UserDetails.title }}</h1>
       </div>
-      <h2>View details and manage the account.</h2>
+      <h2>{{ lS.localeKeys.UserDetails.description }}</h2>
 
       <div class="form">
         <div class="buttons">
           <ReactiveStateButtonEmpty
             state="default"
-            text="Back to Panel"
+            :text="lS.localeKeys.Button.back"
             :ignoreEnter="true"
-            @submit="$router.push('/user/panel')"
+            @submit="$router.push(`/user/panel`)"
           />
         </div>
       </div>
@@ -28,7 +28,7 @@
           <ReactiveStateButton
             :class="loading && 'loadingItem'"
             state="default"
-            text="Edit Account"
+            :text="lS.localeKeys.UserDetails.buttons.edit"
             :ignoreEnter="true"
             @submit="$router.push(`/user/${$route.params._id}/edit`)"
           />
@@ -36,14 +36,14 @@
             <ReactiveStateButtonEmpty
               :class="loading && 'loadingItem'"
               :state="forgetState"
-              text="Forget Account"
+              :text="lS.localeKeys.UserDetails.buttons.forget"
               :ignoreEnter="true"
               @submit="handleAccountForget($route.params._id)"
             />
             <BadReactiveStateButton
               :class="loading && 'loadingItem'"
               :state="deleteState"
-              text="Delete Account"
+              :text="lS.localeKeys.UserDetails.buttons.delete"
               :ignoreEnter="true"
               @submit="handleAccountDelete($route.params._id)"
             />
@@ -55,6 +55,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
@@ -66,6 +67,7 @@ const router = useRouter();
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
+import localeStore from "@/store/localeStore";
 
 const loading = computed(() => {
   const profile = profileStore.getProfileById(route.params._id);
@@ -94,12 +96,12 @@ const handleAccountDelete = (id) => {
 
   notificationStore.createNotif({
     type: "info",
-    title: "Deleting Account",
-    details: `Account has been deleted`,
+    title: lS.localeKeys.UserDetails.notificationDelete.title,
+    details: lS.localeKeys.UserDetails.notificationDelete.details,
     duration: 10000,
     promise: {
       promise: deleteRequest,
-      while: "Deleting your account...",
+      while: lS.localeKeys.UserDetails.notificationDelete.while,
     },
   });
 

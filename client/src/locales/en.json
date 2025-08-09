@@ -147,7 +147,29 @@
     }
   },
   "UserDetails": {
-    "title": "",
-    "description": ""
+    "title": "Account Details",
+    "description": "View details and manage the account.",
+    "buttons": {
+      "edit": "Edit Account",
+      "forget": "Forget Account",
+      "delete": "Delete Account"
+    },
+    "notificationDelete": {
+      "title": "Deleting Account",
+      "details": "Account has been deleted",
+      "while": "Deleting your account..."
+    }
+  },
+  "profileStore": {
+    "notificationForget": {
+      "title": "Forgetting Profile",
+      "details": "Profile was forgotten",
+      "while": "Forgetting profile..."
+    },
+    "notificationDefault": {
+      "title": "Setting Default Profile",
+      "details": "is now your default profile",
+      "while": "Changing your default profile..."
+    }
   }
 }

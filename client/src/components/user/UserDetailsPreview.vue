@@ -232,8 +232,6 @@ ul.keyVal li {
   gap: 10px;
   padding-top: 20px;
 }
-.buttons button {
-}
 .decreaseVisibility {
   filter: blur(2px);
   opacity: 0.5;
