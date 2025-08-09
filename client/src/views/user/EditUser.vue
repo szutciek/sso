@@ -111,10 +111,8 @@ const buttonText = ref("Submit Changes");
 const buttonState = ref("default");
 
 const handleSubmit = () => {
-  if (user.value.password !== user.value.passwordRepeat) {
-    errors.value.passwordRepeat = "Passwords are not the same";
-    return;
-  }
+  const selectedProfile = profileStore.getProfileById(route.params._id);
+  if (!selectedProfile) return;
 
   const cleanUser = {};
   Object.entries(user.value).forEach(([key, value]) => {
@@ -123,8 +121,11 @@ const handleSubmit = () => {
 
   buttonState.value = "loading";
 
-  const updateRequest = wrappedFetch("/api/users/me", {
+  const updateRequest = wrappedFetch(`/api/users/me`, {
     method: "PUT",
+    headers: {
+      authorization: `Bearer ${selectedProfile.token}`,
+    },
     body: JSON.stringify(cleanUser),
   });
 
