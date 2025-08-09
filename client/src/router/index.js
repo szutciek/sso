@@ -99,7 +99,11 @@ import lS from "@/store/localeStore.js";
 router.beforeEach((to, from, next) => {
   const urlLocale = to.path.split("/")[1];
   if (!lS.supportedLocales.includes(urlLocale)) {
-    next({ path: `/en${to.fullPath}`, query: to.query, replace: true });
+    next({
+      path: `/${lS.locale}${to.fullPath}`,
+      query: to.query,
+      replace: true,
+    });
   } else {
     next();
   }

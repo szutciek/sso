@@ -1,9 +1,6 @@
 import { reactive } from "vue";
 
 import en from "@/locales/en.json";
-import pl from "@/locales/pl.json";
-import nl from "@/locales/nl.json";
-import es from "@/locales/es.json";
 
 export default reactive({
   supportedLocales: ["en", "pl", "nl", "es"],
@@ -17,31 +14,17 @@ export default reactive({
   overrideLocale(locale) {
     this.loadLocale(locale);
   },
-  loadLocale(locale) {
-    if (this.supportedLocales.includes(locale)) {
-      this.locale = locale;
+  async loadLocale(locale) {
+    if (!this.supportedLocales.includes(locale)) {
+      this.locale = "en";
+      console.warn("Locale not supported");
+      return;
     }
-    switch (this.locale) {
-      case "en":
-        this.localeKeys = en;
-        break;
-      case "pl":
-        this.localeKeys = pl;
-        break;
-      case "nl":
-        this.localeKeys = nl;
-        break;
-      case "es":
-        this.localeKeys = es;
-        break;
-      default:
-        this.localeKeys = en;
-    }
-    if (window.location.pathname.split("/")[1] !== this.locale) {
-      const path = window.location.pathname.split("/");
-      path[1] = this.locale;
-      window.history.pushState({}, "", path.join("/"));
-    }
+
+    const messages = await import(`@/locales/${locale}.json`);
+    this.localeKeys = messages.default;
+
+    this.locale = locale;
     console.log("Locale Updated:", this.locale);
   },
 

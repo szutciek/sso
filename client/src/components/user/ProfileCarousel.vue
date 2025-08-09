@@ -88,6 +88,7 @@ onMounted(() => {
     if (!scrollArea.value) return;
     const targetBox = e.target.closest(".carousel-Bubble-Catcher");
     if (!targetBox) return;
+    if (targetBox.querySelector(".active")) return;
     const boxX = targetBox.getBoundingClientRect().x;
     const areaX = scrollArea.value.getBoundingClientRect().x;
     scrollArea.value.scrollBy({
