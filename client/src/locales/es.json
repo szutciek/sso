@@ -171,5 +171,13 @@
       "details": "ahora es tu perfil predeterminado",
       "while": "Cambiando tu perfil predeterminado..."
     }
+  },
+  "EditUser": {
+    "title": "Editar cuenta",
+    "description": "Realiza cambios y envíalos para actualizar.",
+    "buttons": {
+      "submit": "Guardar cambios",
+      "clear": "Borrar cambios"
+    }
   }
 }

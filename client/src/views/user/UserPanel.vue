@@ -19,7 +19,7 @@
     <div
       class="content-wrapper secondRow"
       ref="trustedAppsWrapper"
-      v-show="focusedIndex != undefined"
+      v-show="focusedIndex !== undefined"
     >
       <div class="content container-standard wide">
         <div class="form" v-if="focusedIndex != null">

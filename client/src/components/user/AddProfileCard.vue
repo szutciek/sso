@@ -10,18 +10,14 @@
       </div>
     </div>
     <div class="section buttons">
-      <div class="button">
-        <CompactButtonEmpty
-          @submit="handleReroute('/authenticate')"
-          :text="lS.localeKeys.AddProfileCard.signin"
-        />
-      </div>
-      <div class="button">
-        <CompactButtonEmpty
-          @submit="handleReroute('/register')"
-          :text="lS.localeKeys.AddProfileCard.signup"
-        />
-      </div>
+      <CompactButtonEmpty
+        @submit="handleReroute('/authenticate')"
+        :text="lS.localeKeys.AddProfileCard.signin"
+      />
+      <CompactButtonEmpty
+        @submit="handleReroute('/register')"
+        :text="lS.localeKeys.AddProfileCard.signup"
+      />
     </div>
   </div>
 </template>
@@ -78,11 +74,7 @@ const handleReroute = (path) => {
 }
 .buttons {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 10px;
-}
-.buttons .button {
-  flex: 1;
 }
 </style>

@@ -168,5 +168,13 @@
       "details": "is nu je standaardprofiel",
       "while": "Je standaardprofiel wijzigen..."
     }
+  },
+  "EditUser": {
+    "title": "Account bewerken",
+    "description": "Breng wijzigingen aan en dien ze in om te updaten.",
+    "buttons": {
+      "submit": "Wijzigingen opslaan",
+      "clear": "Wijzigingen wissen"
+    }
   }
 }

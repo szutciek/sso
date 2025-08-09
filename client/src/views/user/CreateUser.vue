@@ -6,15 +6,13 @@
       </div>
       <h2>{{ lS.localeKeys.CreateUser.description }}</h2>
 
-      <div class="form">
-        <EditUserForm @input="handleInput" :user="user" :errors="errors" />
-        <ReactiveStateButton
-          :state="buttonState"
-          :text="lS.localeKeys.CreateUser.button"
-          :ignoreEnter="true"
-          @submit="handleSubmit"
-        />
-      </div>
+      <EditUserForm @input="handleInput" :user="user" :errors="errors" />
+      <ReactiveStateButton
+        :state="buttonState"
+        :text="lS.localeKeys.CreateUser.button"
+        :ignoreEnter="true"
+        @submit="handleSubmit"
+      />
     </div>
 
     <div class="box stickyRail">

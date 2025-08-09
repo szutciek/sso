@@ -171,5 +171,13 @@
       "details": "is now your default profile",
       "while": "Changing your default profile..."
     }
+  },
+  "EditUser": {
+    "title": "Edit Account",
+    "description": "Make changes and submit to update.",
+    "buttons": {
+      "submit": "Submit Changes",
+      "clear": "Clear Changes"
+    }
   }
 }

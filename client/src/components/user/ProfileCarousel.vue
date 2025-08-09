@@ -70,6 +70,10 @@ onMounted(() => {
       const newXPosition = boxes[0].getBoundingClientRect().x;
       if (newXPosition === lastXPosition) {
         isSpinning = false;
+
+        const targetBoxRect = boxes[snappedBoxIndex].getBoundingClientRect();
+        if (targetBoxRect.x !== 20) return;
+
         if (snappedBoxIndex === boxes.length - 1) {
           emit("snappedTo", null);
         } else {
@@ -78,7 +82,7 @@ onMounted(() => {
           }
         }
       }
-    }, 80);
+    }, 100);
   };
 
   handleScroll();
@@ -186,6 +190,7 @@ onMounted(() => {
 @media only screen and (max-width: 460px) {
   .scrollBox {
     grid-auto-columns: calc(100vw - 40px);
+    padding-right: 20px;
   }
 }
 </style>

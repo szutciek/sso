@@ -200,8 +200,8 @@ ul.keyVal li {
 .highlight {
   background-color: #2d2d2d !important;
   color: #fff !important;
-  margin: -2px -8px;
-  padding: 2px 8px;
+  margin: 0px -4px;
+  padding: 0px 4px;
 }
 img.highlight {
   border: 4px solid #2d2d2d !important;

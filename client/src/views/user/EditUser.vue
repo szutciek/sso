@@ -2,23 +2,29 @@
   <div class="container-standard wide">
     <div class="box tallBox">
       <div class="row">
-        <h1>Edit Account</h1>
+        <h1>{{ lS.localeKeys.EditUser.title }}</h1>
       </div>
-      <h2>Make changes and submit to update.</h2>
+      <h2>{{ lS.localeKeys.EditUser.description }}</h2>
 
+      <EditUserForm
+        @input="handleInput"
+        :user="user"
+        :errors="errors"
+        :blockEmailInput="true"
+        :blockPasswordInput="true"
+      />
       <div class="form">
-        <EditUserForm
-          @input="handleInput"
-          :user="user"
-          :errors="errors"
-          :blockEmailInput="true"
-          :blockPasswordInput="true"
-        />
         <ReactiveStateButton
-          :state="buttonState"
-          :text="buttonText"
+          :state="buttonStateSubmit"
+          :text="lS.localeKeys.EditUser.buttons.submit"
           :ignoreEnter="true"
           @submit="handleSubmit"
+        />
+        <ReactiveStateButtonEmpty
+          :state="buttonStateClear"
+          :text="lS.localeKeys.EditUser.buttons.clear"
+          :ignoreEnter="true"
+          @submit="clearChanges"
         />
       </div>
     </div>
@@ -31,7 +37,7 @@
         />
         <ReactiveStateButtonEmpty
           state="default"
-          text="Back"
+          :text="lS.localeKeys.Button.back"
           :ignoreEnter="true"
           @submit="$router.push(`/user/${$route.params._id}/details`)"
         />
@@ -41,6 +47,7 @@
 </template>
 
 <script setup>
+import lS from "@/store/localeStore";
 import EditUserForm from "@/components/user/EditUserForm.vue";
 import UserDetailsPreview from "@/components/user/UserDetailsPreview.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
@@ -107,8 +114,8 @@ const handleInput = (value, field) => {
   }
 };
 
-const buttonText = ref("Submit Changes");
-const buttonState = ref("default");
+const buttonStateSubmit = ref("default");
+const buttonStateClear = ref("default");
 
 const handleSubmit = () => {
   const selectedProfile = profileStore.getProfileById(route.params._id);
@@ -150,18 +157,7 @@ const handleSubmit = () => {
 
       setTimeout(() => {
         buttonState.value = "default";
-        user.value = {
-          username: null,
-          email: null,
-          profile: null,
-          use2FA: null,
-          birthday: null,
-          gender: null,
-          locale: null,
-          language: null,
-          password: null,
-          passwordRepeat: null,
-        };
+        clearChanges();
       }, 3000);
     })
     .catch((err) => {
@@ -172,6 +168,21 @@ const handleSubmit = () => {
       }
       buttonState.value = "default";
     });
+};
+
+const clearChanges = () => {
+  user.value = {
+    username: null,
+    email: null,
+    profile: null,
+    use2FA: null,
+    birthday: null,
+    gender: null,
+    locale: null,
+    language: null,
+    password: null,
+    passwordRepeat: null,
+  };
 };
 </script>
 

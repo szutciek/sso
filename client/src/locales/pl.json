@@ -172,5 +172,13 @@
       "details": "jest teraz twoim domyślnym kontem",
       "while": "Zmiana domyślnego konta..."
     }
+  },
+  "EditUser": {
+    "title": "Edytuj Konto",
+    "description": "Wprowadź zmiany i zaptwierdź przyciskiem poniżej.",
+    "buttons": {
+      "submit": "Zapisz Zmiany",
+      "clear": "Cofnij Zmiany"
+    }
   }
 }

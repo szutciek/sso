@@ -68,7 +68,7 @@
 </template>
 
 <script setup>
-import { defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, computed } from "vue";
 const { user, errors, blockEmailInput, blockPasswordInput } = defineProps([
   "user",
   "errors",
@@ -87,50 +87,50 @@ import LabelledDropdownInput from "../inputs/LabelledDropdownInput.vue";
 import LabelledEnumInput from "../inputs/LabelledEnumInput.vue";
 import LabelledDateInput from "../inputs/LabelledDateInput.vue";
 
-const usernameConfig = {
+const usernameConfig = computed(() => ({
   field: "username",
-  type: "",
+  type: "text",
   label: lS.localeKeys.Fields.username,
-};
-const emailConfig = {
+}));
+const emailConfig = computed(() => ({
   field: "email",
   type: "email",
   label: lS.localeKeys.Fields.email,
-};
-const birthdayConfig = {
+}));
+const birthdayConfig = computed(() => ({
   field: "birthday",
   label: lS.localeKeys.Fields.birthday,
-};
-const genderConfig = {
+}));
+const genderConfig = computed(() => ({
   field: "gender",
   enum: ["male", "female", "other"],
   label: lS.localeKeys.Fields.gender,
-};
-const localeConfig = {
+}));
+const localeConfig = computed(() => ({
   field: "locale",
   values: ["en", "pl", "nl"],
   label: lS.localeKeys.Fields.locale,
-};
-const languageConfig = {
+}));
+const languageConfig = computed(() => ({
   field: "language",
   enum: ["en"],
   label: lS.localeKeys.Fields.language,
-};
-const use2FAConfig = {
+}));
+const use2FAConfig = computed(() => ({
   field: "use2FA",
   enum: [false, true],
   label: lS.localeKeys.Fields.use2FA,
-};
-const passwordConfig = {
+}));
+const passwordConfig = computed(() => ({
   field: "password",
   type: "password",
   label: lS.localeKeys.Fields.password,
-};
-const repeatPasswordConfig = {
+}));
+const repeatPasswordConfig = computed(() => ({
   field: "passwordRepeat",
   type: "password",
   label: lS.localeKeys.Fields.passwordRepeat,
-};
+}));
 </script>
 
 <style scoped></style>

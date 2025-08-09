@@ -115,6 +115,9 @@ const handleRevoke = () => {
 .appDetails h2 {
   font-weight: 600;
 }
+.status {
+  margin: 8px 0 4px 0;
+}
 .status p {
   display: inline;
   padding: 2px 8px;

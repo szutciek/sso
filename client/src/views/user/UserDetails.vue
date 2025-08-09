@@ -7,7 +7,7 @@
       <h2>{{ lS.localeKeys.UserDetails.description }}</h2>
 
       <div class="form">
-        <div class="buttons">
+        <div class="form">
           <ReactiveStateButtonEmpty
             state="default"
             :text="lS.localeKeys.Button.back"
