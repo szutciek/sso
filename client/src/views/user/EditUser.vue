@@ -7,7 +7,13 @@
       <h2>Make changes and submit to update.</h2>
 
       <div class="form">
-        <EditUserForm @input="handleInput" :user="user" :errors="errors" />
+        <EditUserForm
+          @input="handleInput"
+          :user="user"
+          :errors="errors"
+          :blockEmailInput="true"
+          :blockPasswordInput="true"
+        />
         <ReactiveStateButton
           :state="buttonState"
           :text="buttonText"
@@ -19,12 +25,15 @@
 
     <div class="box stickyRail">
       <div class="stickyCart">
-        <UserDetailsPreview :user="user" />
+        <UserDetailsPreview
+          :user="computeChangedUser()"
+          :highlight="computeChangedFields()"
+        />
         <ReactiveStateButtonEmpty
           state="default"
-          text="To Panel &rarr;"
+          text="Back"
           :ignoreEnter="true"
-          @submit="$router.push('/user/panel')"
+          @submit="$router.push(`/user/${$route.params._id}/details`)"
         />
       </div>
     </div>
@@ -38,14 +47,19 @@ import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
 import ReactiveStateButtonEmpty from "@/components/buttons/ReactiveStateButtonEmpty.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
 const router = useRouter();
 import wrappedFetch from "@/assets/wrappedFetch";
 import notificationStore from "@/store/notificationStore";
+import profileStore from "@/store/profileStore.js";
+profileStore.getFullProfileList().catch((err) => {
+  console.warn(err);
+});
 
 const user = ref({
   username: null,
   email: null,
-  profile: "https://assets.kanapka.eu/images/user.png",
+  profile: null,
   use2FA: null,
   birthday: null,
   gender: null,
@@ -68,6 +82,21 @@ const errors = ref({
   passwordRepeat: null,
 });
 
+const computeChangedUser = () => {
+  const profile = profileStore.getProfileById(route.params._id);
+  if (!profile.user) return null;
+  const obj = { ...profile.user };
+  Object.entries(user.value).forEach(([key, value]) => {
+    if (value !== null) obj[key] = value;
+  });
+  return obj;
+};
+const computeChangedFields = () => {
+  return Object.entries(user.value).map(([key, value]) => {
+    if (value !== null) return key;
+  });
+};
+
 const handleInput = (value, field) => {
   errors.value[field] = "";
   user.value[field] = value;
@@ -87,32 +116,52 @@ const handleSubmit = () => {
     return;
   }
 
-  const cleanUser = { ...user.value };
-  delete cleanUser.passwordRepeat;
+  const cleanUser = {};
+  Object.entries(user.value).forEach(([key, value]) => {
+    if (value !== null) cleanUser[key] = value;
+  });
 
   buttonState.value = "loading";
 
-  const createRequest = wrappedFetch("/api/users", {
-    method: "POST",
+  const updateRequest = wrappedFetch("/api/users/me", {
+    method: "PUT",
     body: JSON.stringify(cleanUser),
   });
 
   notificationStore.createNotif({
     type: "info",
-    title: "Account Creation",
-    details: "Account created successfully",
-    duration: 10000,
+    title: "Account Edition",
+    details: "Account updated successfully",
+    duration: 5000,
     promise: {
-      promise: createRequest,
+      promise: updateRequest,
       while: "Processing your request...",
     },
   });
 
-  createRequest
+  updateRequest
     .then((data) => {
       buttonState.value = "success";
 
-      console.log(data);
+      profileStore.getFullProfileList().catch((err) => {
+        console.warn(err);
+      });
+
+      setTimeout(() => {
+        buttonState.value = "default";
+        user.value = {
+          username: null,
+          email: null,
+          profile: null,
+          use2FA: null,
+          birthday: null,
+          gender: null,
+          locale: null,
+          language: null,
+          password: null,
+          passwordRepeat: null,
+        };
+      }, 3000);
     })
     .catch((err) => {
       if (err.details) {
@@ -134,7 +183,7 @@ const handleSubmit = () => {
 }
 .stickyCart {
   position: sticky;
-  top: calc(var(--nav-height) + 20px);
+  top: calc(var(--nav-height) + 30px);
   display: flex;
   flex-direction: column;
   gap: 40px;

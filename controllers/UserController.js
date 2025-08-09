@@ -13,7 +13,7 @@ export const getCurrentUser = async (req, res, next) => {
 
 export const updateCurrentUser = async (req, res, next) => {
   try {
-    const user = await UserCrud.updateUser(req.params._id, req.body);
+    const user = await UserCrud.updateUser(req.user._id.toString(), req.body);
     res.status(200).json(user);
   } catch (error) {
     next(error);

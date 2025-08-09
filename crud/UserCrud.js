@@ -57,12 +57,10 @@ export const createUser = async (userData) => {
 export const updateUser = async (userId, updateData) => {
   let user = null;
   await catchDuplicateError(async () => {
-    user = await getUserById(userId, true);
+    user = await getUserById(userId);
     const validatedData = performValidation(LooseUserValidation, updateData);
+    delete validatedData.password;
     Object.assign(user, validatedData);
-    if (validatedData.password) {
-      user.setPassword(updateData.password);
-    }
     await user.save();
   });
   return user;

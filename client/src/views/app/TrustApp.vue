@@ -29,7 +29,7 @@
     <div class="box">
       <UserDetailsPreview
         :user="profileStore.getDefaultProfile()?.user"
-        :highlight="app?.scope"
+        :blurOther="app?.scope"
       />
     </div>
   </div>

@@ -140,7 +140,7 @@ const handleContinue = () => {
 }
 .stickyCart {
   position: sticky;
-  top: calc(var(--nav-height) + 20px);
+  top: calc(var(--nav-height) + 30px);
   display: flex;
   flex-direction: column;
   gap: 40px;

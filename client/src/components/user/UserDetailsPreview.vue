@@ -1,49 +1,28 @@
 <template>
   <div class="userDetails sb">
     <div class="section main sbb">
-      <div :class="[loading && 'loadingItem']">
+      <div :class="computeClasses().filter((c) => c === 'loadingItem')">
         <img
           :src="display.profile"
           :alt="display.username"
-          :class="
-            highlight && !highlight?.includes('profile') && 'decreaseVisibility'
-          "
+          :class="computeClasses('profile').filter((c) => c !== 'loadingItem')"
         />
       </div>
       <div>
-        <h2
-          :class="[
-            loading && 'loadingItem',
-            highlight &&
-              !highlight?.includes('username') &&
-              'decreaseVisibility',
-          ]"
-        >
+        <h2 :class="computeClasses('username')">
           {{ display.username || "..." }}
         </h2>
-        <p
-          :class="[
-            loading && 'loadingItem',
-            highlight && !highlight?.includes('email') && 'decreaseVisibility',
-          ]"
-        >
+        <p :class="computeClasses('email')">
           {{ display.email || "..." }}
         </p>
       </div>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">
+      <p :class="computeClasses().filter((c) => c === 'loadingItem')">
         {{ lS.localeKeys.UserDetailsPreview.labels.personal }}
       </p>
       <ul class="keyVal">
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight &&
-              !highlight?.includes('birthday') &&
-              'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('birthday')">
           <span>{{ lS.localeKeys.Fields.birthday }}</span>
           <span>{{
             display.birthday
@@ -51,68 +30,39 @@
               : "..."
           }}</span>
         </li>
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight && !highlight?.includes('gender') && 'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('gender')">
           <span>{{ lS.localeKeys.Fields.gender }}</span
           ><span>{{ display.gender || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">
+      <p :class="computeClasses().filter((c) => c === 'loadingItem')">
         {{ lS.localeKeys.UserDetailsPreview.labels.location }}
       </p>
       <ul class="keyVal">
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight && !highlight?.includes('locale') && 'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('locale')">
           <span>{{ lS.localeKeys.Fields.locale }}</span>
           <span>{{ display.locale || "..." }}</span>
         </li>
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight &&
-              !highlight?.includes('language') &&
-              'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('language')">
           <span>{{ lS.localeKeys.Fields.language }}</span>
           <span>{{ display.language || "..." }}</span>
         </li>
       </ul>
     </div>
     <div class="section">
-      <p :class="loading && 'loadingItem'">
+      <p :class="computeClasses().filter((c) => c === 'loadingItem')">
         {{ lS.localeKeys.UserDetailsPreview.labels.security }}
       </p>
       <ul class="keyVal">
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight && !highlight?.includes('use2FA') && 'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('use2FA')">
           <span>{{ lS.localeKeys.Fields.use2FA }}</span>
           <span>{{
             display.use2FA === null ? "..." : display.use2FA.toString()
           }}</span>
         </li>
-        <li
-          :class="[
-            loading && 'loadingItem',
-            highlight &&
-              !highlight?.includes('password') &&
-              'decreaseVisibility',
-          ]"
-        >
+        <li :class="computeClasses('password')">
           <span>{{ lS.localeKeys.Fields.password }}</span>
           <span>{{ display.password?.replace(/./g, "*") || "..." }}</span>
         </li>
@@ -143,13 +93,15 @@ import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import { defineProps, ref, computed } from "vue";
-const { user, showView, showDefault, token, highlight } = defineProps([
-  "user",
-  "showView",
-  "showDefault",
-  "token",
-  "highlight",
-]);
+const { user, showView, showDefault, token, highlight, blurOther } =
+  defineProps([
+    "user",
+    "showView",
+    "showDefault",
+    "token",
+    "highlight",
+    "blurOther",
+  ]);
 
 const display = computed(() => {
   if (user) return user;
@@ -165,10 +117,19 @@ const display = computed(() => {
     password: null,
   };
 });
-const loading = computed(() => {
-  if (!user) return true;
-  return false;
-});
+const computeClasses = (field) => {
+  const list = [];
+  if (!user) {
+    list.push("loadingItem");
+  }
+  if (blurOther && !blurOther.includes(field)) {
+    list.push("blur");
+  }
+  if (highlight && highlight.includes(field)) {
+    list.push("highlight");
+  }
+  return list;
+};
 
 const defaultButtonState = ref("default");
 
@@ -232,8 +193,20 @@ ul.keyVal li {
   gap: 10px;
   padding-top: 20px;
 }
-.decreaseVisibility {
+.blur {
   filter: blur(2px);
   opacity: 0.5;
+}
+.highlight {
+  background-color: #2d2d2d !important;
+  color: #fff !important;
+  margin: -2px -8px;
+  padding: 2px 8px;
+}
+img.highlight {
+  border: 4px solid #2d2d2d !important;
+  background-color: #eee !important;
+  margin: 0;
+  padding: 0;
 }
 </style>

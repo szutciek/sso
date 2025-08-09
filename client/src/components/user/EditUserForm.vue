@@ -7,6 +7,7 @@
         :error="errors.username"
       />
       <LabelledTextInput
+        v-if="!blockEmailInput"
         :config="emailConfig"
         @input="handleInput"
         :error="errors.email"
@@ -51,7 +52,7 @@
       />
     </div>
 
-    <div class="form">
+    <div class="form" v-if="!blockPasswordInput">
       <LabelledTextInput
         :config="passwordConfig"
         @input="handleInput"
@@ -68,7 +69,12 @@
 
 <script setup>
 import { defineEmits, defineProps } from "vue";
-const { user, errors } = defineProps(["user", "errors"]);
+const { user, errors, blockEmailInput, blockPasswordInput } = defineProps([
+  "user",
+  "errors",
+  "blockEmailInput",
+  "blockPasswordInput",
+]);
 const emit = defineEmits(["input"]);
 const handleInput = (value, field) => {
   emit("input", value, field);
