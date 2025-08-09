@@ -1,0 +1,172 @@
+{
+  "NavigationComponent": {
+    "items": [
+      {
+        "name": "Functies",
+        "topics": [
+          {
+            "title": "Automatisch Registreren",
+            "description": "Selecteer het standaardaccount om te gebruiken bij het inloggen op alle soorten apps"
+          },
+          {
+            "title": "Flexibiliteit",
+            "description": "Log alleen in met 2FA wanneer het nodig is"
+          },
+          {
+            "title": "Functies",
+            "list": ["Beveiligde 2FA", "Sessiebeheer"]
+          }
+        ]
+      },
+      {
+        "name": "Handleidingen",
+        "topics": [
+          {
+            "title": "Voor Ontwikkelaars",
+            "description": "Ontdek hoe je Kanapka SSO met je app kunt integreren"
+          },
+          {
+            "title": "Voor Gebruikers",
+            "description": "Leer hoe je Kanapka SSO gebruikt"
+          }
+        ]
+      },
+      {
+        "name": "Over",
+        "topics": []
+      }
+    ],
+    "action": "Beheer Profielen"
+  },
+  "UserProfile": {
+    "birthday": "Verjaardag",
+    "gender": "Geslacht",
+    "edit": "Bewerken",
+    "forget": "Vergeten"
+  },
+  "UserApp": {
+    "shared": "Gedeelde gegevens"
+  },
+  "UserPanel": {
+    "title": "Accounts & Vertrouwde Apps",
+    "description": "Navigeer naar een profiel voor meer informatie."
+  },
+  "AppDetails": {
+    "byAuthor": "Door",
+    "Trusted": "Vertrouwd",
+    "Trust Revoked": "Vertrouwen Ingetrokken",
+    "infoRequested": "Informatie aangevraagd door app",
+    "infoShared": "Informatie gedeeld met app",
+    "buttonRevoke": "Vertrouwen intrekken"
+  },
+  "Dropdown": {
+    "interact": "Klik om te selecteren"
+  },
+  "AddProfileCard": {
+    "title": "Profiel toevoegen",
+    "description": "Klik op een van de knoppen hieronder.",
+    "signin": "Inloggen",
+    "signup": "Account aanmaken"
+  },
+  "Fields": {
+    "username": "Gebruikersnaam",
+    "email": "E-mailadres",
+    "profile": "Profielfoto",
+    "birthday": "Verjaardag",
+    "gender": "Geslacht",
+    "locale": "Regio",
+    "language": "Taal",
+    "use2FA": "2FA vereisen",
+    "password": "Wachtwoord",
+    "passwordRepeat": "Herhaal wachtwoord",
+    "code2FA": "2FA-code"
+  },
+  "UserDetailsPreview": {
+    "labels": {
+      "personal": "Persoonlijke Gegevens",
+      "location": "Regio & Locatie",
+      "security": "Beveiligingsinstellingen"
+    },
+    "buttons": {
+      "details": "Details",
+      "default": "Instellen als standaard"
+    }
+  },
+  "TrustApp": {
+    "title": "App Vertrouwen",
+    "description": "Bekijk de details van de app en de vereiste informatie.",
+    "required": "Informatie aangevraagd door app",
+    "trust": "Vertrouwen"
+  },
+  "Authenticate": {
+    "title": "Inloggen",
+    "description": "Gebruik het onderstaande formulier om in te loggen met je Kanapka SSO-account.",
+    "notification": {
+      "title": "Authenticatie",
+      "details": "Je bent succesvol geauthenticeerd",
+      "while": "Je inloggegevens controleren..."
+    }
+  },
+  "Authenticate2FA": {
+    "title": "2FA Verificatie",
+    "description": ["Voer de tweestapsverificatiecode in van ", "je inbox"],
+    "notificationSubmit": {
+      "title": "Authenticatie",
+      "details": "Je bent succesvol geauthenticeerd",
+      "while": "De ingevoerde 2FA-code controleren..."
+    },
+    "notificationRequest": {
+      "title": "2FA-code Verzending",
+      "details": "2FA-code is naar je inbox gestuurd",
+      "while": "2FA-code verzenden naar je e-mail..."
+    }
+  },
+  "Button": {
+    "submit": "Verzenden",
+    "continue": "Doorgaan",
+    "back": "Terug"
+  },
+  "ToasterManager": {
+    "error": "Fout"
+  },
+  "Authorize": {
+    "title": "App Autoriseren",
+    "description": "Even geduld terwijl we je verzoek verwerken."
+  },
+  "CreateUser": {
+    "title": "Account Aanmaken",
+    "description": "Voer je gegevens in en verzend om te registreren.",
+    "button": "Account Aanmaken",
+    "notification": {
+      "title": "Accountaanmaak",
+      "details": "Account succesvol aangemaakt",
+      "while": "Je verzoek verwerken..."
+    }
+  },
+  "UserDetails": {
+    "title": "Accountgegevens",
+    "description": "Bekijk details en beheer het account.",
+    "buttons": {
+      "edit": "Account Bewerken",
+      "forget": "Account Vergeten",
+      "delete": "Account Verwijderen"
+    },
+    "notificationDelete": {
+      "title": "Account Verwijderen",
+      "details": "Account is verwijderd",
+      "while": "Je account verwijderen..."
+    }
+  },
+  "profileStore": {
+    "notificationForget": {
+      "title": "Profiel Vergeten",
+      "details": "Profiel is vergeten",
+      "while": "Profiel vergeten..."
+    },
+    "notificationDefault": {
+      "title": "Standaardprofiel Instellen",
+      "details": "is nu je standaardprofiel",
+      "while": "Je standaardprofiel wijzigen..."
+    }
+  }
+}
