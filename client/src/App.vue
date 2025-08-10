@@ -18,7 +18,7 @@ import Fonts from "@/components/Fonts.vue";
 import ToasterManager from "@/components/ToasterManager.vue";
 
 import localeStore from "@/store/localeStore.js";
-localeStore.loadLocaleFromUrl();
+localeStore.configureLocale();
 
 import profileStore from "@/store/profileStore";
 profileStore.loadProfileState();

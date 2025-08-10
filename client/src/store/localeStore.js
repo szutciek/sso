@@ -7,8 +7,12 @@ export default reactive({
   locale: "en",
   localeKeys: en,
 
-  loadLocaleFromUrl() {
-    const locale = window.location.pathname.split("/")[1];
+  configureLocale() {
+    let locale = window.location.pathname.split("/")[1];
+    if (!this.supportedLocales.includes(locale)) {
+      locale = this.loadLocaleStorage();
+    }
+    this.locale = locale;
     this.loadLocale(locale);
   },
   overrideLocale(locale) {
@@ -25,6 +29,7 @@ export default reactive({
     this.localeKeys = messages.default;
 
     this.locale = locale;
+    this.saveLocaleStorage(this.locale);
     console.log("Locale Updated:", this.locale);
   },
 
@@ -32,5 +37,14 @@ export default reactive({
     const currentIndex = this.supportedLocales.indexOf(this.locale);
     const nextIndex = (currentIndex + 1) % this.supportedLocales.length;
     this.loadLocale(this.supportedLocales[nextIndex]);
+  },
+
+  saveLocaleStorage(locale) {
+    window.localStorage.setItem("lastLocale", locale);
+  },
+
+  loadLocaleStorage() {
+    const loaded = window.localStorage.getItem("lastLocale");
+    return loaded ? loaded : "en";
   },
 });
