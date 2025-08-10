@@ -193,5 +193,10 @@
       "details": "La contraseña ha sido cambiada. Úsala al iniciar sesión.",
       "while": "Procesando tu solicitud..."
     }
+  },
+  "Home": {
+    "title": "Inicia sesión fácilmente con Kanapka SSO",
+    "subtitle": "Kanapka SSO es una plataforma que beneficia a usuarios y desarrolladores para apps que requieren autenticación.",
+    "cta": "Comienza ahora"
   }
 }

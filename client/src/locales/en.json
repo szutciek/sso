@@ -193,5 +193,10 @@
       "details": "Password has been changed. Use it when signing in.",
       "while": "Processing your request..."
     }
+  },
+  "Home": {
+    "title": "Conveniently Sign In Using Kanapka SSO",
+    "subtitle": "Kanapka SSO is a platform that benefits users and developers for apps requiring authentication.",
+    "cta": " Get started now"
   }
 }

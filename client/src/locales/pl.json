@@ -194,5 +194,10 @@
       "details": "Hasło zostało zmienione. Używaj nowego przy logowaniu.",
       "while": "Trwa przetwarzanie żądania..."
     }
+  },
+  "Home": {
+    "title": "Wygodne logowanie za pomocą Kanapka SSO",
+    "subtitle": "Kanapka SSO to platforma, która zapewnia korzyści użytkownikom i deweloperom aplikacji wymagających uwierzytelniania.",
+    "cta": "Rozpocznij teraz"
   }
 }

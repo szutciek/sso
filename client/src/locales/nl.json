@@ -190,5 +190,10 @@
       "details": "Wachtwoord is gewijzigd. Gebruik het bij het inloggen.",
       "while": "Je verzoek verwerken..."
     }
+  },
+  "Home": {
+    "title": "Makkelijk inloggen met Kanapka SSO",
+    "subtitle": "Kanapka SSO is een platform dat zowel gebruikers als ontwikkelaars voordeel biedt voor apps die authenticatie vereisen.",
+    "cta": "Begin nu"
   }
 }

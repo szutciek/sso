@@ -2,18 +2,22 @@
   <div class="container mW1200">
     <div class="head">
       <div class="column">
-        <h1 class="title">Conveniently Sign In Using Kanapka SSO</h1>
+        <h1 class="title">{{ t.title }}</h1>
         <p class="details">
-          Kanapka SSO is a platform that benefits users and developers for apps
-          requiring authentication.
+          {{ t.subtitle }}
         </p>
         <button class="cta" @click="$router.push('/register')">
-          Get started now &rarr;
+          {{ t.cta }} &rarr;
         </button>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import localeStore from "@/store/localeStore";
+const t = localeStore.localeKeys.Home;
+</script>
 
 <style scoped>
 .head {
