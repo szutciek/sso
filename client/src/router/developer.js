@@ -1,6 +1,6 @@
 import NavigationComponent from "@/components/NavigationComponent.vue";
 
-import Documentation from "@/components/developer/Documentation.vue";
+import Documentation from "@/views/developer/Documentation.vue";
 
 export default [
   {

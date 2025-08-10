@@ -101,7 +101,6 @@ const router = useRouter();
 import wrappedFetch from "@/assets/wrappedFetch.js";
 import notificationStore from "@/store/notificationStore.js";
 import profileStore from "@/store/profileStore.js";
-import localeStore from "@/store/localeStore";
 
 const loading = computed(() => {
   const profile = profileStore.getProfileById(route.params._id);

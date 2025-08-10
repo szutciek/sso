@@ -18,6 +18,7 @@
 
     <div class="section">
       <h2>Creating an App</h2>
+      <p>Use a REST API client such as Postman for the following steps.</p>
       <ul>
         <li>
           Send a POST request to <a>/api/apps</a> while logged in to a developer
@@ -53,6 +54,7 @@
 
     <div class="section">
       <h2>Integrating OAuth2</h2>
+      <p>Use a REST API client such as Postman for the following steps.</p>
       <ul>
         <li>
           Upon starting the login flow, redirect the clients browser to
@@ -122,7 +124,7 @@
   margin-bottom: 20px;
 }
 .section p {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
 }
 .section ul {

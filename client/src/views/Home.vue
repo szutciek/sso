@@ -2,12 +2,12 @@
   <div class="container mW1200">
     <div class="head">
       <div class="column">
-        <h1 class="title">{{ t.title }}</h1>
+        <h1 class="title">{{ lS.localeKeys.Home.title }}</h1>
         <p class="details">
-          {{ t.subtitle }}
+          {{ lS.localeKeys.Home.subtitle }}
         </p>
         <button class="cta" @click="$router.push('/register')">
-          {{ t.cta }} &rarr;
+          {{ lS.localeKeys.Home.cta }} &rarr;
         </button>
       </div>
     </div>
@@ -15,8 +15,7 @@
 </template>
 
 <script setup>
-import localeStore from "@/store/localeStore";
-const t = localeStore.localeKeys.Home;
+import lS from "@/store/localeStore";
 </script>
 
 <style scoped>

@@ -2,9 +2,9 @@
   <div class="container-standard">
     <div class="box">
       <div class="row">
-        <h1>{{ t.title }}</h1>
+        <h1>{{ lS.localeKeys.UserPasswordReset.title }}</h1>
       </div>
-      <h2>{{ t.description }}</h2>
+      <h2>{{ lS.localeKeys.UserPasswordReset.description }}</h2>
 
       <div class="form">
         <LabelledTextInput
@@ -22,7 +22,7 @@
       <div class="submit">
         <ReactiveStateButton
           :state="buttonState"
-          :text="localeStore.localeKeys.Button.submit"
+          :text="lS.localeKeys.Button.submit"
           @submit="handleSubmit()"
         />
       </div>
@@ -31,12 +31,10 @@
 </template>
 
 <script setup>
-import localeStore from "@/store/localeStore";
-const t = localeStore.localeKeys.UserPasswordReset;
+import lS from "@/store/localeStore";
 import { ref, computed } from "vue";
 import LabelledTextInput from "@/components/inputs/LabelledTextInput.vue";
 import ReactiveStateButton from "@/components/buttons/ReactiveStateButton.vue";
-import profileStore from "@/store/profileStore";
 import { useRouter, useRoute } from "vue-router";
 import wrappedFetch from "@/assets/wrappedFetch";
 import notificationStore from "@/store/notificationStore";
@@ -46,12 +44,12 @@ const route = useRoute();
 const passwordInputConfig = computed(() => ({
   field: "password",
   type: "password",
-  label: localeStore.localeKeys.Fields.password,
+  label: lS.localeKeys.Fields.password,
 }));
 const passwordRepeatInputConfig = computed(() => ({
   field: "passwordRepeat",
   type: "password",
-  label: localeStore.localeKeys.Fields.passwordRepeat,
+  label: lS.localeKeys.Fields.passwordRepeat,
 }));
 
 const passwordInputError = ref("");
@@ -66,7 +64,7 @@ const handleSubmit = () => {
   try {
     if (password.value !== passwordRepeat.value) {
       passwordRepeatInputError.value =
-        localeStore.localeKeys.UserPasswordReset.passwordsNotSame;
+        lS.localeKeys.UserPasswordReset.passwordsNotSame;
       return;
     }
 
@@ -83,12 +81,12 @@ const handleSubmit = () => {
 
     notificationStore.createNotif({
       type: "info",
-      title: t.notification.title,
-      details: t.notification.details,
+      title: lS.localeKeys.UserPasswordReset.notification.title,
+      details: lS.localeKeys.UserPasswordReset.notification.details,
       duration: 5000,
       promise: {
         promise: resetRequest,
-        while: t.notification.while,
+        while: lS.localeKeys.UserPasswordReset.notification.while,
       },
     });
 
