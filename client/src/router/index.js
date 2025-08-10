@@ -18,7 +18,6 @@ const routes = [
     components: {
       default: Authorize,
       navigation: NavigationComponentLite,
-      // footer: FooterComponent,
     },
   },
 
@@ -110,15 +109,3 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
-
-// METHODS: ------------------------------------------------------
-
-// {
-//   path: "/updates",
-//   name: "updates",
-//   components: {
-//     default: () => import("../views/UpdatesView.vue"),
-//     navigation: NavigationComponent,
-//     footer: FooterComponent,
-//   },
-// },

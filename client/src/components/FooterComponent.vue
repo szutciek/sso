@@ -4,13 +4,6 @@
       <div class="logo">
         <Logo />
       </div>
-
-      <ul>
-        <li>Home</li>
-        <li>Services</li>
-        <li>Products</li>
-        <li>Contacts</li>
-      </ul>
     </div>
   </footer>
 </template>

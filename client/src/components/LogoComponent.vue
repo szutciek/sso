@@ -1,9 +1,24 @@
 <template>
-  <div @click="$router.push('/')">
+  <div @click="handleLogoClick">
     <p>Kanapka</p>
     <h1>SSO</h1>
   </div>
 </template>
+
+<script setup>
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
+const router = useRouter();
+
+const handleLogoClick = () => {
+  const split = route.fullPath.split("/");
+  if (split.length === 4 && split[2] === "user" && split[3] === "panel") {
+    router.push("/home");
+  } else {
+    router.push("/user/panel");
+  }
+};
+</script>
 
 <style scoped>
 div {
