@@ -24,7 +24,7 @@
       <div class="content container-standard wide">
         <div class="form" v-if="focusedIndex != null">
           <AppDetailsUsersPerspective
-            v-for="(app, i) of profileStore.profiles[focusedIndex].user?.apps"
+            v-for="(app, i) of profileStore.profiles[focusedIndex]?.user?.apps"
             class="appItem"
             :style="`z-index: ${Math.min(i, 10)}`"
             :app="app"

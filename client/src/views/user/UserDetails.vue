@@ -193,8 +193,6 @@ const handlePasswordReset = (id) => {
 
   resetRequest
     .then((data) => {
-      console.log(data);
-
       passwordResetState.value = "success";
     })
     .catch((err) => {
