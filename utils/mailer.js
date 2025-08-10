@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 export const sendRecoveryEmail = async (user) => {
   return new Promise(async (res, rej) => {
     try {
-      const recoveryUrl = `${baseUrl}/reset?email=${user.email}&code=${user.passwordChangeCode}`;
+      const recoveryUrl = `${baseUrl}/user/${user._id}/reset-password?code=${user.passwordChangeCode}`;
 
       const mail = {
         from: email.user,

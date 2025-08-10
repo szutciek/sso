@@ -5,8 +5,8 @@
         "name": "Functies",
         "topics": [
           {
-            "title": "Automatisch Registreren",
-            "description": "Selecteer het standaardaccount om te gebruiken bij het inloggen op alle soorten apps"
+            "title": "Geautomatiseerde aanmeldingen",
+            "description": "Selecteer het standaardaccount dat wordt gebruikt bij het inloggen op alle soorten apps"
           },
           {
             "title": "Flexibiliteit",
@@ -14,7 +14,7 @@
           },
           {
             "title": "Functies",
-            "list": ["Beveiligde 2FA", "Sessiebeheer"]
+            "list": ["Veilige 2FA", "Sessiebeheer"]
           }
         ]
       },
@@ -22,11 +22,11 @@
         "name": "Handleidingen",
         "topics": [
           {
-            "title": "Voor Ontwikkelaars",
-            "description": "Ontdek hoe je Kanapka SSO met je app kunt integreren"
+            "title": "Voor ontwikkelaars",
+            "description": "Ontdek hoe je Kanapka SSO kunt integreren met je app"
           },
           {
-            "title": "Voor Gebruikers",
+            "title": "Voor gebruikers",
             "description": "Leer hoe je Kanapka SSO gebruikt"
           }
         ]
@@ -36,10 +36,10 @@
         "topics": []
       }
     ],
-    "action": "Beheer Profielen"
+    "action": "Profielen beheren"
   },
   "UserProfile": {
-    "birthday": "Verjaardag",
+    "birthday": "Geboortedatum",
     "gender": "Geslacht",
     "edit": "Bewerken",
     "forget": "Vergeten"
@@ -49,13 +49,13 @@
   },
   "UserPanel": {
     "title": "Accounts & Vertrouwde Apps",
-    "description": "Navigeer naar een profiel voor meer informatie."
+    "description": "Ga naar een profiel voor meer informatie."
   },
   "AppDetails": {
     "byAuthor": "Door",
     "Trusted": "Vertrouwd",
-    "Trust Revoked": "Vertrouwen Ingetrokken",
-    "infoRequested": "Informatie aangevraagd door app",
+    "Trust Revoked": "Vertrouwen ingetrokken",
+    "infoRequested": "Informatie gevraagd door app",
     "infoShared": "Informatie gedeeld met app",
     "buttonRevoke": "Vertrouwen intrekken"
   },
@@ -72,7 +72,7 @@
     "username": "Gebruikersnaam",
     "email": "E-mailadres",
     "profile": "Profielfoto",
-    "birthday": "Verjaardag",
+    "birthday": "Geboortedatum",
     "gender": "Geslacht",
     "locale": "Regio",
     "language": "Taal",
@@ -83,7 +83,7 @@
   },
   "UserDetailsPreview": {
     "labels": {
-      "personal": "Persoonlijke Gegevens",
+      "personal": "Persoonlijke gegevens",
       "location": "Regio & Locatie",
       "security": "Beveiligingsinstellingen"
     },
@@ -93,9 +93,9 @@
     }
   },
   "TrustApp": {
-    "title": "App Vertrouwen",
+    "title": "App vertrouwen",
     "description": "Bekijk de details van de app en de vereiste informatie.",
-    "required": "Informatie aangevraagd door app",
+    "required": "Informatie gevraagd door app",
     "trust": "Vertrouwen"
   },
   "Authenticate": {
@@ -108,17 +108,17 @@
     }
   },
   "Authenticate2FA": {
-    "title": "2FA Verificatie",
+    "title": "2FA-verificatie",
     "description": ["Voer de tweestapsverificatiecode in van ", "je inbox"],
     "notificationSubmit": {
       "title": "Authenticatie",
       "details": "Je bent succesvol geauthenticeerd",
-      "while": "De ingevoerde 2FA-code controleren..."
+      "while": "De opgegeven 2FA-code controleren..."
     },
     "notificationRequest": {
-      "title": "2FA-code Verzending",
+      "title": "2FA-code bezorging",
       "details": "2FA-code is naar je inbox gestuurd",
-      "while": "2FA-code verzenden naar je e-mail..."
+      "while": "2FA-code naar je e-mail verzenden..."
     }
   },
   "Button": {
@@ -130,51 +130,73 @@
     "error": "Fout"
   },
   "Authorize": {
-    "title": "App Autoriseren",
+    "title": "App autoriseren",
     "description": "Even geduld terwijl we je verzoek verwerken."
   },
   "CreateUser": {
-    "title": "Account Aanmaken",
-    "description": "Voer je gegevens in en verzend om te registreren.",
-    "button": "Account Aanmaken",
+    "title": "Account aanmaken",
+    "description": "Vul je gegevens in en verzend om te registreren.",
+    "button": "Account aanmaken",
     "notification": {
       "title": "Accountaanmaak",
       "details": "Account succesvol aangemaakt",
       "while": "Je verzoek verwerken..."
-    }
+    },
+    "passwordsNotSame": "Wachtwoorden zijn niet hetzelfde"
   },
   "UserDetails": {
     "title": "Accountgegevens",
     "description": "Bekijk details en beheer het account.",
     "buttons": {
-      "edit": "Account Bewerken",
-      "forget": "Account Vergeten",
-      "delete": "Account Verwijderen"
+      "edit": "Account bewerken",
+      "forget": "Account vergeten",
+      "delete": "Account verwijderen",
+      "reset": "Wachtwoord opnieuw instellen",
+      "signin2FA": "Inloggen met 2FA"
     },
     "notificationDelete": {
-      "title": "Account Verwijderen",
+      "title": "Account verwijderen",
       "details": "Account is verwijderd",
       "while": "Je account verwijderen..."
+    },
+    "notificationReset": {
+      "title": "Wachtwoord resetten",
+      "details": "Wachtwoordreset is gestart. Je hebt een link in je inbox ontvangen.",
+      "while": "Wachtwoordreset starten..."
     }
   },
   "profileStore": {
     "notificationForget": {
-      "title": "Profiel Vergeten",
+      "title": "Profiel vergeten",
       "details": "Profiel is vergeten",
       "while": "Profiel vergeten..."
     },
     "notificationDefault": {
-      "title": "Standaardprofiel Instellen",
+      "title": "Standaardprofiel instellen",
       "details": "is nu je standaardprofiel",
       "while": "Je standaardprofiel wijzigen..."
     }
   },
   "EditUser": {
     "title": "Account bewerken",
-    "description": "Breng wijzigingen aan en dien ze in om te updaten.",
+    "description": "Breng wijzigingen aan en verzend om bij te werken.",
     "buttons": {
-      "submit": "Wijzigingen opslaan",
+      "submit": "Wijzigingen verzenden",
       "clear": "Wijzigingen wissen"
+    }
+  },
+  "wrappedFetch": {
+    "networkError": "Netwerkfout",
+    "parsingError": "Fout bij verwerken van antwoord"
+  },
+  "UserPasswordReset": {
+    "title": "Wachtwoord opnieuw instellen",
+    "description": "Voer een nieuw gewenst wachtwoord in.",
+    "passwordsNotSame": "Wachtwoorden zijn niet hetzelfde",
+    "notification": {
+      "title": "Wachtwoord resetten",
+      "details": "Wachtwoord is gewijzigd. Gebruik het bij het inloggen.",
+      "while": "Je verzoek verwerken..."
     }
   }
 }

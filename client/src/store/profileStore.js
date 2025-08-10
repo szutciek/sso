@@ -3,6 +3,7 @@ import wrappedFetch from "@/assets/wrappedFetch";
 import { reactive } from "vue";
 import notificationStore from "./notificationStore.js";
 import lS from "./localeStore.js";
+import router from "@/router/index.js";
 
 export default reactive({
   loadedProfiles: false,
@@ -29,6 +30,8 @@ export default reactive({
           }
           profile.user = data;
           profile.decodedToken = decodeJWT(profile.token);
+          profile.isMissing2FA =
+            profile.user.use2FA && !profile.decodedToken.used2FA;
         } catch (err) {
           console.error("Error fetching profile:", profile._id, err);
         }
@@ -50,6 +53,11 @@ export default reactive({
 
   getProfileById(id) {
     return this.profiles.find((p) => p._id === id);
+  },
+
+  getParamProfile() {
+    const id = router.currentRoute.value.params._id;
+    return this.getProfileById(id);
   },
 
   removeProfile(id) {
@@ -164,6 +172,7 @@ export default reactive({
       profile._id = payload._id;
       this.clearDefaultStatus();
       profile.isDefault = true;
+      profile.isMissing2FA = false;
       this.profiles = this.profiles.filter((p) => p._id !== profile._id);
       this.profiles.push(profile);
       this.sortProfiles();
@@ -180,6 +189,7 @@ export default reactive({
         _id: p._id,
         token: p.token,
         isDefault: p.isDefault,
+        isMissing2FA: p.isMissing2FA,
       });
     });
     window.localStorage.setItem("profileState", JSON.stringify(data));

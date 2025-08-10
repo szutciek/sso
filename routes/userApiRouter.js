@@ -3,6 +3,7 @@ const router = Router();
 
 import { authenticate } from "../middleware/ApiAuthenticationMiddleware.js";
 import * as UserController from "../controllers/UserController.js";
+import * as UserPasswordController from "../controllers/UserPasswordController.js";
 
 router
   .route("/me/email-provider")
@@ -13,6 +14,18 @@ router
   .get(authenticate, UserController.getCurrentUser)
   .put(authenticate, UserController.updateCurrentUser)
   .delete(authenticate, UserController.deleteCurrentUser);
+
+router.post(
+  "/me/initiate-password-reset",
+  authenticate,
+  UserPasswordController.initiateReset
+);
+
+router.post(
+  "/me/complete-password-reset",
+  authenticate,
+  UserPasswordController.completeReset
+);
 
 router.route("/").post(UserController.createUser);
 

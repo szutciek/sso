@@ -1,0 +1,202 @@
+{
+  "NavigationComponent": {
+    "items": [
+      {
+        "name": "功能",
+        "topics": [
+          {
+            "title": "自动注册",
+            "description": "选择登录所有类型应用时使用的默认账户"
+          },
+          {
+            "title": "灵活性",
+            "description": "仅在必要时使用2FA登录"
+          },
+          {
+            "title": "功能",
+            "list": ["安全的2FA", "会话管理"]
+          }
+        ]
+      },
+      {
+        "name": "指南",
+        "topics": [
+          {
+            "title": "针对开发者",
+            "description": "了解如何将Kanapka SSO集成到你的应用中"
+          },
+          {
+            "title": "针对用户",
+            "description": "学习如何使用Kanapka SSO"
+          }
+        ]
+      },
+      {
+        "name": "关于",
+        "topics": []
+      }
+    ],
+    "action": "管理配置文件"
+  },
+  "UserProfile": {
+    "birthday": "生日",
+    "gender": "性别",
+    "edit": "编辑",
+    "forget": "忘记"
+  },
+  "UserApp": {
+    "shared": "共享数据"
+  },
+  "UserPanel": {
+    "title": "账户与可信应用",
+    "description": "导航至配置文件以获取更多信息。"
+  },
+  "AppDetails": {
+    "byAuthor": "作者",
+    "Trusted": "可信任",
+    "Trust Revoked": "信任已撤销",
+    "infoRequested": "应用请求的信息",
+    "infoShared": "与应用共享的信息",
+    "buttonRevoke": "撤销信任"
+  },
+  "Dropdown": {
+    "interact": "点击选择"
+  },
+  "AddProfileCard": {
+    "title": "添加配置文件",
+    "description": "点击下面的按钮之一。",
+    "signin": "登录",
+    "signup": "创建账户"
+  },
+  "Fields": {
+    "username": "用户名",
+    "email": "电子邮箱地址",
+    "profile": "头像",
+    "birthday": "生日",
+    "gender": "性别",
+    "locale": "地区",
+    "language": "语言",
+    "use2FA": "需要2FA",
+    "password": "密码",
+    "passwordRepeat": "重复密码",
+    "code2FA": "2FA代码"
+  },
+  "UserDetailsPreview": {
+    "labels": {
+      "personal": "个人资料",
+      "location": "地区与语言环境",
+      "security": "安全设置"
+    },
+    "buttons": {
+      "details": "详情",
+      "default": "设为默认"
+    }
+  },
+  "TrustApp": {
+    "title": "信任应用",
+    "description": "查看应用详情及所需信息。",
+    "required": "应用请求的信息",
+    "trust": "信任"
+  },
+  "Authenticate": {
+    "title": "登录",
+    "description": "使用下面的表单通过Kanapka SSO账户登录。",
+    "notification": {
+      "title": "认证",
+      "details": "您已成功认证",
+      "while": "正在验证您的凭证..."
+    }
+  },
+  "Authenticate2FA": {
+    "title": "2FA验证",
+    "description": ["请输入来自 ", "您的收件箱的双因素认证代码"],
+    "notificationSubmit": {
+      "title": "认证",
+      "details": "您已成功认证",
+      "while": "正在验证提供的2FA代码..."
+    },
+    "notificationRequest": {
+      "title": "2FA代码发送",
+      "details": "2FA代码已发送到您的收件箱",
+      "while": "正在发送2FA代码到您的邮箱..."
+    }
+  },
+  "Button": {
+    "submit": "提交",
+    "continue": "继续",
+    "back": "返回"
+  },
+  "ToasterManager": {
+    "error": "错误"
+  },
+  "Authorize": {
+    "title": "授权应用",
+    "description": "请稍候，正在处理您的请求。"
+  },
+  "CreateUser": {
+    "title": "创建账户",
+    "description": "输入您的信息并提交以注册。",
+    "button": "创建账户",
+    "notification": {
+      "title": "账户创建",
+      "details": "账户创建成功",
+      "while": "正在处理您的请求..."
+    },
+    "passwordsNotSame": "密码不一致"
+  },
+  "UserDetails": {
+    "title": "账户详情",
+    "description": "查看详情并管理账户。",
+    "buttons": {
+      "edit": "编辑账户",
+      "forget": "忘记账户",
+      "delete": "删除账户",
+      "reset": "重置密码",
+      "signin2FA": "使用2FA登录"
+    },
+    "notificationDelete": {
+      "title": "删除账户",
+      "details": "账户已被删除",
+      "while": "正在删除您的账户..."
+    },
+    "notificationReset": {
+      "title": "密码重置",
+      "details": "密码重置已启动。您已收到收件箱中的链接。",
+      "while": "正在启动密码重置..."
+    }
+  },
+  "profileStore": {
+    "notificationForget": {
+      "title": "忘记配置文件",
+      "details": "配置文件已被忘记",
+      "while": "正在忘记配置文件..."
+    },
+    "notificationDefault": {
+      "title": "设置默认配置文件",
+      "details": "现为您的默认配置文件",
+      "while": "正在更改您的默认配置文件..."
+    }
+  },
+  "EditUser": {
+    "title": "编辑账户",
+    "description": "进行更改并提交以更新。",
+    "buttons": {
+      "submit": "提交更改",
+      "clear": "清除更改"
+    }
+  },
+  "wrappedFetch": {
+    "networkError": "网络错误",
+    "parsingError": "响应解析错误"
+  },
+  "UserPasswordReset": {
+    "title": "重置密码",
+    "description": "输入新的密码。",
+    "passwordsNotSame": "密码不一致",
+    "notification": {
+      "title": "密码重置",
+      "details": "密码已更改。登录时使用新密码。",
+      "while": "正在处理您的请求..."
+    }
+  }
+}

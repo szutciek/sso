@@ -108,7 +108,8 @@ export const send2FACode = async (req, res, next) => {
       );
     }
     if (!user.code2FA || codeExpired) {
-      user.code2FA = crypto.randomUUID().split("-")[0];
+      user.code2FA =
+        "67" + (Math.floor(Math.random() * (10000 - 1000)) + 1000).toString();
       user.last2FAGeneration = new Date();
     }
     user.last2FAEmail = new Date();
@@ -123,7 +124,7 @@ export const send2FACode = async (req, res, next) => {
 export const verify2FA = async (req, res, next) => {
   try {
     const codeValidator = Joi.object({
-      code: Joi.string().required().length(8),
+      code: Joi.string().required().length(6),
     });
     const { code } = performValidation(codeValidator, req.body);
     const user = await getUserById(

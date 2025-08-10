@@ -1,3 +1,5 @@
+import lS from "@/store/localeStore";
+
 export default (url, options) => {
   return new Promise((resolve, reject) => {
     if (!options) {
@@ -20,12 +22,12 @@ export default (url, options) => {
           })
           .catch((error) => {
             console.warn(error.message);
-            reject("Response parsing error");
+            reject(lS.localeKeys.wrappedFetch.parsingError);
           });
       })
       .catch((error) => {
         console.warn(error.message);
-        reject("Network error");
+        reject(lS.localeKeys.wrappedFetch.networkError);
       });
   });
 };

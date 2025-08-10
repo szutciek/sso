@@ -16,10 +16,6 @@ const mongooseUserSchema = new mongoose.Schema({
     type: String,
     default: "https://assets.kanapka.eu/images/user.png",
   },
-  password: {
-    type: String,
-    select: false,
-  },
   birthday: {
     type: Number,
   },
@@ -75,6 +71,10 @@ const mongooseUserSchema = new mongoose.Schema({
     select: false,
   },
   // PASSWORD CHANGE
+  password: {
+    type: String,
+    select: false,
+  },
   passwordLastChanged: {
     type: Date,
     select: false,
@@ -92,14 +92,11 @@ const mongooseUserSchema = new mongoose.Schema({
 mongooseUserSchema.pre("save", function (next) {
   if (this.isModified("password")) {
     this.passwordLastChanged = new Date();
+    const newPassword = this.password;
+    this.password = bcrypt.hashSync(newPassword, 9);
   }
   next();
 });
-
-mongooseUserSchema.methods.setPassword = function (password) {
-  this.passwordLastChanged = new Date();
-  this.password = bcrypt.hashSync(password, 9);
-};
 
 mongooseUserSchema.methods.checkPassword = function (password) {
   return bcrypt.compareSync(password, this.password);

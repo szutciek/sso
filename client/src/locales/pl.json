@@ -144,8 +144,9 @@
     "notification": {
       "title": "Tworzenie Konta",
       "details": "Konto Skutecznie Utworzone",
-      "while": "Trwa procesowanie żądania..."
-    }
+      "while": "Trwa przetwarzanie żądania..."
+    },
+    "passwordsNotSame": "Passwords are not the same"
   },
   "UserDetails": {
     "title": "Szczegóły Konta",
@@ -153,12 +154,19 @@
     "buttons": {
       "edit": "Edytuj Konto",
       "forget": "Zapomnij Konto",
-      "delete": "Usuń Konto"
+      "delete": "Usuń Konto",
+      "reset": "Resetuj Konto",
+      "signin2FA": "Zaloguj się z użyciem 2FA"
     },
     "notificationDelete": {
       "title": "Usuwanie Konta",
       "details": "Konto zostało usunięte",
       "while": "Usuwanie Twojego Konta..."
+    },
+    "notificationReset": {
+      "title": "Resetowanie Hasła",
+      "details": "Resetowanie hasła zostało zainicjowane. Otrzymałeś(aś) link na maila.",
+      "while": "Inicjowanie Resetu Hasła..."
     }
   },
   "profileStore": {
@@ -179,6 +187,20 @@
     "buttons": {
       "submit": "Zapisz Zmiany",
       "clear": "Cofnij Zmiany"
+    }
+  },
+  "wrappedFetch": {
+    "networkError": "Network error",
+    "parsingError": "Response parsing error"
+  },
+  "UserPasswordReset": {
+    "title": "Resetuj Hasło",
+    "description": "Wprowadź nowe hasło.",
+    "passwordsNotSame": "Podane hasła nie są identyczne",
+    "notification": {
+      "title": "Resetowanie Hasła",
+      "details": "Hasło zostało zmienione. Używaj nowego przy logowaniu.",
+      "while": "Trwa przetwarzanie żądania..."
     }
   }
 }

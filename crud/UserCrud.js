@@ -48,7 +48,6 @@ export const createUser = async (userData) => {
     const validatedData = performValidation(UserValidation, userData);
     validatedData.createdAt = new Date();
     user = new User(validatedData);
-    user.setPassword(validatedData.password);
     await user.save();
   });
   return user;
@@ -61,6 +60,17 @@ export const updateUser = async (userId, updateData) => {
     const validatedData = performValidation(LooseUserValidation, updateData);
     delete validatedData.password;
     Object.assign(user, validatedData);
+    await user.save();
+  });
+  return user;
+};
+
+export const updateUserPassword = async (userId, updateData) => {
+  let user = null;
+  await catchDuplicateError(async () => {
+    user = await getUserById(userId);
+    const validatedData = performValidation(LooseUserValidation, updateData);
+    user.password = validatedData.password;
     await user.save();
   });
   return user;

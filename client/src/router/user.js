@@ -3,6 +3,7 @@ import UserPanel from "@/views/user/UserPanel.vue";
 import CreateUser from "@/views/user/CreateUser.vue";
 import UserDetails from "@/views/user/UserDetails.vue";
 import EditUser from "@/views/user/EditUser.vue";
+import UserPasswordReset from "@/views/user/UserPasswordReset.vue";
 
 export default [
   {
@@ -34,6 +35,14 @@ export default [
     name: "EditUser",
     components: {
       default: EditUser,
+      navigation: NavigationComponentLite,
+    },
+  },
+  {
+    path: `/user/:_id/reset-password`,
+    name: "UserPasswordReset",
+    components: {
+      default: UserPasswordReset,
       navigation: NavigationComponentLite,
     },
   },

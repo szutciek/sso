@@ -144,7 +144,8 @@
       "title": "Account Creation",
       "details": "Account Created Successfully",
       "while": "Processing your request..."
-    }
+    },
+    "passwordsNotSame": "Passwords are not the same"
   },
   "UserDetails": {
     "title": "Account Details",
@@ -152,12 +153,19 @@
     "buttons": {
       "edit": "Edit Account",
       "forget": "Forget Account",
-      "delete": "Delete Account"
+      "delete": "Delete Account",
+      "reset": "Reset Password",
+      "signin2FA": "Sign in using 2FA"
     },
     "notificationDelete": {
       "title": "Deleting Account",
       "details": "Account has been deleted",
       "while": "Deleting your account..."
+    },
+    "notificationReset": {
+      "title": "Password Reset",
+      "details": "Password reset has been intiated. You have received a link in your inbox.",
+      "while": "Initiating Password Reset..."
     }
   },
   "profileStore": {
@@ -178,6 +186,20 @@
     "buttons": {
       "submit": "Submit Changes",
       "clear": "Clear Changes"
+    }
+  },
+  "wrappedFetch": {
+    "networkError": "Network error",
+    "parsingError": "Response parsing error"
+  },
+  "UserPasswordReset": {
+    "title": "Reset Password",
+    "description": "Enter a new desired password.",
+    "passwordsNotSame": "Passwords are not the same",
+    "notification": {
+      "title": "Password Reset",
+      "details": "Password has been changed. Use it when signing in.",
+      "while": "Processing your request..."
     }
   }
 }

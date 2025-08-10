@@ -73,18 +73,13 @@ const errors = ref({
 const handleInput = (value, field) => {
   errors.value[field] = "";
   user.value[field] = value;
-  if (field === "password" || field === "passwordRepeat") {
-    if (user.value.password !== user.value.passwordRepeat) {
-      errors.value.passwordRepeat = "Passwords are not the same";
-    }
-  }
 };
 
 const buttonState = ref("default");
 
 const handleSubmit = () => {
   if (user.value.password !== user.value.passwordRepeat) {
-    errors.value.passwordRepeat = "Passwords are not the same";
+    errors.value.passwordRepeat = lS.localeKeys.CreateUser.passwordsNotSame;
     return;
   }
 

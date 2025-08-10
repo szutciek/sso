@@ -5,16 +5,16 @@
         "name": "Funciones",
         "topics": [
           {
-            "title": "Registros Automáticos",
-            "description": "Selecciona la cuenta predeterminada para usar al iniciar sesión en todo tipo de aplicaciones"
+            "title": "Registros automatizados",
+            "description": "Selecciona la cuenta predeterminada para usar al iniciar sesión en todo tipo de apps"
           },
           {
             "title": "Flexibilidad",
-            "description": "Inicia sesión usando 2FA solo cuando sea necesario"
+            "description": "Inicia sesión con 2FA solo cuando sea necesario"
           },
           {
             "title": "Funciones",
-            "list": ["2FA Seguro", "Gestión de Sesiones"]
+            "list": ["2FA segura", "Gestión de sesión"]
           }
         ]
       },
@@ -22,11 +22,11 @@
         "name": "Guías",
         "topics": [
           {
-            "title": "Para Desarrolladores",
-            "description": "Descubre cómo integrar Kanapka SSO con tu aplicación"
+            "title": "Para desarrolladores",
+            "description": "Descubre cómo integrar Kanapka SSO con tu app"
           },
           {
-            "title": "Para Usuarios",
+            "title": "Para usuarios",
             "description": "Aprende cómo usar Kanapka SSO"
           }
         ]
@@ -36,7 +36,7 @@
         "topics": []
       }
     ],
-    "action": "Gestionar Perfiles"
+    "action": "Gestionar perfiles"
   },
   "UserProfile": {
     "birthday": "Fecha de nacimiento",
@@ -48,29 +48,29 @@
     "shared": "Datos compartidos"
   },
   "UserPanel": {
-    "title": "Cuentas y Aplicaciones Confiables",
+    "title": "Cuentas y Apps de confianza",
     "description": "Navega a un perfil para obtener más información."
   },
   "AppDetails": {
     "byAuthor": "Por",
     "Trusted": "Confiable",
-    "Trust Revoked": "Confianza Revocada",
-    "infoRequested": "Información solicitada por la aplicación",
-    "infoShared": "Información compartida con la aplicación",
-    "buttonRevoke": "Revocar Confianza"
+    "Trust Revoked": "Confianza revocada",
+    "infoRequested": "Información solicitada por la app",
+    "infoShared": "Información compartida con la app",
+    "buttonRevoke": "Revocar confianza"
   },
   "Dropdown": {
     "interact": "Haz clic para seleccionar"
   },
   "AddProfileCard": {
     "title": "Agregar perfil",
-    "description": "Haz clic en uno de los botones de abajo.",
+    "description": "Haz clic en uno de los botones abajo.",
     "signin": "Iniciar sesión",
     "signup": "Crear cuenta"
   },
   "Fields": {
     "username": "Nombre de usuario",
-    "email": "Dirección de correo electrónico",
+    "email": "Correo electrónico",
     "profile": "Foto de perfil",
     "birthday": "Fecha de nacimiento",
     "gender": "Género",
@@ -83,45 +83,45 @@
   },
   "UserDetailsPreview": {
     "labels": {
-      "personal": "Detalles Personales",
-      "location": "Región y Localización",
-      "security": "Configuración de Seguridad"
+      "personal": "Datos personales",
+      "location": "Región y localidad",
+      "security": "Configuración de seguridad"
     },
     "buttons": {
       "details": "Detalles",
-      "default": "Establecer como Predeterminado"
+      "default": "Establecer por defecto"
     }
   },
   "TrustApp": {
-    "title": "Confiar en la Aplicación",
-    "description": "Revisa los detalles de la aplicación y la información solicitada.",
-    "required": "Información solicitada por la aplicación",
+    "title": "Confiar en la app",
+    "description": "Revisa los detalles de la app y la información requerida.",
+    "required": "Información solicitada por la app",
     "trust": "Confiar"
   },
   "Authenticate": {
-    "title": "Iniciar Sesión",
-    "description": "Usa el siguiente formulario para iniciar sesión con tu cuenta de Kanapka SSO.",
+    "title": "Iniciar sesión",
+    "description": "Usa el formulario abajo para iniciar sesión con tu cuenta Kanapka SSO.",
     "notification": {
       "title": "Autenticación",
-      "details": "Has sido autenticado correctamente",
+      "details": "Has sido autenticado exitosamente",
       "while": "Verificando tus credenciales..."
     }
   },
   "Authenticate2FA": {
     "title": "Verificación 2FA",
     "description": [
-      "Introduce el código de autenticación de dos factores de ",
+      "Introduce el código de autenticación de dos factores desde ",
       "tu bandeja de entrada"
     ],
     "notificationSubmit": {
       "title": "Autenticación",
-      "details": "Has sido autenticado correctamente",
+      "details": "Has sido autenticado exitosamente",
       "while": "Verificando el código 2FA proporcionado..."
     },
     "notificationRequest": {
-      "title": "Envío del Código 2FA",
+      "title": "Entrega del código 2FA",
       "details": "El código 2FA ha sido enviado a tu bandeja de entrada",
-      "while": "Enviando código 2FA a tu correo electrónico..."
+      "while": "Enviando código 2FA a tu correo..."
     }
   },
   "Button": {
@@ -133,51 +133,73 @@
     "error": "Error"
   },
   "Authorize": {
-    "title": "Autorizar Aplicación",
-    "description": "Por favor, espera mientras procesamos tu solicitud."
+    "title": "Autorizar app",
+    "description": "Por favor espera mientras procesamos tu solicitud."
   },
   "CreateUser": {
-    "title": "Crear Cuenta",
-    "description": "Introduce tus datos y envíalos para registrarte.",
-    "button": "Crear Cuenta",
+    "title": "Crear cuenta",
+    "description": "Introduce tus datos y envía para registrarte.",
+    "button": "Crear cuenta",
     "notification": {
-      "title": "Creación de Cuenta",
+      "title": "Creación de cuenta",
       "details": "Cuenta creada exitosamente",
       "while": "Procesando tu solicitud..."
-    }
+    },
+    "passwordsNotSame": "Las contraseñas no coinciden"
   },
   "UserDetails": {
-    "title": "Detalles de la Cuenta",
+    "title": "Detalles de la cuenta",
     "description": "Ver detalles y administrar la cuenta.",
     "buttons": {
-      "edit": "Editar Cuenta",
-      "forget": "Olvidar Cuenta",
-      "delete": "Eliminar Cuenta"
+      "edit": "Editar cuenta",
+      "forget": "Olvidar cuenta",
+      "delete": "Eliminar cuenta",
+      "reset": "Restablecer contraseña",
+      "signin2FA": "Iniciar sesión con 2FA"
     },
     "notificationDelete": {
-      "title": "Eliminando Cuenta",
+      "title": "Eliminando cuenta",
       "details": "La cuenta ha sido eliminada",
       "while": "Eliminando tu cuenta..."
+    },
+    "notificationReset": {
+      "title": "Restablecer contraseña",
+      "details": "El restablecimiento de contraseña ha sido iniciado. Has recibido un enlace en tu bandeja de entrada.",
+      "while": "Iniciando restablecimiento de contraseña..."
     }
   },
   "profileStore": {
     "notificationForget": {
-      "title": "Olvidando Perfil",
-      "details": "El perfil ha sido olvidado",
+      "title": "Olvidando perfil",
+      "details": "Perfil olvidado",
       "while": "Olvidando perfil..."
     },
     "notificationDefault": {
-      "title": "Estableciendo Perfil Predeterminado",
+      "title": "Estableciendo perfil predeterminado",
       "details": "ahora es tu perfil predeterminado",
       "while": "Cambiando tu perfil predeterminado..."
     }
   },
   "EditUser": {
     "title": "Editar cuenta",
-    "description": "Realiza cambios y envíalos para actualizar.",
+    "description": "Haz cambios y envía para actualizar.",
     "buttons": {
-      "submit": "Guardar cambios",
+      "submit": "Enviar cambios",
       "clear": "Borrar cambios"
+    }
+  },
+  "wrappedFetch": {
+    "networkError": "Error de red",
+    "parsingError": "Error al analizar la respuesta"
+  },
+  "UserPasswordReset": {
+    "title": "Restablecer contraseña",
+    "description": "Introduce una nueva contraseña deseada.",
+    "passwordsNotSame": "Las contraseñas no coinciden",
+    "notification": {
+      "title": "Restablecer contraseña",
+      "details": "La contraseña ha sido cambiada. Úsala al iniciar sesión.",
+      "while": "Procesando tu solicitud..."
     }
   }
 }
