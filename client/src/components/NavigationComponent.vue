@@ -138,7 +138,7 @@ import lS from "@/store/localeStore";
 import Logo from "@/components/LogoComponent.vue";
 import NavigationDropdownComponent from "./NavigationDropdownComponent.vue";
 
-const config = {
+const config = ref({
   items: [
     {
       id: 1,
@@ -152,10 +152,6 @@ const config = {
       dropIndex: 1,
       interactionId: `d-${crypto.randomUUID()}`,
     },
-    {
-      id: 3,
-      type: "link",
-    },
   ],
   drops: [
     {
@@ -167,7 +163,7 @@ const config = {
           description:
             lS.localeKeys.NavigationComponent.items[0].topics[0].description,
           image: "https://assets.kanapka.eu/images/ceo.png",
-          link: "/features/accounts",
+          link: "/user/panel",
         },
         {
           type: "large",
@@ -175,23 +171,7 @@ const config = {
           description:
             lS.localeKeys.NavigationComponent.items[0].topics[1].description,
           image: "https://assets.kanapka.eu/images/ceo.png",
-          link: "/features/flexibility",
-        },
-        {
-          type: "list",
-          title: lS.localeKeys.NavigationComponent.items[0].topics[2].title,
-          list: [
-            {
-              text: lS.localeKeys.NavigationComponent.items[0].topics[2]
-                .list[0],
-              link: "/features/notifications",
-            },
-            {
-              text: lS.localeKeys.NavigationComponent.items[0].topics[2]
-                .list[1],
-              link: "/features/account-management",
-            },
-          ],
+          link: "/user/panel",
         },
       ],
     },
@@ -204,18 +184,10 @@ const config = {
           description:
             lS.localeKeys.NavigationComponent.items[1].topics[0].description,
           image: "https://assets.kanapka.eu/images/ceo.png",
-          link: "/features/accounts",
-        },
-        {
-          type: "large",
-          title: lS.localeKeys.NavigationComponent.items[1].topics[1].title,
-          description:
-            lS.localeKeys.NavigationComponent.items[1].topics[1].description,
-          image: "https://assets.kanapka.eu/images/ceo.png",
-          link: "/features/accounts",
+          link: "/en/developer/documentation",
         },
       ],
     },
   ],
-};
+});
 </script>

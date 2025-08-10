@@ -2,7 +2,7 @@
   "NavigationComponent": {
     "items": [
       {
-        "name": "功能",
+        "name": "针对用户",
         "topics": [
           {
             "title": "自动注册",
@@ -11,29 +11,17 @@
           {
             "title": "灵活性",
             "description": "仅在必要时使用2FA登录"
-          },
-          {
-            "title": "功能",
-            "list": ["安全的2FA", "会话管理"]
           }
         ]
       },
       {
-        "name": "指南",
+        "name": "针对开发者",
         "topics": [
           {
-            "title": "针对开发者",
-            "description": "了解如何将Kanapka SSO集成到你的应用中"
-          },
-          {
-            "title": "针对用户",
-            "description": "学习如何使用Kanapka SSO"
+            "title": "文档",
+            "description": "了解如何将Kanapka SSO集成到您的应用中"
           }
         ]
-      },
-      {
-        "name": "关于",
-        "topics": []
       }
     ],
     "action": "管理配置文件"

@@ -2,7 +2,7 @@
   "NavigationComponent": {
     "items": [
       {
-        "name": "Features",
+        "name": "For Users",
         "topics": [
           {
             "title": "Automated Sign-ups",
@@ -11,29 +11,17 @@
           {
             "title": "Flexibility",
             "description": "Log in using 2FA only when its necessary"
-          },
-          {
-            "title": "Features",
-            "list": ["Secure 2FA", "Session Management"]
           }
         ]
       },
       {
-        "name": "Guides",
+        "name": "For Developers",
         "topics": [
           {
-            "title": "For Developers",
+            "title": "Documentation",
             "description": "Find out how to integrate Kanapka SSO with your app"
-          },
-          {
-            "title": "For Users",
-            "description": "Learn how to use Kanapka SSO"
           }
         ]
-      },
-      {
-        "name": "About",
-        "topics": []
       }
     ],
     "action": "Manage Profiles"

@@ -2,7 +2,7 @@
   "NavigationComponent": {
     "items": [
       {
-        "name": "Functies",
+        "name": "Voor gebruikers",
         "topics": [
           {
             "title": "Geautomatiseerde aanmeldingen",
@@ -11,29 +11,17 @@
           {
             "title": "Flexibiliteit",
             "description": "Log alleen in met 2FA wanneer het nodig is"
-          },
-          {
-            "title": "Functies",
-            "list": ["Veilige 2FA", "Sessiebeheer"]
           }
         ]
       },
       {
-        "name": "Handleidingen",
+        "name": "Voor ontwikkelaars",
         "topics": [
           {
-            "title": "Voor ontwikkelaars",
+            "title": "Documentatie",
             "description": "Ontdek hoe je Kanapka SSO kunt integreren met je app"
-          },
-          {
-            "title": "Voor gebruikers",
-            "description": "Leer hoe je Kanapka SSO gebruikt"
           }
         ]
-      },
-      {
-        "name": "Over",
-        "topics": []
       }
     ],
     "action": "Profielen beheren"

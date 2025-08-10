@@ -2,7 +2,7 @@
   "NavigationComponent": {
     "items": [
       {
-        "name": "Funciones",
+        "name": "Para usuarios",
         "topics": [
           {
             "title": "Registros automatizados",
@@ -11,29 +11,17 @@
           {
             "title": "Flexibilidad",
             "description": "Inicia sesión con 2FA solo cuando sea necesario"
-          },
-          {
-            "title": "Funciones",
-            "list": ["2FA segura", "Gestión de sesión"]
           }
         ]
       },
       {
-        "name": "Guías",
+        "name": "Para desarrolladores",
         "topics": [
           {
-            "title": "Para desarrolladores",
+            "title": "Documentación",
             "description": "Descubre cómo integrar Kanapka SSO con tu app"
-          },
-          {
-            "title": "Para usuarios",
-            "description": "Aprende cómo usar Kanapka SSO"
           }
         ]
-      },
-      {
-        "name": "Acerca de",
-        "topics": []
       }
     ],
     "action": "Gestionar perfiles"

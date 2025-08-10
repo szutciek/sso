@@ -2,41 +2,29 @@
   "NavigationComponent": {
     "items": [
       {
-        "name": "Funkcjonalność",
+        "name": "Dla użytkowników",
         "topics": [
           {
-            "title": "Automatyzacja Rejestracji Kont",
-            "description": "Wybierz domyślne konto do logowania się do każdego z różnych typów aplikacji"
+            "title": "Automatyczne rejestracje",
+            "description": "Wybierz domyślne konto używane podczas logowania do wszystkich typów aplikacji"
           },
           {
             "title": "Elastyczność",
-            "description": "Loguj się za pomocą 2FA jedynie wtedy, gdy jest to konieczne"
-          },
-          {
-            "title": "Rozwiązania",
-            "list": ["Bezpieczne 2FA", "Zarządzanie sesjami"]
+            "description": "Loguj się z użyciem 2FA tylko wtedy, gdy jest to konieczne"
           }
         ]
       },
       {
-        "name": "Poradniki",
+        "name": "Dla deweloperów",
         "topics": [
           {
-            "title": "Dla Developera",
-            "description": "Zobacz poradniki integracji z Kanapka SSO dla programistów"
-          },
-          {
-            "title": "Dla Użytkownika",
-            "description": "Dowiedz się, jak czerpać wszystkie korzyści z Kanapka SSO"
+            "title": "Dokumentacja",
+            "description": "Dowiedz się, jak zintegrować Kanapka SSO z Twoją aplikacją"
           }
         ]
-      },
-      {
-        "name": "O Stronie",
-        "topics": []
       }
     ],
-    "action": "Zarządzaj Profilami"
+    "action": "Zarządzaj profilami"
   },
   "UserProfile": {
     "birthday": "Data urodzin",

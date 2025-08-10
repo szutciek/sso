@@ -1,4 +1,14 @@
 import NavigationComponent from "@/components/NavigationComponent.vue";
-import FooterComponent from "@/components/FooterComponent.vue";
 
-export default [];
+import Documentation from "@/components/developer/Documentation.vue";
+
+export default [
+  {
+    path: `/developer/documentation`,
+    name: "DeveloperDocs",
+    components: {
+      default: Documentation,
+      navigation: NavigationComponent,
+    },
+  },
+];

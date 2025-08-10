@@ -7,7 +7,11 @@
     >
       <div class="box">
         <div class="topic" v-for="item of currentDropdown.items">
-          <div class="large" v-if="item.type === 'large'">
+          <div
+            class="large"
+            v-if="item.type === 'large'"
+            @click="handleClick(item.link)"
+          >
             <div class="text">
               <h3>{{ item.title }}</h3>
               <p>{{ item.description }}</p>
@@ -110,6 +114,8 @@
 
 <script setup>
 import { defineProps, onMounted, onUnmounted, ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const { config } = defineProps(["config"]);
 
@@ -149,6 +155,12 @@ const resizeCallback = () => {
   positionTop.value = document
     .querySelector("nav")
     .getBoundingClientRect().bottom;
+};
+
+const handleClick = (url) => {
+  if (!url) return;
+  dropdownOpen.value = false;
+  router.push(url);
 };
 
 onMounted(() => {
