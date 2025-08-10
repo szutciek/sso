@@ -147,7 +147,7 @@
       "edit": "Edytuj Konto",
       "forget": "Zapomnij Konto",
       "delete": "Usuń Konto",
-      "reset": "Resetuj Konto",
+      "reset": "Resetuj Hasło",
       "signin2FA": "Zaloguj się z użyciem 2FA"
     },
     "notificationDelete": {
