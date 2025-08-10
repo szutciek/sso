@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(oAuth2KeyRouter);
 
 app.use("/api", limiter, apiRouter);
-app.use("/authenticate", authRouter);
+app.use("/authenticate", limiter, authRouter);
 
 app.get("/authorize", handleAuthorizationRequest, sendFrontend);
 // app.post("/token", handleTokenRequest);
