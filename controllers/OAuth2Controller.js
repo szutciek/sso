@@ -25,7 +25,13 @@ export const handleAuthorizationRequest = async (req, res, next) => {
       );
     }
     const decoded = decodeToken(req.cookies.token);
-    req.user = await getUserById(decoded._id);
+    req.user = await getUserById(decoded._id, "+passwordLastChanged");
+    const pwdChanged = new Date(req.user.passwordLastChanged).getTime();
+    if (pwdChanged > decoded.iat) {
+      throw new AppError("Password changed since last sign in", 401, {
+        redirect: req._targetAppPath,
+      });
+    }
     req._used2FA = decoded.used2FA;
     if (req.user.use2FA === true && req._used2FA !== true) {
       req._targetAppPath = `/authenticate/2fa?redirect=${currentUrl}`;

@@ -27,7 +27,11 @@ export const authenticate = async (req, res, next) => {
       throw new AppError("Not authenticated", 400);
     }
     const decoded = decodeToken(token);
-    req.user = await getUserById(decoded._id);
+    req.user = await getUserById(decoded._id, "+passwordLastChanged");
+    const pwdChanged = new Date(req.user.passwordLastChanged).getTime();
+    if (pwdChanged > decoded.iat) {
+      throw new AppError("Password changed since last sign in", 401);
+    }
     req._used2FA = decoded.used2FA;
     const userRequires2FA = req.user.use2FA === true && req._used2FA !== true;
     if (

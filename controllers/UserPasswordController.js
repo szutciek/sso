@@ -9,14 +9,14 @@ export const initiateReset = async (req, res, next) => {
       "+email +passwordChangeCode +passwordChangeCodeExpiration"
     );
 
-    // if (new Date(user.passwordChangeCodeExpiration).getTime() > Date.now()) {
-    //   throw new AppError(
-    //     `Password reset already initiated. Check your inbox for a link valid until ${new Date(
-    //       user.passwordChangeCodeExpiration
-    //     )}`,
-    //     400
-    //   );
-    // }
+    if (new Date(user.passwordChangeCodeExpiration).getTime() > Date.now()) {
+      throw new AppError(
+        `Password reset already initiated. Check your inbox for a link valid until ${new Date(
+          user.passwordChangeCodeExpiration
+        )}`,
+        400
+      );
+    }
 
     const resetPasswordCode = crypto.randomUUID();
     user.passwordChangeCode = resetPasswordCode;
