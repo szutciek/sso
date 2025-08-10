@@ -85,7 +85,7 @@ export const handleAuthorizationRequest = async (req, res, next) => {
         uuid: req.user._id.toString(),
       },
       iat: new Date().getTime(),
-      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn,
+      exp: new Date().getTime() / 1000 + jwtConfig.externalExpiresIn,
     };
     if (req._inDevelopment === true) {
       payload.developmentOnly = true;

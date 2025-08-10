@@ -21,10 +21,10 @@ export const decodeToken = (token) => {
     return decoded;
   } catch (err) {
     if (err.name === "TokenExpiredError") {
-      throw new AppError("Token expired", 403);
+      throw new AppError("Token expired", 401);
     }
     if (err.name === "JsonWebTokenError") {
-      throw new AppError("Token invalid", 403);
+      throw new AppError("Token invalid", 401);
     }
     throw err;
   }

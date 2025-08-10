@@ -42,7 +42,7 @@ export const generateToken = async (req, res, next) => {
       _id: req.user._id,
       used2FA: req._used2FA,
       iat: new Date().getTime(),
-      exp: new Date().getTime() / 1000 + jwtConfig.expiresIn,
+      exp: new Date().getTime() / 1000 + jwtConfig.internalExpiresIn,
     };
     const token = signToken(payload);
     setAuthCookies(res, token);

@@ -5,7 +5,7 @@ export const setAuthCookies = (res, token) => {
     httpOnly: false,
     secure: true,
     sameSite: "Strict",
-    maxAge: jwtConfig.expiresIn * 1000,
+    maxAge: jwtConfig.internalExpiresIn * 1000,
   };
 
   res.cookie("isLoggedIn", "true", cookieConf);
