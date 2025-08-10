@@ -174,9 +174,14 @@ export default reactive({
   },
 
   saveProfileState() {
-    const data = {
-      profiles: this.profiles,
-    };
+    const data = { profiles: [] };
+    this.profiles.forEach((p) => {
+      data.profiles.push({
+        _id: p._id,
+        token: p.token,
+        isDefault: p.isDefault,
+      });
+    });
     window.localStorage.setItem("profileState", JSON.stringify(data));
   },
 

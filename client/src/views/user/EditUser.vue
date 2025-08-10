@@ -126,7 +126,7 @@ const handleSubmit = () => {
     if (value !== null) cleanUser[key] = value;
   });
 
-  buttonState.value = "loading";
+  buttonStateSubmit.value = "loading";
 
   const updateRequest = wrappedFetch(`/api/users/me`, {
     method: "PUT",
@@ -149,14 +149,14 @@ const handleSubmit = () => {
 
   updateRequest
     .then((data) => {
-      buttonState.value = "success";
+      buttonStateSubmit.value = "success";
 
       profileStore.getFullProfileList().catch((err) => {
         console.warn(err);
       });
 
       setTimeout(() => {
-        buttonState.value = "default";
+        buttonStateSubmit.value = "default";
         clearChanges();
       }, 3000);
     })
@@ -166,7 +166,7 @@ const handleSubmit = () => {
           errors.value[key] = value;
         });
       }
-      buttonState.value = "default";
+      buttonStateSubmit.value = "default";
     });
 };
 

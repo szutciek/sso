@@ -72,7 +72,8 @@ onMounted(() => {
         isSpinning = false;
 
         const targetBoxRect = boxes[snappedBoxIndex].getBoundingClientRect();
-        if (targetBoxRect.x !== 20) return;
+        const stopPosition = Math.max(20, (window.innerWidth - 1200) / 2);
+        if (stopPosition !== targetBoxRect.left) return;
 
         if (snappedBoxIndex === boxes.length - 1) {
           emit("snappedTo", null);
