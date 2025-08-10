@@ -4,8 +4,8 @@ import { sendRecoveryEmail } from "../utils/mailer.js";
 
 export const initiateReset = async (req, res, next) => {
   try {
-    const user = await UserCrud.getUserById(
-      req.user._id.toString(),
+    const user = await UserCrud.getUserByProperty(
+      { email: req.body.email },
       "+email +passwordChangeCode +passwordChangeCodeExpiration"
     );
 
@@ -31,15 +31,16 @@ export const initiateReset = async (req, res, next) => {
       message: "Password reset initiated. Email with code delivered to inbox.",
     });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
 
 export const completeReset = async (req, res, next) => {
   try {
-    const user = await UserCrud.getUserById(
-      req.user._id.toString(),
-      "+passwordChangeCode +passwordChangeCodeExpiration"
+    const user = await UserCrud.getUserByProperty(
+      { email: req.body.email },
+      "+email +passwordChangeCode +passwordChangeCodeExpiration"
     );
 
     if (new Date(user.passwordChangeCodeExpiration).getTime() < Date.now()) {
@@ -54,7 +55,7 @@ export const completeReset = async (req, res, next) => {
     }
 
     delete req.body.code;
-    await UserCrud.updateUserPassword(req.user._id.toString(), req.body);
+    await UserCrud.updateUserPassword(user._id.toString(), req.body);
 
     user.passwordChangeCode = "";
     user.passwordChangeCodeExpiration = new Date();

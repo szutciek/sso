@@ -3,7 +3,7 @@ import { reactive } from "vue";
 import en from "@/locales/en.json";
 
 export default reactive({
-  supportedLocales: ["en", "pl", "nl", "es"],
+  supportedLocales: ["en", "pl", "nl", "es", "zh"],
   locale: "en",
   localeKeys: en,
 

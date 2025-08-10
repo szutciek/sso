@@ -105,6 +105,10 @@
       "title": "Authentication",
       "details": "You have been successfully authenticated",
       "while": "Checking your credentials..."
+    },
+    "buttons": {
+      "reset": "Reset Password",
+      "create": "Create Account"
     }
   },
   "Authenticate2FA": {

@@ -105,6 +105,10 @@
       "title": "Authenticatie",
       "details": "Je bent succesvol geauthenticeerd",
       "while": "Je inloggegevens controleren..."
+    },
+    "buttons": {
+      "reset": "Wachtwoord resetten",
+      "create": "Account aanmaken"
     }
   },
   "Authenticate2FA": {

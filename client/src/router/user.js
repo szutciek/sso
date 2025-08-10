@@ -39,7 +39,7 @@ export default [
     },
   },
   {
-    path: `/user/:_id/reset-password`,
+    path: `/user/reset-password`,
     name: "UserPasswordReset",
     components: {
       default: UserPasswordReset,

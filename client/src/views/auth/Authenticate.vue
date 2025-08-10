@@ -1,6 +1,6 @@
 <template>
   <div class="container-standard">
-    <div class="box">
+    <div class="box flexCol">
       <div class="row">
         <h1>{{ lS.localeKeys.Authenticate.title }}</h1>
       </div>
@@ -26,6 +26,21 @@
           @submit="handleSubmit()"
         />
       </div>
+
+      <div class="otherMethods">
+        <ReactiveStateTransparentButton
+          :ignoreEnter="true"
+          :state="resetButtonState"
+          :text="lS.localeKeys.Authenticate.buttons.reset"
+          @submit="handlePasswordResetRequest()"
+        />
+        <ReactiveStateTransparentButton
+          :ignoreEnter="true"
+          state="default"
+          :text="`${lS.localeKeys.Authenticate.buttons.create} &nearr;`"
+          @submit="handleGoCreate()"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +54,7 @@ import profileStore from "@/store/profileStore";
 import { useRouter, useRoute } from "vue-router";
 import wrappedFetch from "@/assets/wrappedFetch";
 import notificationStore from "@/store/notificationStore";
+import ReactiveStateTransparentButton from "@/components/buttons/ReactiveStateTransparentButton.vue";
 const router = useRouter();
 const route = useRoute();
 
@@ -114,6 +130,56 @@ const handleSubmit = () => {
     console.error("Error:", error.message);
   }
 };
+
+const resetButtonState = ref("default");
+const handlePasswordResetRequest = () => {
+  resetButtonState.value = "loading";
+
+  const resetRequest = wrappedFetch(`/api/users/initiate-password-reset`, {
+    method: "POST",
+    body: JSON.stringify({
+      email: email.value,
+    }),
+  });
+
+  notificationStore.createNotif({
+    type: "info",
+    title: lS.localeKeys.UserDetails.notificationReset.title,
+    details: lS.localeKeys.UserDetails.notificationReset.details,
+    duration: 10000,
+    promise: {
+      promise: resetRequest,
+      while: lS.localeKeys.UserDetails.notificationReset.while,
+    },
+  });
+
+  resetRequest
+    .then((data) => {
+      resetButtonState.value = "success";
+    })
+    .catch((err) => {
+      if (err.details) {
+        passwordInputError.value = err.details?.password;
+      }
+      resetButtonState.value = "default";
+    });
+};
+
+const handleGoCreate = () => {
+  window.open("/register", "_blank");
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+.otherMethods {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+</style>

@@ -173,11 +173,11 @@ const handlePasswordReset = (id) => {
   passwordResetState.value = "loading";
 
   const selectedProfile = profileStore.getProfileById(id);
-  const resetRequest = wrappedFetch(`/api/users/me/initiate-password-reset`, {
+  const resetRequest = wrappedFetch(`/api/users/initiate-password-reset`, {
     method: "POST",
-    headers: {
-      authorization: `Bearer ${selectedProfile.token}`,
-    },
+    body: JSON.stringify({
+      email: selectedProfile.user.email,
+    }),
   });
 
   notificationStore.createNotif({

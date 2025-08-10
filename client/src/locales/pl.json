@@ -105,6 +105,10 @@
       "title": "Uwierzytelnianie",
       "details": "Zastałeś(aś) skutecznie uwierzytelniony(a)",
       "while": "Sprawdzanie twoich danych..."
+    },
+    "buttons": {
+      "reset": "Resetuj Hasło",
+      "create": "Utwórz Konto"
     }
   },
   "Authenticate2FA": {

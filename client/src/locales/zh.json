@@ -105,6 +105,10 @@
       "title": "认证",
       "details": "您已成功认证",
       "while": "正在验证您的凭证..."
+    },
+    "buttons": {
+      "reset": "重置密码",
+      "create": "创建账户"
     }
   },
   "Authenticate2FA": {

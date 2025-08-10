@@ -72,14 +72,11 @@ const handleSubmit = () => {
 
     buttonState.value = "loading";
 
-    const selectedProfile = profileStore.getParamProfile();
-    const resetRequest = wrappedFetch(`/api/users/me/complete-password-reset`, {
+    const resetRequest = wrappedFetch(`/api/users/complete-password-reset`, {
       method: "POST",
-      headers: {
-        authorization: `Bearer ${selectedProfile.token}`,
-      },
       body: JSON.stringify({
         code: route.query.code,
+        email: route.query.email,
         password: password.value,
       }),
     });

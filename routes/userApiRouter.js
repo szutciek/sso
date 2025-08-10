@@ -15,17 +15,8 @@ router
   .put(authenticate, UserController.updateCurrentUser)
   .delete(authenticate, UserController.deleteCurrentUser);
 
-router.post(
-  "/me/initiate-password-reset",
-  authenticate,
-  UserPasswordController.initiateReset
-);
-
-router.post(
-  "/me/complete-password-reset",
-  authenticate,
-  UserPasswordController.completeReset
-);
+router.post("/initiate-password-reset", UserPasswordController.initiateReset);
+router.post("/complete-password-reset", UserPasswordController.completeReset);
 
 router.route("/").post(UserController.createUser);
 
