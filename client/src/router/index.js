@@ -54,6 +54,7 @@ const routes = [
     path: "/",
     name: "redirection",
     redirect: (to) => {
+      if (!lS.configuredLocale) lS.configureLocale();
       const locale = lS.locale;
       const profileList = window.localStorage.getItem("profileState");
       if (!profileList) return { path: `/${locale}/home` };

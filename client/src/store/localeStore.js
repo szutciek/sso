@@ -6,14 +6,17 @@ export default reactive({
   supportedLocales: ["en", "pl", "nl", "es", "zh"],
   locale: "en",
   localeKeys: en,
+  configuredLocale: false,
 
   configureLocale() {
+    if (this.configuredLocale) return;
     let locale = window.location.pathname.split("/")[1];
     if (!this.supportedLocales.includes(locale)) {
       locale = this.loadLocaleStorage();
     }
     this.locale = locale;
     this.loadLocale(locale);
+    this.configuredLocale = true;
   },
   overrideLocale(locale) {
     this.loadLocale(locale);
