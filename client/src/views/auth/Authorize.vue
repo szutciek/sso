@@ -39,6 +39,10 @@ authorizationRequest
   .then((data) => {
     // WARNING: can result in changing host
     window.location = data.redirect;
+    // Close after redirecting if remained open
+    setTimeout(() => {
+      window.close();
+    }, 1000);
   })
   .catch((err) => {
     if (err?.details?.redirect) {
