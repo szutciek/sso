@@ -64,6 +64,7 @@ const AppValidation = Joi.object({
         "profile",
         "email",
         "birthday",
+        "gender",
         "locale",
         "language"
       )
